@@ -1,0 +1,24 @@
+<div id="sticky-cta" class="fixed bottom-0 left-0 right-0 z-40 md:hidden translate-y-full transition-transform duration-300">
+  <div class="bg-bg/95 backdrop-blur-sm border-t border-border p-3">
+    <a href="/contacts" class="flex items-center justify-center w-full bg-accent text-white py-3 rounded-xl font-bold text-sm hover:bg-accent-hover transition-all">
+      Получить систему продаж
+    </a>
+  </div>
+</div>
+
+<script>
+  const hero = document.querySelector('[data-hero]');
+  const stickyCta = document.getElementById('sticky-cta');
+  if (hero && stickyCta) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          stickyCta.classList.add('translate-y-full');
+        } else {
+          stickyCta.classList.remove('translate-y-full');
+        }
+      });
+    }, { threshold: 0 });
+    observer.observe(hero);
+  }
+</script>

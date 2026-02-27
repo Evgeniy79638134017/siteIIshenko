@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Бесплатная диагностика — Евгений Ищенко"
+  description="Запишись на бесплатную диагностику. 15-20 минут — разберём твой бизнес и покажем, как внедрить систему продаж на ИИ."
+>
+  <!-- Hero -->
+  <section class="bg-bg-alt py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-heading font-bold text-text" style="font-size: clamp(2rem, 4vw, 3rem);">Запишись на бесплатную диагностику</h1>
+      <p class="text-text-muted text-lg mt-4 leading-relaxed">15-20 минут, которые покажут, как система будет работать в&nbsp;твоей нише</p>
+    </div>
+  </section>
+
+  <!-- Что на диагностике -->
+  <section class="bg-bg py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading font-bold text-2xl md:text-3xl text-text text-center">Что будет на диагностике</h2>
+      <div class="mt-10 max-w-xl mx-auto space-y-6">
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+            <span class="text-primary font-heading font-bold text-sm">1</span>
+          </div>
+          <p class="text-text leading-relaxed">Разберём твой бизнес — что продаёшь, кому, через какие каналы</p>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+            <span class="text-primary font-heading font-bold text-sm">2</span>
+          </div>
+          <p class="text-text leading-relaxed">Определим стратегию внедрения ИИ конкретно для твоей ниши</p>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+            <span class="text-primary font-heading font-bold text-sm">3</span>
+          </div>
+          <p class="text-text leading-relaxed">Подберём инструменты — какие нейросотрудники нужны именно тебе</p>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+            <span class="text-primary font-heading font-bold text-sm">4</span>
+          </div>
+          <p class="text-text leading-relaxed">Сделаем прогноз по результатам — что реально получить за 4 недели</p>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+            <span class="text-primary font-heading font-bold text-sm">5</span>
+          </div>
+          <p class="text-text leading-relaxed">Выберем подходящий тариф — или разойдёмся без обязательств</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Два варианта связи -->
+  <section class="bg-bg-alt py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Telegram -->
+        <div class="bg-white rounded-2xl p-8 border-2 border-primary text-center">
+          <span class="text-4xl block mb-4">💬</span>
+          <h3 class="font-heading font-bold text-xl text-text">Напиши в Telegram</h3>
+          <p class="text-text-muted text-sm mt-2">Самый быстрый способ. Отвечу лично.</p>
+          <a href="https://t.me/Evgen_isch" target="_blank" class="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg mt-6 hover:bg-primary-light transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+            Написать @Evgen_isch
+          </a>
+          <p class="text-text-muted text-xs mt-3">Напиши «Хочу диагностику» — договоримся о времени</p>
+        </div>
+
+        <!-- Форма -->
+        <div class="bg-white rounded-2xl p-8 border border-border">
+          <span class="text-4xl block mb-4">📋</span>
+          <h3 class="font-heading font-bold text-xl text-text">Оставь заявку</h3>
+          <p class="text-text-muted text-sm mt-2">Заполни форму — свяжусь в течение дня.</p>
+          <form id="contact-form" class="mt-6 space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-text mb-1">Имя *</label>
+              <input type="text" name="name" required class="w-full px-4 py-2.5 rounded-lg border border-border bg-bg text-text text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Как тебя зовут" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-text mb-1">Телефон или Telegram *</label>
+              <input type="text" name="phone" required class="w-full px-4 py-2.5 rounded-lg border border-border bg-bg text-text text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="+7... или @username" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-text mb-1">Ниша бизнеса</label>
+              <input type="text" name="niche" class="w-full px-4 py-2.5 rounded-lg border border-border bg-bg text-text text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Чем занимаешься" />
+            </div>
+            <div>
+              <label class="flex items-start gap-2 cursor-pointer">
+                <input type="checkbox" name="agree" required class="mt-1 shrink-0 accent-primary" />
+                <span class="text-text-muted text-xs leading-relaxed">Согласен на <a href="/privacy" class="text-primary underline">обработку персональных данных</a></span>
+              </label>
+            </div>
+            <button type="submit" class="w-full bg-accent text-white py-3 rounded-xl font-bold hover:bg-accent-hover transition-all">Отправить заявку</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Доп. инфо -->
+  <section class="bg-bg py-12">
+    <div class="max-w-xl mx-auto px-4 text-center">
+      <p class="text-text-muted text-sm">Форматы обучения: <strong class="text-text">Офлайн</strong> (Благовещенск) и <strong class="text-text">Онлайн</strong> (Zoom)</p>
+      <p class="text-text-muted text-sm mt-2">Диагностика бесплатная. Даже если не пойдёшь на практикум — получишь пользу.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const name = (form.elements.namedItem('name') as HTMLInputElement).value;
+    const phone = (form.elements.namedItem('phone') as HTMLInputElement).value;
+    const niche = (form.elements.namedItem('niche') as HTMLInputElement).value;
+    const text = encodeURIComponent(
+      `Заявка с сайта:\nИмя: ${name}\nТелефон: ${phone}\nНиша: ${niche || 'не указана'}`
+    );
+    window.open(`https://t.me/Evgen_isch?text=${text}`, '_blank');
+  });
+</script>
