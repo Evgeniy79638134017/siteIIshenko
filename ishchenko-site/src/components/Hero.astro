@@ -1,5 +1,8 @@
-<section data-hero class="mesh-gradient relative overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-40 pb-20 md:pb-28">
+<section data-hero class="relative overflow-hidden min-h-[90vh] md:min-h-[85vh] flex items-center">
+  <!-- Vanta.js container (абсолютный фон) -->
+  <div id="vanta-hero" class="absolute inset-0 mesh-gradient"></div>
+  <!-- Контент поверх -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-40 pb-20 md:pb-28 w-full">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
       <!-- Left column: text -->
@@ -61,3 +64,47 @@
     </div>
   </div>
 </section>
+
+<script>
+  import * as THREE from 'three';
+  async function initVanta() {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return;
+    if (window.innerWidth < 768 && navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    try {
+      const VANTA = await import('vanta/dist/vanta.fog.min');
+
+      window.__vantaHero = VANTA.default({
+        el: '#vanta-hero',
+        THREE: THREE,
+        mouseControls: true,
+        touchControls: false,
+        gyroControls: false,
+        minHeight: 200,
+        minWidth: 200,
+        highlightColor: 0x1A535C,
+        midtoneColor: 0x0F2B3C,
+        lowlightColor: 0x0a1e2e,
+        baseColor: 0x0F2B3C,
+        blurFactor: 0.6,
+        speed: 1.2,
+        zoom: 0.8,
+      });
+    } catch (e) {
+      console.log('Vanta.js not loaded, using CSS fallback');
+    }
+  }
+  if (document.readyState === 'complete') {
+    initVanta();
+  } else {
+    window.addEventListener('load', initVanta);
+  }
+  document.addEventListener('astro:before-swap', () => {
+    if (window.__vantaHero) {
+      window.__vantaHero.destroy();
+      window.__vantaHero = null;
+    }
+  });
+</script>

@@ -1,21 +1,68 @@
-<section class="mesh-gradient py-20 md:py-24">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="font-heading font-bold text-3xl md:text-4xl text-white">Готов внедрить систему?</h2>
-    <p class="text-white/75 text-lg mt-4 leading-relaxed">Запишись на бесплатную диагностику. 15-20 минут — и&nbsp;ты поймёшь, как система будет работать в&nbsp;твоей нише.</p>
+<section class="relative overflow-hidden">
+  <div id="vanta-cta" class="absolute inset-0 mesh-gradient"></div>
+  <div class="relative z-10 py-20 md:py-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-heading font-bold text-3xl md:text-4xl text-white">Готов внедрить систему?</h2>
+      <p class="text-white/75 text-lg mt-4 leading-relaxed">Запишись на бесплатную диагностику. 15-20 минут — и&nbsp;ты поймёшь, как система будет работать в&nbsp;твоей нише.</p>
 
-    <div class="mt-6">
-      <div class="inline-flex items-center gap-2 bg-accent/20 text-accent px-5 py-2 rounded-full text-sm font-semibold">
-        <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-        До 4 марта — текущие цены. После — +15%
+      <div class="mt-6">
+        <div class="inline-flex items-center gap-2 bg-accent/20 text-accent px-5 py-2 rounded-full text-sm font-semibold">
+          <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+          До 4 марта — текущие цены. После — +15%
+        </div>
       </div>
-    </div>
 
-    <div class="mt-8">
-      <a href="/contacts" class="inline-flex items-center justify-center bg-accent text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-accent-hover hover:scale-[1.02] shadow-lg shadow-accent/25 transition-all duration-200">Получить систему продаж</a>
-    </div>
+      <div class="mt-8">
+        <a href="/contacts" class="inline-flex items-center justify-center bg-accent text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-accent-hover hover:scale-[1.02] shadow-lg shadow-accent/25 transition-all duration-200">Получить систему продаж</a>
+      </div>
 
-    <div class="mt-4">
-      <a href="https://t.me/Evgen_isch" target="_blank" class="text-white/50 hover:text-white/80 transition-colors text-sm">Или напиши напрямую: @Evgen_isch</a>
+      <div class="mt-4">
+        <a href="https://t.me/Evgen_isch" target="_blank" class="text-white/50 hover:text-white/80 transition-colors text-sm">Или напиши напрямую: @Evgen_isch</a>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  import * as THREE from 'three';
+  async function initVantaCTA() {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return;
+    if (window.innerWidth < 768 && navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    try {
+      const VANTA = await import('vanta/dist/vanta.fog.min');
+
+      window.__vantaCTA = VANTA.default({
+        el: '#vanta-cta',
+        THREE: THREE,
+        mouseControls: true,
+        touchControls: false,
+        gyroControls: false,
+        minHeight: 200,
+        minWidth: 200,
+        highlightColor: 0x1A535C,
+        midtoneColor: 0x0F2B3C,
+        lowlightColor: 0x0a1e2e,
+        baseColor: 0x0F2B3C,
+        blurFactor: 0.6,
+        speed: 1.0,
+        zoom: 0.9,
+      });
+    } catch (e) {
+      console.log('Vanta CTA not loaded, using CSS fallback');
+    }
+  }
+  if (document.readyState === 'complete') {
+    initVantaCTA();
+  } else {
+    window.addEventListener('load', initVantaCTA);
+  }
+  document.addEventListener('astro:before-swap', () => {
+    if (window.__vantaCTA) {
+      window.__vantaCTA.destroy();
+      window.__vantaCTA = null;
+    }
+  });
+</script>
