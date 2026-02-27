@@ -15,6 +15,22 @@ import Guarantees from '../components/Guarantees.astro';
 import FinalCTA from '../components/FinalCTA.astro';
 ---
 <BaseLayout>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Евгений Ищенко",
+      "jobTitle": "Эксперт по продажам в соцсетях и автоматизации на базе ИИ",
+      "url": "https://siteishchenko.vercel.app",
+      "sameAs": ["https://t.me/Evgen_isch"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Благовещенск",
+        "addressRegion": "Амурская область",
+        "addressCountry": "RU"
+      }
+    })} />
+  </Fragment>
   <Hero />
   <Problems />
   <Comparison />

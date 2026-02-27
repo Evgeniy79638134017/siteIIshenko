@@ -5,6 +5,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="Программа мастер-практикума — 5 этапов за 4 недели"
   description="Распаковка бизнеса, ИИ-помощники, вирусный контент, воронки, посадочные. Полная система продаж на базе ИИ."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Мастер-практикум: Внедрение системы продаж на базе ИИ",
+      "description": "5 этапов за 4 недели. Распаковка бизнеса, ИИ-помощники, вирусный контент, воронки, посадочные.",
+      "provider": {
+        "@type": "Person",
+        "name": "Евгений Ищенко"
+      },
+      "offers": [
+        {"@type": "Offer", "name": "Базовый", "price": "19000", "priceCurrency": "RUB"},
+        {"@type": "Offer", "name": "Стандарт", "price": "59000", "priceCurrency": "RUB"},
+        {"@type": "Offer", "name": "VIP", "price": "99000", "priceCurrency": "RUB"},
+        {"@type": "Offer", "name": "Корпоративный", "price": "179000", "priceCurrency": "RUB"}
+      ]
+    })} />
+  </Fragment>
   <!-- Hero -->
   <section class="bg-bg-alt py-16 md:py-20">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

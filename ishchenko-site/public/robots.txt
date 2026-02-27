@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://siteishchenko.vercel.app/sitemap-index.xml
