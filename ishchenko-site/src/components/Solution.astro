@@ -1,6 +1,10 @@
-<section class="bg-bg py-20 md:py-24">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="font-heading font-bold text-3xl md:text-4xl text-text text-center">Что если бы у тебя были<br class="hidden sm:block" /> <span class="text-primary">нейросотрудники</span>?</h2>
+<section class="bg-bg relative overflow-hidden py-16 md:py-20">
+  <!-- Particles background -->
+  <div id="particles-solution" class="absolute inset-0 z-0 opacity-30"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="split-heading font-heading font-bold text-3xl md:text-4xl text-text text-center">Что если бы у тебя были<br class="hidden sm:block" /> <span class="text-primary">нейросотрудники</span>?</h2>
     <p class="text-text-muted text-lg text-center mt-4 max-w-2xl mx-auto">Не просто инструменты — а ИИ-помощники, обученные на ДНК твоего бизнеса</p>
 
     <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 reveal-group">
@@ -34,3 +38,57 @@
     </div>
   </div>
 </section>
+
+<script>
+  async function initParticles() {
+    if (window.innerWidth < 768) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    try {
+      const { tsParticles } = await import('tsparticles');
+      const { loadSlim } = await import('@tsparticles/slim');
+      await loadSlim(tsParticles);
+      await tsParticles.load({
+        id: 'particles-solution',
+        options: {
+          fullScreen: { enable: false },
+          background: { color: 'transparent' },
+          particles: {
+            number: { value: 50, density: { enable: true, width: 800, height: 800 } },
+            color: { value: '#1A535C' },
+            links: {
+              enable: true,
+              color: '#1A535C',
+              distance: 180,
+              opacity: 0.25,
+              width: 1,
+            },
+            move: {
+              enable: true,
+              speed: 0.6,
+              direction: 'none',
+              outModes: { default: 'bounce' },
+            },
+            size: { value: { min: 1, max: 3 } },
+            opacity: { value: { min: 0.15, max: 0.4 } },
+          },
+          interactivity: {
+            events: {
+              onHover: { enable: true, mode: 'grab' },
+            },
+            modes: {
+              grab: { distance: 200, links: { opacity: 0.4 } },
+            },
+          },
+          detectRetina: true,
+        },
+      });
+    } catch (e) {
+      console.log('tsParticles not loaded:', e);
+    }
+  }
+  if (document.readyState === 'complete') {
+    initParticles();
+  } else {
+    window.addEventListener('load', initParticles);
+  }
+</script>

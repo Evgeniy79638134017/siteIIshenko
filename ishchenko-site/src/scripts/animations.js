@@ -14,6 +14,33 @@ lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
 
+/* ── SplitText on key headings ── */
+function initSplitText() {
+  document.querySelectorAll('.split-heading').forEach((el) => {
+    const text = el.textContent;
+    const chars = text.split('');
+    el.innerHTML = chars.map((char) =>
+      char === ' '
+        ? ' '
+        : `<span class="inline-block" style="opacity:0; transform:translateY(30px);">${char}</span>`
+    ).join('');
+    const spans = el.querySelectorAll('span');
+    gsap.to(spans, {
+      opacity: 1,
+      y: 0,
+      duration: 0.05,
+      stagger: 0.03,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      },
+    });
+  });
+}
+setTimeout(initSplitText, 100);
+
 /* ── Reveal (single element fade-slide-up) ── */
 gsap.utils.toArray('.reveal').forEach((el) => {
   gsap.to(el, {
