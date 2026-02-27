@@ -219,3 +219,51 @@ h1, h2, h3, h4, h5, h6 {
 .cursor-glow.active {
   opacity: 1;
 }
+
+/* --- Icon animations --- */
+.icon-animated {
+  transition: transform 0.3s ease;
+}
+
+.icon-float {
+  animation: icon-float 3s ease-in-out infinite;
+}
+
+.icon-pulse {
+  animation: icon-pulse 2s ease-in-out infinite;
+}
+
+.icon-bounce {
+  animation: icon-bounce 2s ease-in-out infinite;
+}
+
+.icon-shake {
+  animation: icon-shake 3s ease-in-out infinite;
+}
+
+@keyframes icon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes icon-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-8px); }
+  50% { transform: translateY(0); }
+  70% { transform: translateY(-4px); }
+}
+
+@keyframes icon-shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+}
+
+.glass-card:hover .icon-animated {
+  transform: scale(1.15);
+}
