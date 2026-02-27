@@ -93,3 +93,129 @@ h1, h2, h3, h4, h5, h6 {
 .js-tilt-glare {
   border-radius: inherit;
 }
+
+/* --- Animated gradient border --- */
+.gradient-border {
+  position: relative;
+  z-index: 0;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--border-angle, 0deg),
+    #1A535C 0%,
+    #D97757 25%,
+    #1A535C 50%,
+    #D97757 75%,
+    #1A535C 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  animation: rotate-border 4s linear infinite;
+}
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-border {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+/* Вариант для accent-карточки (Стандарт тариф) */
+.gradient-border-accent::before {
+  background: conic-gradient(
+    from var(--border-angle, 0deg),
+    #D97757 0%,
+    #e8956e 25%,
+    #D97757 50%,
+    #f0b89a 75%,
+    #D97757 100%
+  );
+  padding: 3px;
+}
+
+/* Пульсирующее свечение на CTA кнопках */
+.glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(217, 119, 87, 0.3), 0 0 40px rgba(217, 119, 87, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(217, 119, 87, 0.5), 0 0 60px rgba(217, 119, 87, 0.2);
+  }
+}
+
+/* --- Gradient border on hover only --- */
+.gradient-border-hover {
+  position: relative;
+  z-index: 0;
+}
+
+.gradient-border-hover::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--border-angle, 0deg),
+    #1A535C 0%,
+    #D97757 25%,
+    #1A535C 50%,
+    #D97757 75%,
+    #1A535C 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  animation: rotate-border 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gradient-border-hover:hover::before {
+  opacity: 1;
+}
+
+/* --- Cursor glow --- */
+.cursor-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(26, 83, 92, 0.08) 0%,
+    rgba(26, 83, 92, 0.03) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.cursor-glow.active {
+  opacity: 1;
+}

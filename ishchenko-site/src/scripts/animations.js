@@ -167,3 +167,43 @@ setTimeout(() => {
     }
   });
 }, 4000);
+
+/* ── Cursor glow effect (desktop only) ── */
+function initCursorGlow() {
+  if (window.innerWidth < 1024) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const glow = document.createElement('div');
+  glow.classList.add('cursor-glow');
+  document.body.appendChild(glow);
+
+  let mouseX = 0, mouseY = 0;
+  let glowX = 0, glowY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!glow.classList.contains('active')) {
+      glow.classList.add('active');
+    }
+  });
+
+  document.addEventListener('mouseleave', () => {
+    glow.classList.remove('active');
+  });
+
+  function animate() {
+    glowX += (mouseX - glowX) * 0.15;
+    glowY += (mouseY - glowY) * 0.15;
+    glow.style.left = glowX + 'px';
+    glow.style.top = glowY + 'px';
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+if (document.readyState === 'complete') {
+  initCursorGlow();
+} else {
+  window.addEventListener('load', initCursorGlow);
+}
