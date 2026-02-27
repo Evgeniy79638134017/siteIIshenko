@@ -168,42 +168,112 @@ setTimeout(() => {
   });
 }, 4000);
 
-/* ── Cursor glow effect (desktop only) ── */
-function initCursorGlow() {
+/* ── Comet trail cursor (desktop only) ── */
+function initCometCursor() {
   if (window.innerWidth < 1024) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const glow = document.createElement('div');
-  glow.classList.add('cursor-glow');
-  document.body.appendChild(glow);
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;inset:0;z-index:9999;pointer-events:none;';
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
 
-  let mouseX = 0, mouseY = 0;
-  let glowX = 0, glowY = 0;
+  const ctx = canvas.getContext('2d');
+  const trail = [];
+  const maxTrail = 30;
+  let mouseX = -100, mouseY = -100;
+  let isActive = false;
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
 
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    if (!glow.classList.contains('active')) {
-      glow.classList.add('active');
-    }
+    isActive = true;
+    trail.push({ x: mouseX, y: mouseY, time: Date.now() });
+    if (trail.length > maxTrail) trail.shift();
   });
 
   document.addEventListener('mouseleave', () => {
-    glow.classList.remove('active');
+    isActive = false;
+    trail.length = 0;
   });
 
-  function animate() {
-    glowX += (mouseX - glowX) * 0.15;
-    glowY += (mouseY - glowY) * 0.15;
-    glow.style.left = glowX + 'px';
-    glow.style.top = glowY + 'px';
-    requestAnimationFrame(animate);
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (trail.length < 2) {
+      requestAnimationFrame(draw);
+      return;
+    }
+
+    const now = Date.now();
+
+    // Убираем старые точки (старше 400ms)
+    while (trail.length > 0 && now - trail[0].time > 400) {
+      trail.shift();
+    }
+
+    if (trail.length < 2) {
+      requestAnimationFrame(draw);
+      return;
+    }
+
+    // Рисуем ломаную линию (не сглаженную — angular corners)
+    for (let i = 1; i < trail.length; i++) {
+      const prev = trail[i - 1];
+      const curr = trail[i];
+      const age = (now - curr.time) / 400; // 0 = новая, 1 = старая
+      const alpha = Math.max(0, (1 - age) * 0.7);
+      const width = Math.max(0.5, (1 - age) * 2.5);
+
+      // Gradient: accent (D97757) → primary (1A535C) по длине
+      const ratio = i / trail.length;
+      const r = Math.round(217 - ratio * (217 - 26));
+      const g = Math.round(119 - ratio * (119 - 83));
+      const b = Math.round(87 + ratio * (92 - 87));
+
+      ctx.beginPath();
+      ctx.moveTo(prev.x, prev.y);
+      ctx.lineTo(curr.x, curr.y);
+      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      ctx.lineWidth = width;
+      ctx.lineCap = 'square'; // ломаные углы, не скруглённые
+      ctx.lineJoin = 'miter'; // острые углы
+      ctx.stroke();
+    }
+
+    // Головка кометы — яркая точка
+    if (isActive && trail.length > 0) {
+      const head = trail[trail.length - 1];
+
+      ctx.beginPath();
+      ctx.arc(head.x, head.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(217, 119, 87, 0.6)';
+      ctx.fill();
+
+      // Glow вокруг головки
+      ctx.beginPath();
+      ctx.arc(head.x, head.y, 8, 0, Math.PI * 2);
+      const glow = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, 8);
+      glow.addColorStop(0, 'rgba(217, 119, 87, 0.3)');
+      glow.addColorStop(1, 'rgba(217, 119, 87, 0)');
+      ctx.fillStyle = glow;
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
   }
-  animate();
+
+  draw();
 }
 
 if (document.readyState === 'complete') {
-  initCursorGlow();
+  initCometCursor();
 } else {
-  window.addEventListener('load', initCursorGlow);
+  window.addEventListener('load', initCometCursor);
 }

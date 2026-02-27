@@ -197,29 +197,6 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
 }
 
-/* --- Cursor glow --- */
-.cursor-glow {
-  position: fixed;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(26, 83, 92, 0.08) 0%,
-    rgba(26, 83, 92, 0.03) 40%,
-    transparent 70%
-  );
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease;
-  opacity: 0;
-}
-
-.cursor-glow.active {
-  opacity: 1;
-}
-
 /* --- Icon animations --- */
 .icon-animated {
   transition: transform 0.3s ease;
@@ -268,14 +245,23 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.15);
 }
 
-/* --- Pulse line divider --- */
-@keyframes pulse-line {
-  0%, 100% { opacity: 0; transform: translateX(-100%); }
-  50% { opacity: 1; transform: translateX(100%); }
+/* --- Divider sweep line --- */
+.divider-pulse-line {
+  position: absolute;
+  top: 50%;
+  left: -30%;
+  width: 30%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(217, 119, 87, 0.5), rgba(26, 83, 92, 0.3), transparent);
+  animation: divider-sweep 5s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.animate-pulse-line {
-  animation: pulse-line 4s ease-in-out infinite;
+@keyframes divider-sweep {
+  0% { left: -30%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
 }
 
 /* --- Circuit board pattern --- */

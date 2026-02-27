@@ -1,38 +1,77 @@
 ---
 interface Props {
-  variant?: 'line' | 'dots' | 'pulse';
+  variant?: 'circuit' | 'equalizer' | 'signal';
 }
 
-const { variant = 'line' } = Astro.props;
+const { variant = 'circuit' } = Astro.props;
 ---
 
-{variant === 'line' && (
-  <div class="relative h-px w-full">
-    <div class="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
-    <div class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-3">
-      <div class="w-16 md:w-24 h-px bg-primary/20"></div>
-      <div class="w-2 h-2 rounded-full bg-primary/30 shrink-0"></div>
-      <div class="w-16 md:w-24 h-px bg-primary/20"></div>
+{variant === 'circuit' && (
+  <div class="relative py-3 overflow-hidden">
+    <svg class="w-full h-6" viewBox="0 0 1440 24" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="12" x2="380" y2="12" stroke="#1A535C" stroke-width="1" opacity="0.12" />
+      <polyline points="380,12 400,4 480,4 500,12" stroke="#1A535C" stroke-width="1" opacity="0.15" fill="none" />
+      <circle cx="400" cy="4" r="2.5" fill="#1A535C" opacity="0.2" />
+      <circle cx="480" cy="4" r="2.5" fill="#D97757" opacity="0.25" />
+      <line x1="500" y1="12" x2="940" y2="12" stroke="#1A535C" stroke-width="1" opacity="0.12" />
+      <polyline points="940,12 960,20 1040,20 1060,12" stroke="#1A535C" stroke-width="1" opacity="0.15" fill="none" />
+      <circle cx="960" cy="20" r="2.5" fill="#D97757" opacity="0.2" />
+      <circle cx="1040" cy="20" r="2.5" fill="#1A535C" opacity="0.2" />
+      <line x1="1060" y1="12" x2="1440" y2="12" stroke="#1A535C" stroke-width="1" opacity="0.12" />
+    </svg>
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="divider-pulse-line"></div>
     </div>
   </div>
 )}
 
-{variant === 'dots' && (
-  <div class="relative h-px w-full">
-    <div class="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent"></div>
-    <div class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2">
-      <div class="w-1.5 h-1.5 rounded-full bg-primary/20"></div>
-      <div class="w-1.5 h-1.5 rounded-full bg-primary/30"></div>
-      <div class="w-2 h-2 rounded-full bg-accent/40"></div>
-      <div class="w-1.5 h-1.5 rounded-full bg-primary/30"></div>
-      <div class="w-1.5 h-1.5 rounded-full bg-primary/20"></div>
+{variant === 'equalizer' && (
+  <div class="relative py-3 overflow-hidden">
+    <svg class="w-full h-6" viewBox="0 0 1440 24" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="12" x2="1440" y2="12" stroke="#1A535C" stroke-width="0.5" opacity="0.08" />
+      <!-- Equalizer bars -->
+      <rect x="200" y="6" width="3" height="12" rx="1" fill="#1A535C" opacity="0.12" />
+      <rect x="210" y="3" width="3" height="18" rx="1" fill="#1A535C" opacity="0.15" />
+      <rect x="220" y="8" width="3" height="8" rx="1" fill="#D97757" opacity="0.18" />
+      <rect x="230" y="1" width="3" height="22" rx="1" fill="#1A535C" opacity="0.12" />
+      <rect x="240" y="6" width="3" height="12" rx="1" fill="#1A535C" opacity="0.1" />
+      <rect x="600" y="4" width="3" height="16" rx="1" fill="#1A535C" opacity="0.1" />
+      <rect x="610" y="8" width="3" height="8" rx="1" fill="#D97757" opacity="0.15" />
+      <rect x="620" y="2" width="3" height="20" rx="1" fill="#1A535C" opacity="0.18" />
+      <rect x="630" y="6" width="3" height="12" rx="1" fill="#1A535C" opacity="0.12" />
+      <rect x="640" y="4" width="3" height="16" rx="1" fill="#D97757" opacity="0.1" />
+      <rect x="1000" y="5" width="3" height="14" rx="1" fill="#1A535C" opacity="0.15" />
+      <rect x="1010" y="2" width="3" height="20" rx="1" fill="#D97757" opacity="0.12" />
+      <rect x="1020" y="7" width="3" height="10" rx="1" fill="#1A535C" opacity="0.18" />
+      <rect x="1030" y="3" width="3" height="18" rx="1" fill="#1A535C" opacity="0.1" />
+      <rect x="1040" y="6" width="3" height="12" rx="1" fill="#1A535C" opacity="0.14" />
+      <!-- Nodes -->
+      <circle cx="225" cy="12" r="1.5" fill="#1A535C" opacity="0.2" />
+      <circle cx="625" cy="12" r="1.5" fill="#D97757" opacity="0.25" />
+      <circle cx="1025" cy="12" r="1.5" fill="#1A535C" opacity="0.2" />
+    </svg>
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="divider-pulse-line"></div>
     </div>
   </div>
 )}
 
-{variant === 'pulse' && (
-  <div class="relative h-px w-full overflow-hidden">
-    <div class="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
-    <div class="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent animate-pulse-line"></div>
+{variant === 'signal' && (
+  <div class="relative py-3 overflow-hidden">
+    <svg class="w-full h-6" viewBox="0 0 1440 24" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="12" x2="500" y2="12" stroke="#1A535C" stroke-width="1" opacity="0.1" />
+      <!-- Signal/heartbeat -->
+      <polyline points="500,12 530,12 540,4 550,20 560,8 570,16 580,12 610,12" stroke="#1A535C" stroke-width="1.2" opacity="0.18" fill="none" />
+      <line x1="610" y1="12" x2="830" y2="12" stroke="#1A535C" stroke-width="1" opacity="0.1" />
+      <!-- Second signal -->
+      <polyline points="830,12 860,12 870,6 880,18 890,10 900,14 910,12 940,12" stroke="#D97757" stroke-width="1.2" opacity="0.2" fill="none" />
+      <line x1="940" y1="12" x2="1440" y2="12" stroke="#1A535C" stroke-width="1" opacity="0.1" />
+      <!-- Glow dots at signal peaks -->
+      <circle cx="540" cy="4" r="2" fill="#1A535C" opacity="0.15" />
+      <circle cx="870" cy="6" r="2" fill="#D97757" opacity="0.2" />
+    </svg>
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="divider-pulse-line"></div>
+    </div>
   </div>
 )}
