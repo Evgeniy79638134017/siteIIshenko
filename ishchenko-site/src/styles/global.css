@@ -47,3 +47,12 @@ h1, h2, h3, h4, h5, h6 {
 .gsap-progress-bar {
   width: 0%;
 }
+
+.tilt-card,
+.tilt-pricing {
+  transform-style: preserve-3d;
+}
+
+.js-tilt-glare {
+  border-radius: inherit;
+}

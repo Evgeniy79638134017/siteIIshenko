@@ -100,3 +100,35 @@ gsap.utils.toArray('.parallax-slow').forEach((el) => {
     },
   });
 });
+
+/* ── Vanilla-tilt 3D hover on cards ── */
+async function initTilt() {
+  if (window.innerWidth < 768) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const { default: VanillaTilt } = await import('vanilla-tilt');
+
+  const cards = document.querySelectorAll('.tilt-card');
+  if (cards.length) {
+    VanillaTilt.init(Array.from(cards), {
+      max: 8,
+      speed: 400,
+      scale: 1.02,
+      glare: true,
+      'max-glare': 0.08,
+    });
+  }
+
+  const pricingCards = document.querySelectorAll('.tilt-pricing');
+  if (pricingCards.length) {
+    VanillaTilt.init(Array.from(pricingCards), {
+      max: 5,
+      speed: 400,
+      scale: 1.01,
+      glare: true,
+      'max-glare': 0.12,
+    });
+  }
+}
+
+initTilt();
