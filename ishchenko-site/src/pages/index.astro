@@ -13,6 +13,7 @@ import Testimonials from '../components/Testimonials.astro';
 import FAQ from '../components/FAQ.astro';
 import Guarantees from '../components/Guarantees.astro';
 import FinalCTA from '../components/FinalCTA.astro';
+import SectionDivider from '../components/SectionDivider.astro';
 ---
 <BaseLayout>
   <Fragment slot="head">
@@ -32,16 +33,28 @@ import FinalCTA from '../components/FinalCTA.astro';
     })} />
   </Fragment>
   <Hero />
+  <SectionDivider variant="glitch" from="#0F2B3C" to="#FAF9F5" />
   <Problems />
+  <SectionDivider variant="circuit-line" from="#FAF9F5" to="#F0EEE9" />
   <Comparison />
+  <SectionDivider variant="equalizer" from="#F0EEE9" to="#FAF9F5" flip />
   <Solution />
+  <SectionDivider variant="zigzag" from="#FAF9F5" to="#F0EEE9" />
   <Modules />
+  <SectionDivider variant="glitch" from="#F0EEE9" to="#FAF9F5" flip />
   <CaseStudy />
+  <SectionDivider variant="circuit-line" from="#FAF9F5" to="#F0EEE9" />
   <CompetitorTable />
+  <SectionDivider variant="equalizer" from="#F0EEE9" to="#FAF9F5" flip />
   <Pricing />
+  <SectionDivider variant="zigzag" from="#FAF9F5" to="#F0EEE9" />
   <ForWhom />
+  <SectionDivider variant="circuit-line" from="#F0EEE9" to="#FAF9F5" flip />
   <Testimonials />
+  <SectionDivider variant="glitch" from="#FAF9F5" to="#F0EEE9" />
   <FAQ />
+  <SectionDivider variant="equalizer" from="#F0EEE9" to="#FAF9F5" flip />
   <Guarantees />
+  <SectionDivider variant="circuit-line" from="#FAF9F5" to="#0F2B3C" />
   <FinalCTA />
 </BaseLayout>
