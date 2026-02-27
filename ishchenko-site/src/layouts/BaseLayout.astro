@@ -34,6 +34,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ru_RU" />
 
+  <!-- Lenis smooth scroll CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1/dist/lenis.css" />
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -51,16 +54,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <StickyMobileCTA />
 
   <script>
-    if (!CSS.supports('animation-timeline', 'view()')) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal, .reveal-delay-1, .reveal-delay-2').forEach(el => observer.observe(el));
-    }
+    import '../scripts/animations.js';
   </script>
 </body>
 </html>
