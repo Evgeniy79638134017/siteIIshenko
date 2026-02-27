@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'PT Sans', sans-serif;
+
+  --color-primary: #1A535C;
+  --color-primary-light: #2A7F8A;
+  --color-secondary: #5FA8D3;
+  --color-bg: #FAF9F5;
+  --color-bg-alt: #F0EEE9;
+  --color-bg-dark: #0F2B3C;
+  --color-text: #141413;
+  --color-text-muted: #6B7280;
+  --color-text-light: #B0AEA5;
+  --color-accent: #D97757;
+  --color-accent-hover: #C4623F;
+  --color-success: #2D6A4F;
+  --color-border: #E8E6DC;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.65;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: fade-slide-up 600ms ease both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+    .reveal-delay-1 {
+      animation: fade-slide-up 600ms ease 100ms both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+    .reveal-delay-2 {
+      animation: fade-slide-up 600ms ease 200ms both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+@keyframes fade-slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@supports not (animation-timeline: view()) {
+  .reveal,
+  .reveal-delay-1,
+  .reveal-delay-2 {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible,
+  .reveal-delay-1.visible,
+  .reveal-delay-2.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mesh-gradient {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(26, 83, 92, 0.8) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(42, 127, 138, 0.6) 0%, transparent 40%),
+    radial-gradient(ellipse at 60% 80%, rgba(15, 43, 60, 0.7) 0%, transparent 50%),
+    #0F2B3C;
+}
+
+@keyframes grow-bar {
+  from { width: 0%; }
+  to { width: var(--bar-width); }
+}
+
+.progress-bar {
+  animation: grow-bar 1s ease-out both;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .progress-bar {
+      animation: grow-bar 1s ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+  }
+}
