@@ -268,6 +268,16 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.15);
 }
 
+/* --- Pulse line divider --- */
+@keyframes pulse-line {
+  0%, 100% { opacity: 0; transform: translateX(-100%); }
+  50% { opacity: 1; transform: translateX(100%); }
+}
+
+.animate-pulse-line {
+  animation: pulse-line 4s ease-in-out infinite;
+}
+
 /* --- Circuit board pattern --- */
 .bg-circuit {
   position: relative;

@@ -1,47 +1,38 @@
 ---
 interface Props {
-  variant?: 'zigzag' | 'equalizer' | 'glitch' | 'circuit-line';
-  from?: string;
-  to?: string;
-  flip?: boolean;
+  variant?: 'line' | 'dots' | 'pulse';
 }
 
-const { variant = 'zigzag', from = '#FAF9F5', to = '#F0EEE9', flip = false } = Astro.props;
+const { variant = 'line' } = Astro.props;
 ---
 
-{variant === 'zigzag' && (
-  <div class:list={['w-full overflow-hidden leading-[0] -mb-px -mt-px', { 'rotate-180': flip }]}>
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="w-full h-[40px] md:h-[60px]">
-      <polygon points="0,0 0,60 1440,60 1440,0 1380,30 1260,0 1140,30 1020,0 900,30 780,0 660,30 540,0 420,30 300,0 180,30 60,0" fill={to} />
-    </svg>
+{variant === 'line' && (
+  <div class="relative h-px w-full">
+    <div class="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+    <div class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-3">
+      <div class="w-16 md:w-24 h-px bg-primary/20"></div>
+      <div class="w-2 h-2 rounded-full bg-primary/30 shrink-0"></div>
+      <div class="w-16 md:w-24 h-px bg-primary/20"></div>
+    </div>
   </div>
 )}
 
-{variant === 'equalizer' && (
-  <div class:list={['w-full overflow-hidden leading-[0] -mb-px -mt-px', { 'rotate-180': flip }]}>
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="w-full h-[40px] md:h-[60px]">
-      <path d={`M0,60 L0,30 L60,30 L60,10 L120,10 L120,40 L180,40 L180,15 L240,15 L240,35 L300,35 L300,5 L360,5 L360,45 L420,45 L420,20 L480,20 L480,50 L540,50 L540,8 L600,8 L600,38 L660,38 L660,18 L720,18 L720,42 L780,42 L780,12 L840,12 L840,48 L900,48 L900,22 L960,22 L960,35 L1020,35 L1020,8 L1080,8 L1080,45 L1140,45 L1140,15 L1200,15 L1200,40 L1260,40 L1260,10 L1320,10 L1320,30 L1380,30 L1380,20 L1440,20 L1440,60 Z`} fill={to} />
-    </svg>
+{variant === 'dots' && (
+  <div class="relative h-px w-full">
+    <div class="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent"></div>
+    <div class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2">
+      <div class="w-1.5 h-1.5 rounded-full bg-primary/20"></div>
+      <div class="w-1.5 h-1.5 rounded-full bg-primary/30"></div>
+      <div class="w-2 h-2 rounded-full bg-accent/40"></div>
+      <div class="w-1.5 h-1.5 rounded-full bg-primary/30"></div>
+      <div class="w-1.5 h-1.5 rounded-full bg-primary/20"></div>
+    </div>
   </div>
 )}
 
-{variant === 'glitch' && (
-  <div class:list={['w-full overflow-hidden leading-[0] -mb-px -mt-px', { 'rotate-180': flip }]}>
-    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" class="w-full h-[35px] md:h-[50px]">
-      <path d="M0,50 L0,25 L200,25 L200,10 L400,10 L400,35 L500,35 L500,0 L700,0 L700,20 L900,20 L900,5 L1000,5 L1000,30 L1200,30 L1200,15 L1440,15 L1440,50 Z" fill={to} />
-    </svg>
-  </div>
-)}
-
-{variant === 'circuit-line' && (
-  <div class:list={['w-full overflow-hidden leading-[0] -mb-px -mt-px relative', { 'rotate-180': flip }]}>
-    <svg viewBox="0 0 1440 50" preserveAspectRatio="none" class="w-full h-[35px] md:h-[50px]">
-      <rect x="0" y="25" width="1440" height="25" fill={to} />
-      <path d="M0,25 L300,25 L320,10 L500,10 L520,25 L700,25 L720,5 L800,5 L820,25 L1000,25 L1020,15 L1200,15 L1220,25 L1440,25" fill="none" stroke="#1A535C" stroke-width="1.5" opacity="0.15" />
-      <circle cx="320" cy="10" r="3" fill="#1A535C" opacity="0.2" />
-      <circle cx="520" cy="25" r="3" fill="#1A535C" opacity="0.2" />
-      <circle cx="820" cy="25" r="3" fill="#D97757" opacity="0.25" />
-      <circle cx="1220" cy="25" r="3" fill="#1A535C" opacity="0.2" />
-    </svg>
+{variant === 'pulse' && (
+  <div class="relative h-px w-full overflow-hidden">
+    <div class="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+    <div class="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent animate-pulse-line"></div>
   </div>
 )}
