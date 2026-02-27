@@ -1,0 +1,116 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/program', label: 'Программа' },
+  { href: '/cases', label: 'Кейсы' },
+  { href: '/about', label: 'Обо мне' },
+];
+
+const mobileLinks = [
+  { href: '/', label: 'Главная' },
+  { href: '/program', label: 'Программа' },
+  { href: '/cases', label: 'Кейсы' },
+  { href: '/about', label: 'Обо мне' },
+  { href: '/contacts', label: 'Контакты' },
+];
+---
+<header class="sticky top-0 z-50 bg-bg/90 backdrop-blur-sm border-b border-border/50">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="font-heading font-bold text-xl text-primary hover:text-primary-light transition-colors">
+      Евгений Ищенко
+    </a>
+
+    <!-- Desktop navigation -->
+    <div class="hidden md:flex items-center gap-8">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={[
+            'transition-colors font-medium text-sm',
+            currentPath === link.href || currentPath.startsWith(link.href + '/')
+              ? 'text-primary font-semibold'
+              : 'text-text hover:text-primary',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="/contacts"
+        class="bg-accent text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-accent-hover transition-all"
+      >
+        Получить систему
+      </a>
+    </div>
+
+    <!-- Mobile burger button -->
+    <button id="burger-btn" class="md:hidden" aria-label="Открыть меню">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-bg">
+  <!-- Top bar -->
+  <div class="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+    <a href="/" class="font-heading font-bold text-xl text-primary">
+      Евгений Ищенко
+    </a>
+    <button id="close-menu-btn" aria-label="Закрыть меню">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Links -->
+  <div class="flex flex-col items-center justify-center gap-6 text-xl font-medium mt-12">
+    {mobileLinks.map(link => (
+      <a
+        href={link.href}
+        class:list={[
+          'mobile-menu-link transition-colors',
+          currentPath === link.href || currentPath.startsWith(link.href + '/')
+            ? 'text-primary font-semibold'
+            : 'text-text hover:text-primary',
+        ]}
+      >
+        {link.label}
+      </a>
+    ))}
+    <a
+      href="/contacts"
+      class="mobile-menu-link mt-4 mx-8 w-[calc(100%-4rem)] text-center bg-accent text-white px-8 py-3 rounded-xl font-bold hover:bg-accent-hover transition-all"
+    >
+      Получить систему
+    </a>
+  </div>
+</div>
+
+<script>
+  const burgerBtn = document.getElementById('burger-btn');
+  const closeMenuBtn = document.getElementById('close-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  burgerBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  closeMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.add('hidden');
+  });
+
+  document.querySelectorAll('.mobile-menu-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+</script>
