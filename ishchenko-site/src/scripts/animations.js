@@ -16,9 +16,9 @@ gsap.ticker.lagSmoothing(0);
 
 /* ── Reveal (single element fade-slide-up) ── */
 gsap.utils.toArray('.reveal').forEach((el) => {
-  gsap.from(el, {
-    y: 40,
-    opacity: 0,
+  gsap.to(el, {
+    y: 0,
+    opacity: 1,
     duration: 0.8,
     ease: 'power2.out',
     scrollTrigger: {
@@ -33,15 +33,15 @@ gsap.utils.toArray('.reveal').forEach((el) => {
 gsap.utils.toArray('.reveal-group').forEach((group) => {
   const items = group.querySelectorAll('.reveal-item');
   if (!items.length) return;
-  gsap.from(items, {
-    y: 40,
-    opacity: 0,
-    duration: 0.6,
-    stagger: 0.15,
+  gsap.to(items, {
+    y: 0,
+    opacity: 1,
+    duration: 0.7,
+    stagger: 0.12,
     ease: 'power2.out',
     scrollTrigger: {
       trigger: group,
-      start: 'top 85%',
+      start: 'top 80%',
       toggleActions: 'play none none none',
     },
   });
@@ -71,20 +71,16 @@ gsap.utils.toArray('.counter').forEach((el) => {
 /* ── GSAP progress bars ── */
 gsap.utils.toArray('.gsap-progress-bar').forEach((bar) => {
   const width = bar.dataset.width || '0%';
-  gsap.fromTo(
-    bar,
-    { width: '0%' },
-    {
-      width,
-      duration: 1.2,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: bar,
-        start: 'top 90%',
-        toggleActions: 'play none none none',
-      },
-    }
-  );
+  gsap.to(bar, {
+    width,
+    duration: 1.2,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: bar,
+      start: 'top 90%',
+      toggleActions: 'play none none none',
+    },
+  });
 });
 
 /* ── Parallax-slow (decorative elements in Hero) ── */
@@ -136,9 +132,11 @@ initTilt();
 /* ── Safety fallback: show elements if GSAP didn't trigger ── */
 setTimeout(() => {
   document.querySelectorAll('.reveal, .reveal-item').forEach((el) => {
-    if (window.getComputedStyle(el).opacity === '0') {
+    const style = window.getComputedStyle(el);
+    if (style.opacity === '0') {
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
       el.style.opacity = '1';
-      el.style.transform = 'none';
+      el.style.transform = 'translateY(0)';
     }
   });
-}, 3000);
+}, 4000);

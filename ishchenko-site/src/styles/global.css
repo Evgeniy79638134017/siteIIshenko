@@ -48,9 +48,16 @@ h1, h2, h3, h4, h5, h6 {
   width: 0%;
 }
 
-.reveal-item,
-.reveal {
-  visibility: visible;
+.reveal,
+.reveal-item {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.no-js .reveal,
+.no-js .reveal-item {
+  opacity: 1;
+  transform: none;
 }
 
 .tilt-card,
