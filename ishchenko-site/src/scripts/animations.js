@@ -132,3 +132,13 @@ async function initTilt() {
 }
 
 initTilt();
+
+/* ── Safety fallback: show elements if GSAP didn't trigger ── */
+setTimeout(() => {
+  document.querySelectorAll('.reveal, .reveal-item').forEach((el) => {
+    if (window.getComputedStyle(el).opacity === '0') {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    }
+  });
+}, 3000);
