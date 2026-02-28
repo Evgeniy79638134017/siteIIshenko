@@ -357,8 +357,11 @@ h1, h2, h3, h4, h5, h6 {
   scrollbar-width: none;
 }
 
-/* Prevent word-break by letters in headings */
-h1, h2, h3, .split-heading {
+/* Запрет переноса слов по буквам — только по словам */
+h1, h2, h3, h4, h5, h6,
+.split-heading,
+.font-heading,
+p, li, span, a, blockquote, summary, label, td, th, dt, dd {
   word-break: keep-all;
   overflow-wrap: break-word;
   hyphens: none;
