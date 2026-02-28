@@ -1,72 +1,64 @@
 <section id="pricing" class="bg-bg py-20 md:py-24 bg-circuit relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 neon-scan">
     <h2 class="split-heading font-heading font-bold text-3xl md:text-4xl text-text text-center">Выбери свой формат</h2>
+    <p class="text-center text-text-muted mt-3">Старт — после бесплатной диагностики в Telegram</p>
 
-    <div class="text-center mt-4">
-      <div class="inline-flex items-center gap-2 bg-accent/10 text-accent font-semibold px-6 py-2.5 rounded-full text-sm">
-        <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-        До 4 марта — текущие цены. После — +15%
+    <!-- Countdown timer + promo code -->
+    <div id="pricing-timer-block" class="mt-8 text-center">
+      <div class="inline-block bg-bg-alt border border-border rounded-2xl px-6 py-4 md:px-10 md:py-5">
+        <p class="text-text-muted text-sm mb-2">До повышения цен осталось:</p>
+        <div id="countdown" class="flex items-center justify-center gap-3 md:gap-4 font-heading font-bold text-2xl md:text-3xl text-accent">
+          <div class="flex flex-col items-center">
+            <span id="cd-days">00</span>
+            <span class="text-xs text-text-muted font-normal mt-1">дн</span>
+          </div>
+          <span class="text-text-muted">:</span>
+          <div class="flex flex-col items-center">
+            <span id="cd-hours">00</span>
+            <span class="text-xs text-text-muted font-normal mt-1">час</span>
+          </div>
+          <span class="text-text-muted">:</span>
+          <div class="flex flex-col items-center">
+            <span id="cd-mins">00</span>
+            <span class="text-xs text-text-muted font-normal mt-1">мин</span>
+          </div>
+          <span class="text-text-muted">:</span>
+          <div class="flex flex-col items-center">
+            <span id="cd-secs">00</span>
+            <span class="text-xs text-text-muted font-normal mt-1">сек</span>
+          </div>
+        </div>
+        <div class="mt-4 flex items-center justify-center gap-2">
+          <span class="text-text-muted text-sm">Промокод:</span>
+          <code id="promo-code" class="bg-accent/10 text-accent font-bold px-3 py-1 rounded-lg text-sm select-all">ИЩЕНКО10</code>
+          <button id="copy-promo" class="text-accent hover:text-accent-hover transition-colors cursor-pointer" title="Скопировать">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9.75a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" /></svg>
+          </button>
+          <span id="copy-feedback" class="text-success text-xs font-medium opacity-0 transition-opacity duration-300">Скопировано!</span>
+        </div>
       </div>
     </div>
 
-    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start reveal-group">
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start reveal-group">
 
-      <!-- Базовый -->
-      <div class="bg-white rounded-2xl p-8 flex flex-col reveal-item tilt-pricing gradient-border relative">
-        <span class="bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full inline-block w-fit">20 мест</span>
-        <h3 class="font-heading font-bold text-2xl text-text mt-4">Базовый</h3>
-        <p class="text-text-muted text-sm mt-1">Самостоятельное изучение</p>
-        <div class="mt-4">
-          <span class="font-heading font-bold text-3xl text-text">19 000</span>
-          <span class="text-text-muted text-sm ml-1">₽</span>
-        </div>
-        <ul class="mt-6 space-y-3 flex-1">
-          <li class="flex items-start gap-2">
-            <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            <span class="text-text text-sm">Аналитическая записка с разбором бизнеса</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            <span class="text-text text-sm">Все материалы мастер-практикума</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            <span class="text-text text-sm">Видеозаписи 4 субботних занятий</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            <span class="text-text text-sm">50 готовых промптов и шаблонов</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            <span class="text-text text-sm">Общий чат участников</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            <span class="text-text text-sm">Пятничные разборы кейсов</span>
-          </li>
-        </ul>
-        <a href="/contacts" class="border-2 border-primary text-primary px-6 py-3 rounded-xl font-semibold hover:bg-primary hover:text-white transition-all mt-8 text-center block">Выбрать тариф</a>
-      </div>
-
-      <!-- Стандарт (выделенный, order-first на мобильном) -->
+      <!-- Стандарт (рекомендуемый) -->
       <div class="order-first md:order-none bg-white shadow-xl relative rounded-2xl p-8 flex flex-col reveal-item tilt-pricing gradient-border gradient-border-accent">
         <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-accent text-white text-xs font-bold px-4 py-1 rounded-full whitespace-nowrap">Рекомендуемый</span>
         <span class="bg-accent/10 text-accent text-xs font-semibold px-3 py-1 rounded-full inline-block w-fit">8 мест</span>
         <h3 class="font-heading font-bold text-2xl text-text mt-4">Стандарт</h3>
         <p class="text-text-muted text-sm mt-1">Полное сопровождение</p>
         <div class="mt-4">
-          <span class="font-heading font-bold text-3xl text-accent">59 000</span>
+          <span class="font-heading font-bold text-3xl text-accent">79 000</span>
           <span class="text-text-muted text-sm ml-1">₽</span>
         </div>
         <ul class="mt-6 space-y-3 flex-1">
           <li class="flex items-start gap-2">
             <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            <span class="text-text text-sm">Всё из Базового</span>
+            <span class="text-text text-sm">Подробная диагностика до старта</span>
           </li>
           <li class="flex items-start gap-2">
             <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            <span class="text-text text-sm">Подробная диагностика до старта</span>
+            <span class="text-text text-sm">Все материалы мастер-практикума</span>
           </li>
           <li class="flex items-start gap-2">
             <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
@@ -78,15 +70,23 @@
           </li>
           <li class="flex items-start gap-2">
             <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            <span class="text-text text-sm">50 готовых промптов и шаблонов</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
             <span class="text-text text-sm">Мастер-группа 3 месяца (Telegram)</span>
           </li>
           <li class="flex items-start gap-2">
             <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
             <span class="text-text text-sm">Проверка домашних заданий с обратной связью</span>
           </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-success shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            <span class="text-text text-sm">Пятничные разборы кейсов</span>
+          </li>
         </ul>
         <p class="text-text-muted text-xs mt-3 pt-3 border-t border-border">24+ часа живого обучения + 3 мес поддержки</p>
-        <a href="/contacts" class="bg-accent text-white px-6 py-3 rounded-xl font-bold hover:bg-accent-hover hover:scale-[1.02] shadow-lg shadow-accent/25 transition-all mt-8 text-center block">Получить систему</a>
+        <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer" class="bg-accent text-white px-6 py-3 rounded-xl font-bold hover:bg-accent-hover hover:scale-[1.02] shadow-lg shadow-accent/25 transition-all mt-8 text-center block">Получить систему</a>
       </div>
 
       <!-- VIP -->
@@ -95,7 +95,7 @@
         <h3 class="font-heading font-bold text-2xl text-text mt-4">VIP</h3>
         <p class="text-text-muted text-sm mt-1">Результат «под ключ»</p>
         <div class="mt-4">
-          <span class="font-heading font-bold text-3xl text-text">99 000</span>
+          <span class="font-heading font-bold text-3xl text-text">129 000</span>
           <span class="text-text-muted text-sm ml-1">₽</span>
         </div>
         <ul class="mt-6 space-y-3 flex-1">
@@ -128,7 +128,7 @@
             <span class="text-text text-sm">Сопровождение до передачи системы</span>
           </li>
         </ul>
-        <a href="/contacts" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-light transition-all mt-8 text-center block">Выбрать тариф</a>
+        <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-light transition-all mt-8 text-center block">Выбрать тариф</a>
       </div>
 
       <!-- Корпоративный -->
@@ -137,7 +137,7 @@
         <h3 class="font-heading font-bold text-2xl text-text mt-4">Корпоративный</h3>
         <p class="text-text-muted text-sm mt-1">Глубокое внедрение</p>
         <div class="mt-4">
-          <span class="font-heading font-bold text-3xl text-text">179 000</span>
+          <span class="font-heading font-bold text-3xl text-text">199 000</span>
           <span class="text-text-muted text-sm ml-1">₽</span>
         </div>
         <ul class="mt-6 space-y-3 flex-1">
@@ -170,7 +170,7 @@
             <span class="text-text text-sm">Полное сопровождение до передачи</span>
           </li>
         </ul>
-        <a href="/contacts" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-light transition-all mt-8 text-center block">Обсудить внедрение</a>
+        <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-light transition-all mt-8 text-center block">Обсудить внедрение</a>
       </div>
 
     </div>
@@ -178,3 +178,67 @@
     <p class="mt-10 text-center text-text-muted text-sm">Рассрочка на 2-3 месяца. Обсудим индивидуально на диагностике.</p>
   </div>
 </section>
+
+<script is:inline>
+  (function() {
+    var DEADLINE = new Date('2025-03-04T23:59:59+03:00').getTime();
+    var timerBlock = document.getElementById('pricing-timer-block');
+    var daysEl = document.getElementById('cd-days');
+    var hoursEl = document.getElementById('cd-hours');
+    var minsEl = document.getElementById('cd-mins');
+    var secsEl = document.getElementById('cd-secs');
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function updateTimer() {
+      var diff = DEADLINE - Date.now();
+      if (diff <= 0) {
+        if (timerBlock) timerBlock.style.display = 'none';
+        return false;
+      }
+      var days = Math.floor(diff / 86400000);
+      var hours = Math.floor((diff % 86400000) / 3600000);
+      var mins = Math.floor((diff % 3600000) / 60000);
+      var secs = Math.floor((diff % 60000) / 1000);
+      if (daysEl) daysEl.textContent = pad(days);
+      if (hoursEl) hoursEl.textContent = pad(hours);
+      if (minsEl) minsEl.textContent = pad(mins);
+      if (secsEl) secsEl.textContent = pad(secs);
+      return true;
+    }
+
+    if (updateTimer()) {
+      var interval = setInterval(function() {
+        if (!updateTimer()) clearInterval(interval);
+      }, 1000);
+    }
+
+    // Copy promo code
+    var copyBtn = document.getElementById('copy-promo');
+    var feedback = document.getElementById('copy-feedback');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function() {
+        var code = '\u0418\u0429\u0415\u041D\u041A\u041E10';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(showFeedback);
+        } else {
+          var ta = document.createElement('textarea');
+          ta.value = code;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showFeedback();
+        }
+      });
+    }
+
+    function showFeedback() {
+      if (!feedback) return;
+      feedback.style.opacity = '1';
+      setTimeout(function() { feedback.style.opacity = '0'; }, 2000);
+    }
+  })();
+</script>
