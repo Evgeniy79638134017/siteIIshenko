@@ -354,3 +354,10 @@ h1, h2, h3, h4, h5, h6 {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Prevent word-break by letters in headings */
+h1, h2, h3, .split-heading {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  hyphens: none;
+}
