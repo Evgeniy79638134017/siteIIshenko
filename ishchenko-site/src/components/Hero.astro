@@ -1,117 +1,226 @@
-<section data-hero class="relative overflow-hidden min-h-[90vh] md:min-h-[85vh] flex items-center">
-  <!-- Vanta.js container (абсолютный фон) -->
-  <div id="vanta-hero" class="absolute inset-0 mesh-gradient"></div>
-  <!-- Контент поверх -->
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-40 pb-20 md:pb-28 w-full">
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section id="hero" class="relative min-h-screen flex items-center overflow-hidden">
+  <!-- VIDEO BACKGROUND -->
+  <div class="absolute inset-0 z-0">
+    <!-- Desktop video -->
+    <video
+      id="hero-video"
+      class="hidden md:block absolute inset-0 w-full h-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster="/videos/hero-poster.jpg"
+    >
+      <source src="/videos/hero-bg.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Mobile video (легче) -->
+    <video
+      id="hero-video-mobile"
+      class="md:hidden absolute inset-0 w-full h-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster="/videos/hero-poster.jpg"
+    >
+      <source src="/videos/hero-bg-mobile.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Fallback poster для слабых устройств -->
+    <img
+      src="/videos/hero-poster.jpg"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover"
+      id="hero-poster-fallback"
+      style="display: none;"
+    />
+  </div>
+
+  <!-- OVERLAY — "туман" поверх видео -->
+  <div class="absolute inset-0 z-1" style="
+    background: linear-gradient(
+      135deg,
+      rgba(11, 34, 48, 0.85) 0%,
+      rgba(22, 69, 80, 0.7) 30%,
+      rgba(11, 34, 48, 0.75) 60%,
+      rgba(15, 43, 60, 0.85) 100%
+    );
+  "></div>
+
+  <!-- Дополнительный gradient снизу для плавного перехода к следующей секции -->
+  <div class="absolute bottom-0 left-0 right-0 h-32 z-1 bg-gradient-to-t from-bg to-transparent"></div>
+
+  <!-- CONTENT -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-      <!-- Left column: text -->
-      <div>
-        <!-- Promo badge -->
-        <div class="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+      <!-- Левая колонка — текст -->
+      <div class="text-white">
+        <!-- Бейдж -->
+        <div class="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 rounded-full px-4 py-1.5 mb-6">
           <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-          До 4 марта — текущие цены. После — +15%
+          <span class="text-sm text-accent font-medium">До 4 марта — текущие цены. После — +15%</span>
         </div>
 
-        <!-- Heading -->
-        <h1 class="split-heading font-heading font-bold text-white" style="font-size: clamp(2.25rem, 5vw, 3.5rem);">
+        <!-- Заголовок -->
+        <h1 class="split-heading font-heading font-bold text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
           Внедри систему продаж на&nbsp;базе&nbsp;ИИ — за&nbsp;4&nbsp;недели
         </h1>
 
-        <!-- Subheading -->
-        <p class="mt-6 text-white/75 text-lg md:text-xl leading-relaxed">
-          Мастер-практикум для предпринимателей. Проверено на&nbsp;проекте с&nbsp;оборотом 120&nbsp;млн₽/год. 500+ вопросов распаковки&nbsp;→ ИИ&#8209;помощники&nbsp;→ вирусный контент&nbsp;→ воронки&nbsp;→ посадочные.
+        <!-- Подзаголовок -->
+        <p class="text-lg md:text-xl text-white/80 mb-8 max-w-xl leading-relaxed">
+          Мастер-практикум для предпринимателей. Проверено на проекте с оборотом 120&nbsp;млн₽/год. 500+ вопросов распаковки → ИИ&#8209;помощники → вирусный контент → воронки → посадочные.
         </p>
 
-        <!-- CTA buttons -->
-        <div class="mt-8 flex flex-col sm:flex-row gap-4">
-          <a href="/contacts" class="glow-pulse inline-flex items-center justify-center bg-accent text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-accent-hover hover:scale-[1.02] shadow-lg shadow-accent/25 transition-all duration-200">
+        <!-- CTA кнопки -->
+        <div class="flex flex-col sm:flex-row gap-4 mb-10">
+          <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
+            class="glow-pulse inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl px-8 py-4 text-lg transition-all duration-300 hover:scale-[1.02]">
             Получить систему продаж
           </a>
-          <a href="#program" class="inline-flex items-center justify-center border-2 border-white/30 text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-all duration-200">
+          <a href="/program"
+            class="inline-flex items-center justify-center border-2 border-white/30 hover:border-white/60 text-white font-semibold rounded-xl px-8 py-4 text-lg transition-all duration-300 hover:bg-white/10">
             Смотреть программу
           </a>
         </div>
 
-        <!-- Trust metrics -->
-        <div class="mt-10 flex flex-wrap gap-x-8 gap-y-4">
+        <!-- Метрики -->
+        <div class="flex gap-8 md:gap-12">
           <div>
-            <span class="text-accent font-heading font-bold text-2xl">23 года</span>
-            <span class="text-white/50 text-sm block">в бизнесе</span>
+            <span class="counter block font-heading font-bold text-2xl md:text-3xl text-accent" data-target="23">23</span>
+            <span class="text-sm text-white/60">в бизнесе</span>
           </div>
           <div>
-            <span class="text-accent font-heading font-bold text-2xl">600+</span>
-            <span class="text-white/50 text-sm block">выпускников</span>
+            <span class="block font-heading font-bold text-2xl md:text-3xl text-accent">600+</span>
+            <span class="text-sm text-white/60">выпускников</span>
           </div>
           <div>
-            <span class="text-accent font-heading font-bold text-2xl">46 стран</span>
-            <span class="text-white/50 text-sm block">клиенты</span>
+            <span class="counter block font-heading font-bold text-2xl md:text-3xl text-accent" data-target="46">46</span>
+            <span class="text-sm text-white/60">стран</span>
           </div>
         </div>
       </div>
 
-      <!-- Right column: photo (desktop only) -->
-      <div class="hidden lg:block">
-        <div class="relative">
-          <div class="aspect-[3/4] max-w-md mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-            <img
-              src="/images/hero/hero-portrait.png"
-              alt="Евгений Ищенко — эксперт по продажам и ИИ"
-              class="w-full h-full object-cover object-top"
-              loading="eager"
-              width="600"
-              height="800"
-            />
-          </div>
-          <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/20 rounded-2xl -z-10"></div>
-          <div class="absolute -top-6 -left-6 w-24 h-24 bg-primary-light/20 rounded-full -z-10"></div>
+      <!-- Правая колонка — фото + кнопка видео -->
+      <div class="hidden lg:block relative">
+        <div class="aspect-[3/4] max-w-md mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          <img
+            src="/images/hero/hero-portrait.png"
+            alt="Евгений Ищенко — эксперт по продажам и ИИ"
+            class="w-full h-full object-cover object-top"
+            loading="eager"
+            width="600"
+            height="800"
+          />
         </div>
+
+        <!-- Кнопка YouTube видео поверх фото -->
+        <button
+          id="play-video-btn"
+          class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white/15 backdrop-blur-md border border-white/20 rounded-full px-6 py-3 text-white hover:bg-white/25 transition-all duration-300 group cursor-pointer"
+        >
+          <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="white"><polygon points="6,3 6,13 13,8" /></svg>
+          </div>
+          <span class="text-sm font-medium">Смотреть видео</span>
+        </button>
+
+        <!-- Декоративные элементы -->
+        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/20 rounded-2xl -z-10"></div>
+        <div class="absolute -top-6 -left-6 w-24 h-24 bg-primary-light/20 rounded-full -z-10"></div>
       </div>
 
     </div>
   </div>
 </section>
 
-<script>
-  import * as THREE from 'three';
-  async function initVanta() {
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    if (!gl) return;
-    if (window.innerWidth < 768 && navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    try {
-      const VANTA = await import('vanta/dist/vanta.fog.min');
+<!-- YouTube модалка -->
+<div id="video-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm">
+  <div class="relative w-full max-w-4xl mx-4 aspect-video">
+    <button
+      id="close-video-btn"
+      class="absolute -top-12 right-0 text-white/70 hover:text-white text-lg font-medium transition-colors cursor-pointer"
+    >
+      Закрыть ✕
+    </button>
+    <iframe
+      id="youtube-iframe"
+      class="w-full h-full rounded-2xl"
+      src=""
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+</div>
 
-      window.__vantaHero = VANTA.default({
-        el: '#vanta-hero',
-        THREE: THREE,
-        mouseControls: true,
-        touchControls: false,
-        gyroControls: false,
-        minHeight: 200,
-        minWidth: 200,
-        highlightColor: 0x227a85,
-        midtoneColor: 0x164550,
-        lowlightColor: 0x0d2a38,
-        baseColor: 0x0b2230,
-        blurFactor: 0.5,
-        speed: 1.5,
-        zoom: 0.7,
+<script>
+  // --- Video fallback для слабых устройств ---
+  (function() {
+    const video = document.getElementById('hero-video') || document.getElementById('hero-video-mobile');
+    const poster = document.getElementById('hero-poster-fallback');
+
+    if (video) {
+      // Если prefers-reduced-motion — показываем постер
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        video.style.display = 'none';
+        if (poster) poster.style.display = 'block';
+        return;
+      }
+
+      // Если видео не может воспроизвестись — fallback на постер
+      video.addEventListener('error', () => {
+        video.style.display = 'none';
+        if (poster) poster.style.display = 'block';
       });
-    } catch (e) {
-      console.log('Vanta.js not loaded, using CSS fallback');
+
+      // Таймаут: если за 5 секунд не заиграло — постер
+      setTimeout(() => {
+        if (video.readyState < 2) {
+          video.style.display = 'none';
+          if (poster) poster.style.display = 'block';
+        }
+      }, 5000);
     }
-  }
-  if (document.readyState === 'complete') {
-    initVanta();
-  } else {
-    window.addEventListener('load', initVanta);
-  }
-  document.addEventListener('astro:before-swap', () => {
-    if (window.__vantaHero) {
-      window.__vantaHero.destroy();
-      window.__vantaHero = null;
+  })();
+
+  // --- YouTube модалка ---
+  const playBtn = document.getElementById('play-video-btn');
+  const modal = document.getElementById('video-modal');
+  const closeBtn = document.getElementById('close-video-btn');
+  const iframe = document.getElementById('youtube-iframe');
+  const youtubeURL = 'https://www.youtube.com/embed/4o50B8MZgI4?autoplay=1&rel=0';
+
+  if (playBtn && modal && iframe) {
+    playBtn.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      iframe.src = youtubeURL;
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      iframe.src = '';
+      document.body.style.overflow = '';
     }
-  });
+
+    closeBtn?.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  }
 </script>
