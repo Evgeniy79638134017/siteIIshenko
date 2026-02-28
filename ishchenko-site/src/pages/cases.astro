@@ -108,56 +108,126 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- Кейсы учеников -->
-  <section class="bg-bg py-16 md:py-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="font-heading font-bold text-2xl md:text-3xl text-text text-center">Результаты учеников</h2>
-
-      <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
-        <!-- Алла -->
-        <div class="bg-white rounded-2xl p-8 border border-border">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center font-heading font-bold text-primary text-sm">А</div>
-            <div>
-              <span class="font-heading font-semibold text-text block">Алла</span>
-              <span class="text-text-muted text-xs">Инфобизнес-консультант</span>
-            </div>
-          </div>
-          <p class="text-text text-sm leading-relaxed italic">«Раньше один пост занимал 3-4 часа. Сейчас — 15-20 минут. За первую неделю сделала 14 постов. Через две недели пришли первые 3 заявки с нового контента.»</p>
-          <div class="mt-4 pt-4 border-t border-border">
-            <p class="text-primary font-semibold text-sm">15 минут вместо 3 часов на пост</p>
-          </div>
-        </div>
-
-        <!-- Алексей -->
-        <div class="bg-white rounded-2xl p-8 border border-border">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center font-heading font-bold text-primary text-sm">А</div>
-            <div>
-              <span class="font-heading font-semibold text-text block">Алексей</span>
-              <span class="text-text-muted text-xs">Детский прокат, франшиза</span>
-            </div>
-          </div>
-          <p class="text-text text-sm leading-relaxed italic">«Систематизировал весь контент для бизнеса. ИИ теперь создаёт материалы для франшизы — описания, посты, скрипты. Освободилось время на стратегию.»</p>
-          <div class="mt-4 pt-4 border-t border-border">
-            <p class="text-primary font-semibold text-sm">Освободил 5+ часов в неделю</p>
+  <!-- Кейсы учеников практикума -->
+  <section class="bg-bg py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading font-bold text-3xl md:text-4xl text-text mb-4 text-center">
+        Кейсы учеников практикума
+      </h2>
+      <p class="text-text-muted text-lg text-center mb-12 max-w-2xl mx-auto">
+        Предприниматели из разных ниш — от шоколада до международных перевозок. Одна система ИИ, конкретные результаты.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 1. Елена и Иван -->
+        <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <img src="/images/cases/case-elena-ivan.jpg" alt="Елена и Иван — French Kiss" class="w-full object-cover" loading="lazy" />
+          <div class="p-6 bg-white">
+            <h3 class="font-heading font-bold text-lg text-text mb-1">Елена и Иван · French Kiss</h3>
+            <p class="text-sm text-text-muted mb-3">Бутик бельгийского шоколада · 25 лет в бизнесе</p>
+            <ul class="space-y-2 text-sm text-text">
+              <li>📋 Книга продаж: 1,5 дня → 2 часа с ИИ</li>
+              <li>🏷 Маркировка за 20 мин — консультирует коллег</li>
+              <li>💬 Ответ клиенту: полдня → 2 минуты</li>
+              <li>🎉 23 февраля — всё продали без остатков</li>
+            </ul>
+            <blockquote class="mt-4 text-sm italic text-text-muted border-l-2 border-accent pl-3">
+              «Появился вопрос — сразу к ИИ-ассистенту. Всё решается за 5 минут. Появилась уверенность, что всё могу»
+            </blockquote>
           </div>
         </div>
-
-        <!-- Николай -->
-        <div class="bg-white rounded-2xl p-8 border border-border">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center font-heading font-bold text-primary text-sm">Н</div>
-            <div>
-              <span class="font-heading font-semibold text-text block">Николай</span>
-              <span class="text-text-muted text-xs">Фитнес-тренер</span>
-            </div>
-          </div>
-          <p class="text-text text-sm leading-relaxed italic">«Всё применяю сразу на практике. Генерирую готовые тексты для публикаций, сценарии для видео. Раньше вообще не знал, о чём писать.»</p>
-          <div class="mt-4 pt-4 border-t border-border">
-            <p class="text-primary font-semibold text-sm">Регулярный контент с первого дня</p>
+        <!-- 2. Ольга Куркина -->
+        <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <img src="/images/cases/case-olga.jpg" alt="Ольга Куркина — нутрициолог" class="w-full object-cover" loading="lazy" />
+          <div class="p-6 bg-white">
+            <h3 class="font-heading font-bold text-lg text-text mb-1">Ольга Куркина</h3>
+            <p class="text-sm text-text-muted mb-3">Нутрициолог · Хабаровск</p>
+            <ul class="space-y-2 text-sm text-text">
+              <li>📈 Охват: 1 000 → 40 000+ (×40)</li>
+              <li>👥 Клиентов: 2-3/мес → 15/мес (×5)</li>
+              <li>🔥 900 запросов с одной карусели</li>
+              <li>📱 30 каруселей за месяц на потоке</li>
+            </ul>
+            <blockquote class="mt-4 text-sm italic text-text-muted border-l-2 border-accent pl-3">
+              «Просто делала карусели каждый день. ИИ-помощник готовит сценарии, весь визуал — я только проверяю и публикую»
+            </blockquote>
           </div>
         </div>
+        <!-- 3. Настя -->
+        <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <img src="/images/cases/case-nastya.jpg" alt="Настя — дизайнер интерьеров" class="w-full object-cover" loading="lazy" />
+          <div class="p-6 bg-white">
+            <h3 class="font-heading font-bold text-lg text-text mb-1">Настя</h3>
+            <p class="text-sm text-text-muted mb-3">Дизайнер интерьеров · проекты под ключ</p>
+            <ul class="space-y-2 text-sm text-text">
+              <li>🎨 Мудборд: 2 дня в Фотошопе → 2 минуты с ИИ</li>
+              <li>🏠 Визуализация комнаты: 2 недели → 3 дня</li>
+              <li>📐 6 ракурсов интерьера — за один вечер</li>
+              <li>✨ ИИ делает то, что хочет клиент, а не дизайнер</li>
+            </ul>
+            <blockquote class="mt-4 text-sm italic text-text-muted border-l-2 border-accent pl-3">
+              «Подгружаю референсы клиента, и за 2 минуты готова концепция. Я даже цвета не выставляю — ИИ сам подбирает по стилю»
+            </blockquote>
+          </div>
+        </div>
+        <!-- 4. Алла Пашкова -->
+        <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <img src="/images/cases/case-alla.jpg" alt="Алла Пашкова — дерматолог-трихолог" class="w-full object-cover" loading="lazy" />
+          <div class="p-6 bg-white">
+            <h3 class="font-heading font-bold text-lg text-text mb-1">Алла Пашкова</h3>
+            <p class="text-sm text-text-muted mb-3">Дерматолог-трихолог · 15 лет практики</p>
+            <ul class="space-y-2 text-sm text-text">
+              <li>👥 +6 000 подписчиков за первый месяц</li>
+              <li>📈 Охват: 36 тыс → 2,5 млн/мес</li>
+              <li>💾 36 000 сохранений</li>
+              <li>📰 33 публикации в ведущих СМИ РФ</li>
+              <li>🌐 Создала крутой сайт за 4 часа</li>
+            </ul>
+            <blockquote class="mt-4 text-sm italic text-text-muted border-l-2 border-accent pl-3">
+              «Без ИИ-ассистента я каждый день уже не могу — куча задач, и он всё решает. Как будто на мой костёр деятельности плеснули ведро керосина»
+            </blockquote>
+          </div>
+        </div>
+        <!-- 5. Евгения -->
+        <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <img src="/images/cases/case-evgeniya.jpg" alt="Евгения — психолог" class="w-full object-cover" loading="lazy" />
+          <div class="p-6 bg-white">
+            <h3 class="font-heading font-bold text-lg text-text mb-1">Евгения</h3>
+            <p class="text-sm text-text-muted mb-3">Психолог · 20 лет практики</p>
+            <ul class="space-y-2 text-sm text-text">
+              <li>🧠 ИИ-наставник — разбор рабочих сессий каждый вечер</li>
+              <li>🎬 ИИ-редактор — монтаж документалки по тексту</li>
+              <li>💡 Три специалиста за стоимость подписки</li>
+            </ul>
+            <blockquote class="mt-4 text-sm italic text-text-muted border-l-2 border-accent pl-3">
+              «Сижу с ним, веселюсь каждый вечер. Он выбирает куски видео лучше, чем живой редактор. Получаю профессиональное удовольствие от процесса и результата»
+            </blockquote>
+          </div>
+        </div>
+        <!-- 6. Роман — ТПТ -->
+        <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <img src="/images/cases/case-roman.jpg" alt="Роман — ТПТ, международные перевозки" class="w-full object-cover" loading="lazy" />
+          <div class="p-6 bg-white">
+            <h3 class="font-heading font-bold text-lg text-text mb-1">Роман · ТПТ</h3>
+            <p class="text-sm text-text-muted mb-3">Международные перевозки · 100+ ед. техники · Россия–Китай</p>
+            <ul class="space-y-2 text-sm text-text">
+              <li>🏢 Уволили SMM менеджера — ИИ делает лучше</li>
+              <li>⚡ Кризис с Яндекс.Директом решили за 10 минут</li>
+              <li>🖼 Выставочный стенд — за вечер вместо месяца</li>
+              <li>🇷🇺 Вошли в пилотный проект при Правительстве РФ</li>
+            </ul>
+            <blockquote class="mt-4 text-sm italic text-text-muted border-l-2 border-accent pl-3">
+              «Загрузили всё в ИИ, раздали сотрудникам. Это другой уровень. Другая архитектура работы в каждом действии»
+            </blockquote>
+          </div>
+        </div>
+      </div>
+      <!-- CTA -->
+      <div class="text-center mt-12">
+        <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl px-8 py-4 text-lg transition-all duration-300 hover:scale-[1.02]">
+          Хочу такие же результаты →
+        </a>
+        <p class="text-sm text-text-muted mt-3">Начни с бесплатной диагностики — 15-20 минут</p>
       </div>
     </div>
   </section>

@@ -345,3 +345,12 @@ h1, h2, h3, h4, h5, h6 {
   50% { --gradient-angle: 180deg; }
   100% { --gradient-angle: 360deg; }
 }
+
+/* Hide scrollbar for horizontal scroll */
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;
+}
+.overflow-x-auto {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
