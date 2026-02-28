@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components';
 ---
 
 <section id="hero" class="relative min-h-screen flex items-center overflow-hidden">
@@ -59,107 +58,55 @@ import { Icon } from 'astro-icon/components';
 
   <!-- CONTENT -->
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="max-w-3xl">
 
-      <!-- Левая колонка — текст -->
-      <div class="text-white">
-        <!-- Бейдж -->
-        <div class="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 rounded-full px-4 py-1.5 mb-6">
-          <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-          <span class="text-sm text-accent font-medium">До 4 марта — текущие цены. После — +15%</span>
-        </div>
-
-        <!-- Заголовок -->
-        <h1 class="split-heading font-heading font-bold text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
-          Внедри систему продаж на&nbsp;базе&nbsp;ИИ — за&nbsp;4&nbsp;недели
-        </h1>
-
-        <!-- Подзаголовок -->
-        <p class="text-lg md:text-xl text-white/80 mb-8 max-w-xl leading-relaxed">
-          Мастер-практикум для предпринимателей. Проверено на проекте с оборотом 120&nbsp;млн₽/год. 500+ вопросов распаковки → ИИ&#8209;помощники → вирусный контент → воронки → посадочные.
-        </p>
-
-        <!-- CTA кнопки -->
-        <div class="flex flex-col sm:flex-row gap-4 mb-10">
-          <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
-            class="glow-pulse inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl px-8 py-4 text-lg transition-all duration-300 hover:scale-[1.02]">
-            Получить систему продаж
-          </a>
-          <a href="/program"
-            class="inline-flex items-center justify-center border-2 border-white/30 hover:border-white/60 text-white font-semibold rounded-xl px-8 py-4 text-lg transition-all duration-300 hover:bg-white/10">
-            Смотреть программу
-          </a>
-        </div>
-
-        <!-- Метрики -->
-        <div class="flex gap-8 md:gap-12">
-          <div>
-            <span class="counter block font-heading font-bold text-2xl md:text-3xl text-accent" data-target="23">23</span>
-            <span class="text-sm text-white/60">в бизнесе</span>
-          </div>
-          <div>
-            <span class="block font-heading font-bold text-2xl md:text-3xl text-accent">600+</span>
-            <span class="text-sm text-white/60">выпускников</span>
-          </div>
-          <div>
-            <span class="counter block font-heading font-bold text-2xl md:text-3xl text-accent" data-target="46">46</span>
-            <span class="text-sm text-white/60">стран</span>
-          </div>
-        </div>
+      <!-- Бейдж -->
+      <div class="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 rounded-full px-4 py-1.5 mb-6">
+        <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+        <span class="text-sm text-accent font-medium">До 4 марта — текущие цены. После — +15%</span>
       </div>
 
-      <!-- Правая колонка — фото + кнопка видео -->
-      <div class="hidden lg:block relative">
-        <div class="aspect-[3/4] max-w-md mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-          <img
-            src="/images/hero/hero-portrait.png"
-            alt="Евгений Ищенко — эксперт по продажам и ИИ"
-            class="w-full h-full object-cover object-top"
-            loading="eager"
-            width="600"
-            height="800"
-          />
+      <!-- Заголовок -->
+      <h1 class="split-heading font-heading font-bold text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 text-white">
+        Внедри систему продаж на&nbsp;базе&nbsp;ИИ — за&nbsp;4&nbsp;недели
+      </h1>
+
+      <!-- Подзаголовок -->
+      <p class="text-lg md:text-xl text-white/80 mb-8 max-w-xl leading-relaxed">
+        Мастер-практикум для предпринимателей. Проверено на проекте с оборотом 120&nbsp;млн₽/год. 500+ вопросов распаковки → ИИ&#8209;помощники → вирусный контент → воронки → посадочные.
+      </p>
+
+      <!-- CTA кнопки -->
+      <div class="flex flex-col sm:flex-row gap-4 mb-10">
+        <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
+          class="glow-pulse inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl px-8 py-4 text-lg transition-all duration-300 hover:scale-[1.02]">
+          Получить систему продаж
+        </a>
+        <a href="/program"
+          class="inline-flex items-center justify-center border-2 border-white/30 hover:border-white/60 text-white font-semibold rounded-xl px-8 py-4 text-lg transition-all duration-300 hover:bg-white/10">
+          Смотреть программу
+        </a>
+      </div>
+
+      <!-- Метрики -->
+      <div class="flex gap-8 md:gap-12">
+        <div>
+          <span class="counter block font-heading font-bold text-2xl md:text-3xl text-accent" data-target="23">23</span>
+          <span class="text-sm text-white/60">в бизнесе</span>
         </div>
-
-        <!-- Кнопка YouTube видео поверх фото -->
-        <button
-          id="play-video-btn"
-          class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white/15 backdrop-blur-md border border-white/20 rounded-full px-6 py-3 text-white hover:bg-white/25 transition-all duration-300 group cursor-pointer"
-        >
-          <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="white"><polygon points="6,3 6,13 13,8" /></svg>
-          </div>
-          <span class="text-sm font-medium">Смотреть видео</span>
-        </button>
-
-        <!-- Декоративные элементы -->
-        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/20 rounded-2xl -z-10"></div>
-        <div class="absolute -top-6 -left-6 w-24 h-24 bg-primary-light/20 rounded-full -z-10"></div>
+        <div>
+          <span class="block font-heading font-bold text-2xl md:text-3xl text-accent">600+</span>
+          <span class="text-sm text-white/60">выпускников</span>
+        </div>
+        <div>
+          <span class="counter block font-heading font-bold text-2xl md:text-3xl text-accent" data-target="46">46</span>
+          <span class="text-sm text-white/60">стран</span>
+        </div>
       </div>
 
     </div>
   </div>
 </section>
-
-<!-- YouTube модалка -->
-<div id="video-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm">
-  <div class="relative w-full max-w-4xl mx-4 aspect-video">
-    <button
-      id="close-video-btn"
-      class="absolute -top-12 right-0 text-white/70 hover:text-white text-lg font-medium transition-colors cursor-pointer"
-    >
-      Закрыть ✕
-    </button>
-    <iframe
-      id="youtube-iframe"
-      class="w-full h-full rounded-2xl"
-      src=""
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    ></iframe>
-  </div>
-</div>
 
 <script>
   // --- Video fallback для слабых устройств ---
@@ -190,37 +137,4 @@ import { Icon } from 'astro-icon/components';
       }, 5000);
     }
   })();
-
-  // --- YouTube модалка ---
-  const playBtn = document.getElementById('play-video-btn');
-  const modal = document.getElementById('video-modal');
-  const closeBtn = document.getElementById('close-video-btn');
-  const iframe = document.getElementById('youtube-iframe');
-  const youtubeURL = 'https://www.youtube.com/embed/4o50B8MZgI4?autoplay=1&rel=0';
-
-  if (playBtn && modal && iframe) {
-    playBtn.addEventListener('click', () => {
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      iframe.src = youtubeURL;
-      document.body.style.overflow = 'hidden';
-    });
-
-    function closeModal() {
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      iframe.src = '';
-      document.body.style.overflow = '';
-    }
-
-    closeBtn?.addEventListener('click', closeModal);
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-  }
 </script>

@@ -53,6 +53,63 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <Footer />
   <StickyMobileCTA />
 
+  <!-- YouTube модалка (глобальная) -->
+  <div id="video-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm">
+    <div class="relative w-full max-w-4xl mx-4 aspect-video">
+      <button
+        id="close-video-btn"
+        class="absolute -top-12 right-0 text-white/70 hover:text-white text-lg font-medium transition-colors cursor-pointer"
+      >
+        Закрыть ✕
+      </button>
+      <iframe
+        id="youtube-iframe"
+        class="w-full h-full rounded-2xl"
+        src=""
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+
+  <script is:inline>
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-video-youtube]');
+      if (!btn) return;
+
+      const modal = document.getElementById('video-modal');
+      const iframe = document.getElementById('youtube-iframe');
+      if (!modal || !iframe) return;
+
+      const url = btn.dataset.videoYoutube;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      iframe.src = url;
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeVideoModal() {
+      const modal = document.getElementById('video-modal');
+      const iframe = document.getElementById('youtube-iframe');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      if (iframe) iframe.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('close-video-btn')?.addEventListener('click', closeVideoModal);
+
+    document.getElementById('video-modal')?.addEventListener('click', (e) => {
+      if (e.target === document.getElementById('video-modal')) closeVideoModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeVideoModal();
+    });
+  </script>
+
   <script>
     import '../scripts/animations.js';
   </script>
