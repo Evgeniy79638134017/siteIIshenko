@@ -42,7 +42,7 @@
     <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start reveal-group">
 
       <!-- СТАНДАРТ -->
-      <div class="relative border border-border rounded-2xl bg-white p-8 flex flex-col reveal-item">
+      <div class="relative border border-border rounded-2xl bg-white p-8 flex flex-col min-w-0 reveal-item">
         <div class="mb-4">
           <span class="inline-block bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">8 мест</span>
         </div>
@@ -94,7 +94,7 @@
       </div>
 
       <!-- VIP — Рекомендуемый -->
-      <div class="relative border-2 border-accent rounded-2xl bg-white p-8 flex flex-col shadow-xl reveal-item">
+      <div class="relative border-2 border-accent rounded-2xl bg-white p-8 flex flex-col min-w-0 shadow-xl reveal-item">
         <div class="absolute -top-4 left-1/2 -translate-x-1/2">
           <span class="bg-accent text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-md">Рекомендуемый</span>
         </div>
@@ -143,49 +143,49 @@
         </a>
       </div>
 
-      <!-- КОРПОРАТИВНЫЙ — тёмная карточка -->
-      <div class="relative border border-white/10 rounded-2xl bg-primary-dark p-8 flex flex-col reveal-item">
+      <!-- КОРПОРАТИВНЫЙ -->
+      <div class="relative border border-border rounded-2xl bg-white p-8 flex flex-col min-w-0 reveal-item">
         <div class="mb-4">
-          <span class="inline-block bg-white/15 text-white/90 text-xs font-medium px-3 py-1 rounded-full">3 места</span>
+          <span class="inline-block bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">3 места</span>
         </div>
-        <h3 class="font-heading text-2xl font-bold text-white">Корпоративный</h3>
-        <p class="text-sm text-white/60 mt-1 mb-6">Глубокое внедрение</p>
+        <h3 class="font-heading text-2xl font-bold text-text">Корпоративный</h3>
+        <p class="text-sm text-text-muted mt-1 mb-6">Глубокое внедрение</p>
         <div class="mb-6">
-          <span class="font-heading text-4xl font-bold text-white">199 000</span>
-          <span class="text-lg text-white/60 font-normal ml-1">₽</span>
+          <span class="font-heading text-4xl font-bold text-text">199 000</span>
+          <span class="text-lg text-text-muted font-normal ml-1">₽</span>
         </div>
         <ul class="space-y-3 mb-8 flex-grow">
-          <li class="flex items-start gap-2.5 text-sm text-white/80">
-            <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+          <li class="flex items-start gap-2.5 text-sm text-text">
+            <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
             Всё из VIP
           </li>
-          <li class="flex items-start gap-2.5 text-sm text-white/80">
-            <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+          <li class="flex items-start gap-2.5 text-sm text-text">
+            <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
             До 3 сотрудников на выбор
           </li>
-          <li class="flex items-start gap-2.5 text-sm text-white/80">
-            <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+          <li class="flex items-start gap-2.5 text-sm text-text">
+            <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
             2 рабочие недели в офисе
           </li>
-          <li class="flex items-start gap-2.5 text-sm text-white/80">
-            <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+          <li class="flex items-start gap-2.5 text-sm text-text">
+            <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
             Месяц внедрения: 4 сессии по 2 часа
           </li>
-          <li class="flex items-start gap-2.5 text-sm text-white/80">
-            <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+          <li class="flex items-start gap-2.5 text-sm text-text">
+            <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
             4 консультации по 3 часа
           </li>
-          <li class="flex items-start gap-2.5 text-sm text-white/80">
-            <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+          <li class="flex items-start gap-2.5 text-sm text-text">
+            <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
             Корпоративный чат с приоритетом
           </li>
-          <li class="flex items-start gap-2.5 text-sm text-white/80">
-            <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+          <li class="flex items-start gap-2.5 text-sm text-text">
+            <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
             Полное сопровождение до передачи
           </li>
         </ul>
         <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
-          class="block text-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl py-3.5 transition-all duration-300">
+          class="block text-center bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl py-3.5 transition-all duration-300">
           Обсудить внедрение
         </a>
       </div>
