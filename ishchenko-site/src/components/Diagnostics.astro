@@ -1,59 +1,102 @@
 ---
 import { Icon } from 'astro-icon/components';
 ---
-<section id="diagnostics" class="bg-bg relative bg-circuit py-16 md:py-20">
-  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="diagnostics" class="bg-bg relative bg-circuit py-16 md:py-24">
+  <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <h2 class="split-heading font-heading font-bold text-3xl md:text-4xl text-text mb-4">
-        Что будет на диагностике
+      <h2 class="font-heading font-bold text-3xl md:text-4xl text-text mb-4">
+        Что&nbsp;ты&nbsp;получишь на&nbsp;диагностике
       </h2>
-      <p class="text-text-muted text-lg max-w-2xl mx-auto">
-        Бесплатно. Без обязательств. 15-20 минут в Telegram или Zoom.
+      <p class="text-text-muted text-lg max-w-3xl mx-auto">
+        Не&nbsp;созвон на&nbsp;15&nbsp;минут&nbsp;— а&nbsp;полноценное маркетинговое исследование твоего бизнеса на&nbsp;50-70&nbsp;страниц. Бесплатно.
       </p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-group mb-12">
-      <div class="glass-card reveal-item rounded-2xl p-6">
-        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-          <Icon name="ph:magnifying-glass-duotone" class="w-7 h-7 text-primary" />
-        </div>
-        <h3 class="font-heading font-semibold text-lg text-text mb-2">Разбор бизнеса и ниши</h3>
-        <p class="text-text-muted text-sm">Поймём, как устроены твои продажи сейчас и где точки роста</p>
-      </div>
-      <div class="glass-card reveal-item rounded-2xl p-6">
-        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-          <Icon name="ph:crosshair-duotone" class="w-7 h-7 text-primary" />
-        </div>
-        <h3 class="font-heading font-semibold text-lg text-text mb-2">Стратегия внедрения ИИ</h3>
-        <p class="text-text-muted text-sm">Определим, какие процессы автоматизировать в первую очередь</p>
-      </div>
-      <div class="glass-card reveal-item rounded-2xl p-6">
-        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-          <Icon name="ph:wrench-duotone" class="w-7 h-7 text-primary" />
-        </div>
-        <h3 class="font-heading font-semibold text-lg text-text mb-2">Подбор инструментов</h3>
-        <p class="text-text-muted text-sm">Подберём ИИ-инструменты под твои задачи и бюджет</p>
-      </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal-group mb-12">
+      <!-- 1. Анализ рынка -->
       <div class="glass-card reveal-item rounded-2xl p-6">
         <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
           <Icon name="ph:chart-line-up-duotone" class="w-7 h-7 text-primary" />
         </div>
-        <h3 class="font-heading font-semibold text-lg text-text mb-2">Прогноз результатов</h3>
-        <p class="text-text-muted text-sm">Покажу, каких результатов можно ожидать в твоей нише</p>
+        <h3 class="font-heading font-semibold text-lg text-text mb-2">Анализ рынка и&nbsp;твоего потенциала</h3>
+        <p class="text-text-muted text-sm leading-relaxed">Объём рынка, динамика, расчёт потенциала твоего города — с&nbsp;формулой. Ты увидишь свою реальную долю и&nbsp;поймёшь, на&nbsp;сколько можно вырасти.</p>
       </div>
+      <!-- 2. Рентген конкурентов -->
       <div class="glass-card reveal-item rounded-2xl p-6">
         <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-          <Icon name="ph:chat-circle-dots-duotone" class="w-7 h-7 text-primary" />
+          <Icon name="ph:magnifying-glass-duotone" class="w-7 h-7 text-primary" />
         </div>
-        <h3 class="font-heading font-semibold text-lg text-text mb-2">Подбор тарифа</h3>
-        <p class="text-text-muted text-sm">Подберём формат без давления — или поймём, что практикум не нужен</p>
+        <h3 class="font-heading font-semibold text-lg text-text mb-2">Рентген 8-12&nbsp;конкурентов</h3>
+        <p class="text-text-muted text-sm leading-relaxed">Рейтинги, цены, сильные и&nbsp;слабые стороны каждого. Таблица: кто что делает — а&nbsp;кто нет. И&nbsp;главное — как использовать их слабости.</p>
       </div>
-      <div class="glass-card reveal-item rounded-2xl p-6 flex flex-col items-center justify-center bg-primary/5 border-2 border-dashed border-primary/20">
-        <p class="text-primary font-heading font-bold text-xl mb-3">Это бесплатно</p>
-        <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl px-6 py-3 transition-all duration-300 hover:scale-[1.02]">
-          Записаться →
-        </a>
+      <!-- 3. Анализ отзывов -->
+      <div class="glass-card reveal-item rounded-2xl p-6">
+        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+          <Icon name="ph:chat-circle-text-duotone" class="w-7 h-7 text-primary" />
+        </div>
+        <h3 class="font-heading font-semibold text-lg text-text mb-2">Анализ 50-120 реальных отзывов</h3>
+        <p class="text-text-muted text-sm leading-relaxed">Читаем ВСЕ отзывы — твои и&nbsp;конкурентов. Находим паттерны: что хвалят, на&nbsp;что жалуются. Выбираем сильные цитаты для рекламы.</p>
       </div>
+      <!-- 4. Портреты клиентов -->
+      <div class="glass-card reveal-item rounded-2xl p-6">
+        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+          <Icon name="ph:users-three-duotone" class="w-7 h-7 text-primary" />
+        </div>
+        <h3 class="font-heading font-semibold text-lg text-text mb-2">5&nbsp;живых портретов клиентов</h3>
+        <p class="text-text-muted text-sm leading-relaxed">Не&nbsp;«женщины 25-45». А&nbsp;конкретные люди с&nbsp;именами, болями, возражениями. Для каждого — готовый скрипт: что написать в&nbsp;рекламе.</p>
+      </div>
+      <!-- 5. План на 12 месяцев -->
+      <div class="glass-card reveal-item rounded-2xl p-6">
+        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+          <Icon name="ph:calendar-check-duotone" class="w-7 h-7 text-primary" />
+        </div>
+        <h3 class="font-heading font-semibold text-lg text-text mb-2">План на&nbsp;12&nbsp;месяцев по&nbsp;неделям</h3>
+        <p class="text-text-muted text-sm leading-relaxed">Неделя 1: создать канал, написать 5&nbsp;постов. Неделя 2: провести эфир. Конкретные действия — не&nbsp;«улучшите маркетинг».</p>
+      </div>
+      <!-- 6. Расчёт ROI -->
+      <div class="glass-card reveal-item rounded-2xl p-6">
+        <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+          <Icon name="ph:currency-circle-dollar-duotone" class="w-7 h-7 text-primary" />
+        </div>
+        <h3 class="font-heading font-semibold text-lg text-text mb-2">Расчёт ROI с&nbsp;формулами</h3>
+        <p class="text-text-muted text-sm leading-relaxed">Три сценария окупаемости: пессимистичный, базовый, оптимистичный. Каждый — с&nbsp;формулой. Ты сможешь проверить каждую цифру сам.</p>
+      </div>
+    </div>
+    <!-- Акцентный блок — сравнение стоимости -->
+    <div class="max-w-3xl mx-auto mb-10 reveal">
+      <div class="bg-primary/5 border-l-4 border-primary rounded-r-2xl p-6 md:p-8">
+        <p class="text-text text-base md:text-lg leading-relaxed">
+          <span class="font-bold">Такое исследование в&nbsp;московском агентстве стоит от&nbsp;390&nbsp;000 до&nbsp;930&nbsp;000&nbsp;₽</span> и&nbsp;занимает 2-4&nbsp;месяца.
+        </p>
+        <p class="text-text text-base md:text-lg leading-relaxed mt-2">
+          У&nbsp;нас — <span class="font-bold text-accent">бесплатно</span>. Ты заполняешь анкету за&nbsp;20&nbsp;минут → получаешь документ через несколько дней.
+        </p>
+      </div>
+    </div>
+    <!-- Почему бесплатно — аккордеон -->
+    <div class="max-w-3xl mx-auto mb-10 reveal">
+      <details class="group bg-white/60 backdrop-blur-sm border border-border rounded-2xl overflow-hidden">
+        <summary class="flex items-center justify-between cursor-pointer p-5 md:p-6 font-heading font-semibold text-text text-base md:text-lg">
+          Почему мы&nbsp;отдаём это бесплатно? Честный ответ.
+          <svg class="w-5 h-5 text-text-muted transition-transform group-open:rotate-180 shrink-0 ml-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="px-5 pb-5 md:px-6 md:pb-6 text-text-muted text-sm md:text-base leading-relaxed space-y-3">
+          <p>Мы хотим показать, на&nbsp;что способны современные технологии — не&nbsp;на&nbsp;словах, а&nbsp;на&nbsp;твоём бизнесе. Когда ты держишь в&nbsp;руках 50-70 страниц персональной аналитики — слова не&nbsp;нужны.</p>
+          <p>Мы уверены: часть тех, кто увидит глубину исследования, захочет внедрить всё это системно — быстро, организованно, с&nbsp;нашей помощью. А&nbsp;кто-то возьмёт документ и&nbsp;сделает всё сам. И&nbsp;то, и&nbsp;другое — отлично.</p>
+          <p class="font-medium text-text">Никакого давления. Никаких скрытых условий.</p>
+        </div>
+      </details>
+    </div>
+    <!-- CTA -->
+    <div class="text-center reveal">
+      <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
+        class="glow-pulse inline-flex items-center justify-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl px-8 py-4 text-lg transition-all duration-300 hover:scale-[1.02]">
+        Получить диагностику бесплатно
+      </a>
+      <p class="text-sm text-text-muted mt-3">
+        Или напиши напрямую: <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">@Evgen_isch</a>
+      </p>
     </div>
   </div>
 </section>
