@@ -392,7 +392,7 @@ h1, h2, h3, h4, h5, h6,
 .split-heading,
 .font-heading,
 p, li, span, a, blockquote, summary, label, td, th, dt, dd {
-  word-break: keep-all;
+  word-break: keep-all !important;
   overflow-wrap: break-word;
   hyphens: none;
 }

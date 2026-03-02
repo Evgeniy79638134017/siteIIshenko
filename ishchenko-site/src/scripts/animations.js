@@ -14,22 +14,22 @@ lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
 
-/* ── SplitText on key headings ── */
+/* ── SplitText on key headings (split by WORDS to prevent mid-word breaks) ── */
 function initSplitText() {
   document.querySelectorAll('.split-heading').forEach((el) => {
     const text = el.textContent;
-    const chars = text.split('');
-    el.innerHTML = chars.map((char) =>
-      char === ' '
-        ? ' '
-        : `<span class="inline-block" style="opacity:0; transform:translateY(30px);">${char}</span>`
+    const words = text.split(/(\s+)/);
+    el.innerHTML = words.map((word) =>
+      /^\s+$/.test(word)
+        ? word
+        : `<span class="inline-block" style="opacity:0; transform:translateY(30px);">${word}</span>`
     ).join('');
     const spans = el.querySelectorAll('span');
     gsap.to(spans, {
       opacity: 1,
       y: 0,
       duration: 0.05,
-      stagger: 0.03,
+      stagger: 0.06,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: el,
