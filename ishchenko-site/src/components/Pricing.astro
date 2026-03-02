@@ -5,38 +5,62 @@
       <p class="text-center text-text-muted mt-3">Старт — после бесплатной диагностики</p>
     </div>
 
-    <!-- Countdown timer + promo code -->
-    <div id="pricing-timer-block" class="mt-8 text-center">
-      <div class="inline-block bg-bg-alt border border-border rounded-2xl px-6 py-4 md:px-10 md:py-5">
-        <p class="text-text-muted text-sm mb-2">До повышения цен осталось:</p>
-        <div id="countdown" class="flex items-center justify-center gap-3 md:gap-4 font-heading font-bold text-2xl md:text-3xl text-accent">
-          <div class="flex flex-col items-center">
-            <span id="cd-days">00</span>
-            <span class="text-xs text-text-muted font-normal mt-1">дн</span>
+    <!-- Баннер скидки -->
+    <div class="max-w-2xl mx-auto mb-10 mt-10 reveal" id="discount-banner">
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary-dark to-primary p-6 md:p-8">
+        <!-- Декоративные круги на фоне -->
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
+        <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full"></div>
+
+        <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
+          <!-- Левая часть: текст скидки -->
+          <div class="flex-1 text-center md:text-left">
+            <div class="inline-flex items-center gap-2 bg-accent/20 rounded-full px-4 py-1.5 mb-3">
+              <span class="text-accent font-bold text-sm">−10%</span>
+              <span class="text-white/80 text-sm">на любой тариф</span>
+            </div>
+            <p class="text-white font-heading font-bold text-xl md:text-2xl mb-1">
+              Скидка до&nbsp;5&nbsp;марта
+            </p>
+            <p class="text-white/60 text-sm">
+              Промокод: <button id="copy-promo" class="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 rounded-lg px-3 py-1 transition-colors cursor-pointer border-0">
+                <span class="text-accent font-mono font-bold">ИЩЕНКО10</span>
+                <svg class="w-4 h-4 text-white/50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              </button>
+              <span id="copy-feedback" class="text-accent text-xs ml-2 opacity-0 transition-opacity duration-300">Скопировано!</span>
+            </p>
           </div>
-          <span class="text-text-muted">:</span>
-          <div class="flex flex-col items-center">
-            <span id="cd-hours">00</span>
-            <span class="text-xs text-text-muted font-normal mt-1">час</span>
+
+          <!-- Правая часть: таймер -->
+          <div class="flex items-center gap-1.5" id="countdown-timer">
+            <div class="text-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
+                <span id="days" class="font-heading font-bold text-2xl md:text-3xl text-white">00</span>
+              </div>
+              <span class="text-white/40 text-[10px] mt-1 block">дн</span>
+            </div>
+            <span class="text-white/30 text-xl font-light mb-4">:</span>
+            <div class="text-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
+                <span id="hours" class="font-heading font-bold text-2xl md:text-3xl text-white">00</span>
+              </div>
+              <span class="text-white/40 text-[10px] mt-1 block">час</span>
+            </div>
+            <span class="text-white/30 text-xl font-light mb-4">:</span>
+            <div class="text-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
+                <span id="minutes" class="font-heading font-bold text-2xl md:text-3xl text-white">00</span>
+              </div>
+              <span class="text-white/40 text-[10px] mt-1 block">мин</span>
+            </div>
+            <span class="text-white/30 text-xl font-light mb-4">:</span>
+            <div class="text-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
+                <span id="seconds" class="font-heading font-bold text-2xl md:text-3xl text-white">00</span>
+              </div>
+              <span class="text-white/40 text-[10px] mt-1 block">сек</span>
+            </div>
           </div>
-          <span class="text-text-muted">:</span>
-          <div class="flex flex-col items-center">
-            <span id="cd-mins">00</span>
-            <span class="text-xs text-text-muted font-normal mt-1">мин</span>
-          </div>
-          <span class="text-text-muted">:</span>
-          <div class="flex flex-col items-center">
-            <span id="cd-secs">00</span>
-            <span class="text-xs text-text-muted font-normal mt-1">сек</span>
-          </div>
-        </div>
-        <div class="mt-4 flex items-center justify-center gap-2">
-          <span class="text-text-muted text-sm">Промокод:</span>
-          <code id="promo-code" class="bg-accent/10 text-accent font-bold px-3 py-1 rounded-lg text-sm select-all">ИЩЕНКО10</code>
-          <button id="copy-promo" class="text-accent hover:text-accent-hover transition-colors cursor-pointer" title="Скопировать">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9.75a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" /></svg>
-          </button>
-          <span id="copy-feedback" class="text-success text-xs font-medium opacity-0 transition-opacity duration-300">Скопировано!</span>
         </div>
       </div>
     </div>
@@ -194,82 +218,66 @@
 
     </div>
 
-    <div class="text-center mt-8 mb-4 reveal">
-      <div class="inline-flex items-center gap-3 bg-accent/10 border border-accent/20 rounded-xl px-6 py-3">
-        <span class="text-accent font-bold text-lg">&minus;10%</span>
-        <span class="text-text text-sm md:text-base">
-          при оплате до&nbsp;4&nbsp;марта — на&nbsp;любой тариф
-        </span>
-      </div>
-    </div>
-
-    <p class="mt-4 text-center text-text-muted text-sm">Рассрочка на 2-3 месяца. Обсудим индивидуально на диагностике.</p>
+    <p class="mt-8 text-center text-text-muted text-sm">Рассрочка на 2-3 месяца. Обсудим индивидуально на диагностике.</p>
     <p class="text-center text-xs text-text-muted mt-2">
       Цены указаны в&nbsp;российских рублях. Не&nbsp;является публичной офертой. Подробности — в&nbsp;<a href="/terms" class="text-primary hover:underline">договоре-оферте</a>.
     </p>
   </div>
 </section>
 
-<script is:inline>
-  (function() {
-    var DEADLINE = new Date('2026-03-04T23:59:59+09:00').getTime();
-    var timerBlock = document.getElementById('pricing-timer-block');
-    var daysEl = document.getElementById('cd-days');
-    var hoursEl = document.getElementById('cd-hours');
-    var minsEl = document.getElementById('cd-mins');
-    var secsEl = document.getElementById('cd-secs');
+<script>
+  // Дедлайн: 5 марта 2026, 23:59:59 по Благовещенску (UTC+9)
+  const DEADLINE = new Date('2026-03-05T23:59:59+09:00').getTime();
 
-    function pad(n) { return n < 10 ? '0' + n : String(n); }
+  function updateCountdown() {
+    const now = Date.now();
+    const diff = DEADLINE - now;
+    const banner = document.getElementById('discount-banner');
+    if (!banner) return;
 
-    function updateTimer() {
-      var diff = DEADLINE - Date.now();
-      if (diff <= 0) {
-        if (timerBlock) timerBlock.style.display = 'none';
-        return false;
+    if (diff <= 0) {
+      banner.style.display = 'none';
+      return;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+    const days = document.getElementById('days');
+    const hours = document.getElementById('hours');
+    const minutes = document.getElementById('minutes');
+    const seconds = document.getElementById('seconds');
+
+    if (days) days.textContent = String(d).padStart(2, '0');
+    if (hours) hours.textContent = String(h).padStart(2, '0');
+    if (minutes) minutes.textContent = String(m).padStart(2, '0');
+    if (seconds) seconds.textContent = String(s).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Копирование промокода
+  const copyBtn = document.getElementById('copy-promo');
+  const feedback = document.getElementById('copy-feedback');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('ИЩЕНКО10');
+      } catch {
+        const textarea = document.createElement('textarea');
+        textarea.value = 'ИЩЕНКО10';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
       }
-      var days = Math.floor(diff / 86400000);
-      var hours = Math.floor((diff % 86400000) / 3600000);
-      var mins = Math.floor((diff % 3600000) / 60000);
-      var secs = Math.floor((diff % 60000) / 1000);
-      if (daysEl) daysEl.textContent = pad(days);
-      if (hoursEl) hoursEl.textContent = pad(hours);
-      if (minsEl) minsEl.textContent = pad(mins);
-      if (secsEl) secsEl.textContent = pad(secs);
-      return true;
-    }
-
-    if (updateTimer()) {
-      var interval = setInterval(function() {
-        if (!updateTimer()) clearInterval(interval);
-      }, 1000);
-    }
-
-    // Copy promo code
-    var copyBtn = document.getElementById('copy-promo');
-    var feedback = document.getElementById('copy-feedback');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', function() {
-        var code = '\u0418\u0429\u0415\u041D\u041A\u041E10';
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(code).then(showFeedback);
-        } else {
-          var ta = document.createElement('textarea');
-          ta.value = code;
-          ta.style.position = 'fixed';
-          ta.style.opacity = '0';
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand('copy');
-          document.body.removeChild(ta);
-          showFeedback();
-        }
-      });
-    }
-
-    function showFeedback() {
-      if (!feedback) return;
-      feedback.style.opacity = '1';
-      setTimeout(function() { feedback.style.opacity = '0'; }, 2000);
-    }
-  })();
+      if (feedback) {
+        feedback.style.opacity = '1';
+        setTimeout(() => { feedback.style.opacity = '0'; }, 2000);
+      }
+    });
+  }
 </script>
