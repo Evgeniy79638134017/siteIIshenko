@@ -395,6 +395,7 @@
 
     if (inner) {
       inner.style.background = 'var(--color-primary-dark)';
+      inner.style.backgroundImage = 'none';
       inner.style.padding = '2rem';
     }
     if (closeBtn) {
@@ -464,7 +465,7 @@
     banner.offsetHeight;
 
     // 3) Убираем big-overrides → CSS-классы берут верх, transition анимирует
-    if (inner) { inner.style.background = ''; inner.style.padding = ''; }
+    if (inner) { inner.style.background = ''; inner.style.backgroundImage = ''; inner.style.padding = ''; }
     if (closeBtn) { closeBtn.style.width = ''; closeBtn.style.height = ''; closeBtn.style.background = ''; closeBtn.style.top = ''; closeBtn.style.right = ''; }
     if (pill) { pill.style.padding = ''; pill.style.marginBottom = ''; }
     if (discountSpan) discountSpan.style.fontSize = '';
@@ -615,38 +616,36 @@
     let triggered = false;
     let bottomObserver = null;
     let pricingObserver = null;
-    let pricingTimer = null;
+    let dwellTimeout = null;
 
     function fire() {
       if (triggered) return;
       triggered = true;
       if (bottomObserver) bottomObserver.disconnect();
       if (pricingObserver) pricingObserver.disconnect();
-      if (pricingTimer) clearInterval(pricingTimer);
+      if (dwellTimeout) { clearTimeout(dwellTimeout); dwellTimeout = null; }
       startDramaticReveal();
     }
 
-    // Триггер А: пользователь проскроллил НИЖЕ карточек
-    const bottomEl = document.getElementById('pricing-bottom-trigger');
-    if (bottomEl) {
+    const pricingSection = document.getElementById('pricing');
+
+    // Триггер А: пользователь проскроллил НИЖЕ всей секции Pricing
+    // Наблюдаем за первым элементом ПОСЛЕ <section id="pricing">
+    const afterPricingEl = pricingSection && pricingSection.nextElementSibling;
+    if (afterPricingEl) {
       bottomObserver = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) fire();
       }, { threshold: 0.1 });
-      bottomObserver.observe(bottomEl);
+      bottomObserver.observe(afterPricingEl);
     }
 
-    // Триггер Б: секция Pricing в viewport 12 секунд
-    const pricingSection = document.getElementById('pricing');
-    let visibleStart = 0;
+    // Триггер Б: секция Pricing в viewport 12 непрерывных секунд
     if (pricingSection) {
       pricingObserver = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
-          visibleStart = Date.now();
-          pricingTimer = setInterval(() => {
-            if (Date.now() - visibleStart >= 12000) fire();
-          }, 500);
+          dwellTimeout = setTimeout(() => fire(), 12000);
         } else {
-          if (pricingTimer) { clearInterval(pricingTimer); pricingTimer = null; }
+          if (dwellTimeout) { clearTimeout(dwellTimeout); dwellTimeout = null; }
         }
       }, { threshold: 0.15 });
       pricingObserver.observe(pricingSection);
