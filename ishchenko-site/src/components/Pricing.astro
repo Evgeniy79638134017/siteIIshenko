@@ -382,6 +382,122 @@
     }, { once: true });
   }
 
+  /* ---------- Стили БОЛЬШОГО баннера (центр экрана) ---------- */
+  function applyBigBannerStyles(banner) {
+    var inner = banner.firstElementChild;
+    var closeBtn = document.getElementById('banner-close-btn');
+    var closeSvg = closeBtn && closeBtn.querySelector('svg');
+    var pill = inner && inner.querySelector('.inline-flex');
+    var discountSpan = pill && pill.children[0];
+    var subtextSpan = pill && pill.children[1];
+    var titleP = pill && pill.parentElement && pill.parentElement.querySelector('p');
+    var isDesktop = window.innerWidth >= 768;
+
+    if (inner) {
+      inner.style.background = 'var(--color-primary-dark)';
+      inner.style.padding = '2rem';
+    }
+    if (closeBtn) {
+      closeBtn.style.width = '2.5rem';
+      closeBtn.style.height = '2.5rem';
+      closeBtn.style.background = 'rgba(255,255,255,0.2)';
+      closeBtn.style.top = '1rem';
+      closeBtn.style.right = '1rem';
+    }
+    if (closeSvg) {
+      closeSvg.setAttribute('width', '20');
+      closeSvg.setAttribute('height', '20');
+    }
+    if (pill) {
+      pill.style.padding = '0.625rem 1.25rem';
+      pill.style.marginBottom = '1rem';
+    }
+    if (discountSpan) discountSpan.style.fontSize = '1.5rem';
+    if (subtextSpan) subtextSpan.style.fontSize = '1rem';
+    if (titleP) {
+      titleP.style.fontSize = '1.875rem';
+      titleP.style.lineHeight = '2.25rem';
+    }
+
+    var timerCells = document.querySelectorAll('#countdown-timer > div > div:first-child');
+    timerCells.forEach(function(cell) {
+      cell.style.width = isDesktop ? '5rem' : '4rem';
+      cell.style.height = isDesktop ? '5rem' : '4rem';
+    });
+
+    ['days','hours','minutes','seconds'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.style.fontSize = isDesktop ? '2.25rem' : '1.875rem';
+    });
+  }
+
+  /* Плавный возврат внутренних элементов к CSS-классам */
+  function transitionInnerToNormal(banner) {
+    var t = 'all 0.6s ease-in-out';
+    var inner = banner.firstElementChild;
+    var closeBtn = document.getElementById('banner-close-btn');
+    var closeSvg = closeBtn && closeBtn.querySelector('svg');
+    var pill = inner && inner.querySelector('.inline-flex');
+    var discountSpan = pill && pill.children[0];
+    var subtextSpan = pill && pill.children[1];
+    var titleP = pill && pill.parentElement && pill.parentElement.querySelector('p');
+    var timerCells = document.querySelectorAll('#countdown-timer > div > div:first-child');
+    var digitIds = ['days','hours','minutes','seconds'];
+
+    // 1) Добавляем transition
+    [inner, closeBtn, pill, discountSpan, subtextSpan, titleP].forEach(function(el) {
+      if (el) el.style.transition = t;
+    });
+    timerCells.forEach(function(c) { c.style.transition = t; });
+    digitIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.style.transition = t;
+    });
+
+    // SVG атрибуты — просто вернуть (не анимируются)
+    if (closeSvg) {
+      closeSvg.setAttribute('width', '16');
+      closeSvg.setAttribute('height', '16');
+    }
+
+    // 2) Reflow чтобы transition применился
+    banner.offsetHeight;
+
+    // 3) Убираем big-overrides → CSS-классы берут верх, transition анимирует
+    if (inner) { inner.style.background = ''; inner.style.padding = ''; }
+    if (closeBtn) { closeBtn.style.width = ''; closeBtn.style.height = ''; closeBtn.style.background = ''; closeBtn.style.top = ''; closeBtn.style.right = ''; }
+    if (pill) { pill.style.padding = ''; pill.style.marginBottom = ''; }
+    if (discountSpan) discountSpan.style.fontSize = '';
+    if (subtextSpan) subtextSpan.style.fontSize = '';
+    if (titleP) { titleP.style.fontSize = ''; titleP.style.lineHeight = ''; }
+    timerCells.forEach(function(c) { c.style.width = ''; c.style.height = ''; });
+    digitIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.style.fontSize = '';
+    });
+  }
+
+  /* Полная очистка inline-стилей с внутренних элементов */
+  function cleanupInnerStyles(banner) {
+    var inner = banner.firstElementChild;
+    var closeBtn = document.getElementById('banner-close-btn');
+    var pill = inner && inner.querySelector('.inline-flex');
+    var discountSpan = pill && pill.children[0];
+    var subtextSpan = pill && pill.children[1];
+    var titleP = pill && pill.parentElement && pill.parentElement.querySelector('p');
+
+    [inner, closeBtn, pill, discountSpan, subtextSpan, titleP].forEach(function(el) {
+      if (el) el.removeAttribute('style');
+    });
+    document.querySelectorAll('#countdown-timer > div > div:first-child').forEach(function(c) {
+      c.removeAttribute('style');
+    });
+    ['days','hours','minutes','seconds'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.removeAttribute('style');
+    });
+  }
+
   /* ---------- Драматичная анимация скидки ---------- */
   function startDramaticReveal() {
     sessionStorage.setItem('discount-shown', '1');
@@ -396,14 +512,17 @@
 
     // 1. Оверлей — затемнение фона (opacity 0 → 0.6 за 300ms)
     const overlay = document.createElement('div');
-    overlay.style.cssText = 'position:fixed;inset:0;background:#000;z-index:9998;opacity:0;transition:opacity 0.3s ease;';
+    overlay.style.cssText = 'position:fixed;inset:0;background:#000;z-index:99998;opacity:0;transition:opacity 0.3s ease;';
     document.body.appendChild(overlay);
     overlay.offsetHeight;
     overlay.style.opacity = '0.6';
 
-    // 2. Баннер — фиксированный по центру экрана, scale(0.8→1) + opacity(0→1) за 400ms
-    banner.style.cssText = 'display:block;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.8);z-index:9999;opacity:0;width:90%;max-width:42rem;margin:0;';
+    // 2. Баннер — БОЛЬШОЙ, фиксированный по центру, z-index выше всего
+    banner.style.cssText = 'display:block;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.8);z-index:99999;opacity:0;width:90vw;max-width:700px;margin:0;';
+    applyBigBannerStyles(banner);
     banner.offsetHeight;
+
+    // Entrance: scale(0.8→1) + opacity(0→1) за 400ms
     banner.style.transition = 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease';
     banner.style.transform = 'translate(-50%,-50%) scale(1)';
     banner.style.opacity = '1';
@@ -418,41 +537,57 @@
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
 
-      // 4. Баннер улетает вверх
-      banner.style.transition = 'transform 0.6s ease-in-out, opacity 0.6s ease';
-      banner.style.transform = 'translate(-50%,-150%) scale(0.95)';
-      banner.style.opacity = '0';
-
       // 5. Оверлей исчезает
-      overlay.style.transition = 'opacity 0.4s ease';
+      overlay.style.transition = 'opacity 0.6s ease-in-out';
       overlay.style.opacity = '0';
 
-      setTimeout(() => {
+      // Скроллим к Pricing мгновенно чтобы измерить целевую позицию
+      const pricingSection = document.getElementById('pricing');
+      if (pricingSection) {
+        pricingSection.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }
+
+      // --- Измеряем целевую позицию баннера в потоке ---
+      const savedCss = banner.style.cssText;
+      banner.style.cssText = 'display:block;visibility:hidden;position:static;';
+      const targetRect = banner.getBoundingClientRect();
+      // Восстанавливаем фиксированную позицию
+      banner.style.cssText = savedCss;
+      banner.style.opacity = '1';
+
+      // Конвертируем текущую позицию из % в px (убираем translate)
+      const startRect = banner.getBoundingClientRect();
+      banner.style.transition = 'none';
+      banner.style.top = startRect.top + 'px';
+      banner.style.left = startRect.left + 'px';
+      banner.style.width = startRect.width + 'px';
+      banner.style.maxWidth = startRect.width + 'px';
+      banner.style.transform = 'none';
+      banner.offsetHeight;
+
+      // 4. Анимация: баннер плавно уменьшается и перемещается на своё место (600ms)
+      banner.style.transition = 'top 0.6s ease-in-out, left 0.6s ease-in-out, width 0.6s ease-in-out, max-width 0.6s ease-in-out';
+      banner.style.top = targetRect.top + 'px';
+      banner.style.left = targetRect.left + 'px';
+      banner.style.width = targetRect.width + 'px';
+      banner.style.maxWidth = targetRect.width + 'px';
+
+      // Одновременно — внутренние элементы возвращаются к обычным размерам
+      transitionInnerToNormal(banner);
+
+      // 6. После завершения — removeAttribute('style'), баннер в потоке
+      setTimeout(function() {
         overlay.remove();
+        banner.removeAttribute('style');
+        banner.style.display = 'block';
+        cleanupInnerStyles(banner);
 
-        // Возвращаем баннер в поток (скрыт сверху, готов к slide-down)
-        banner.style.cssText = 'display:block;transform:translateY(-100%);opacity:0;';
-
-        // 6. Скроллим к секции Pricing
-        const pricingSection = document.getElementById('pricing');
-        if (pricingSection) {
-          pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // После начала скролла — баннер плавно садится на своё место
-        setTimeout(() => {
-          banner.offsetHeight;
-          banner.style.transition = 'transform 0.7s cubic-bezier(0.22,1,0.36,1), opacity 0.7s ease';
-          banner.style.transform = 'translateY(0)';
-          banner.style.opacity = '1';
-
-          // 7. Через 300ms после приземления — анимация цен
-          setTimeout(() => {
-            revealDiscountPrices();
-            setupBannerCloseHandler();
-          }, 700 + 300);
-        }, 400);
-      }, 600);
+        // 7. Через 300ms — анимация цен
+        setTimeout(function() {
+          revealDiscountPrices();
+          setupBannerCloseHandler();
+        }, 300);
+      }, 650);
     }
 
     // Крестик во время центрального показа — пропуск паузы
