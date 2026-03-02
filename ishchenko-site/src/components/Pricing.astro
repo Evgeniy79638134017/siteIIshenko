@@ -5,12 +5,20 @@
       <p class="text-center text-text-muted mt-3">Старт — после бесплатной диагностики</p>
     </div>
 
-    <!-- Баннер скидки -->
-    <div class="max-w-2xl mx-auto mb-10 mt-10 reveal" id="discount-banner">
+    <!-- Баннер скидки — изначально скрыт -->
+    <div class="discount-banner-wrapper max-w-2xl mx-auto mb-10 mt-10" id="discount-banner" style="display:none; transform:translateY(-100%); opacity:0;">
       <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-primary-dark p-6 md:p-8">
         <!-- Декоративные круги на фоне -->
         <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
         <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full"></div>
+
+        <!-- Кнопка закрытия -->
+        <button id="banner-close-btn" type="button" aria-label="Закрыть баннер"
+          class="absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-colors duration-200 cursor-pointer">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 4l8 8M12 4l-8 8"/>
+          </svg>
+        </button>
 
         <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
           <!-- Левая часть: текст скидки -->
@@ -58,21 +66,21 @@
       </div>
     </div>
 
-    <div class="mt-12 pt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start max-w-full reveal-group">
+    <div class="mt-12 pt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start max-w-full reveal-group" id="pricing-cards-grid">
 
       <!-- СТАНДАРТ -->
-      <div class="relative border border-border rounded-2xl bg-white p-8 flex flex-col min-w-0 reveal-item">
+      <div class="relative border border-border rounded-2xl bg-white p-8 flex flex-col min-w-0 reveal-item" data-price-card="0">
         <div class="mb-4">
           <span class="inline-block bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">8 мест</span>
         </div>
         <h3 class="font-heading text-2xl font-bold text-text">Стандарт</h3>
         <p class="text-sm text-text-muted mt-1 mb-6">Полное сопровождение</p>
         <div class="mb-6 price-block">
-          <div class="original-price hidden">
+          <div class="original-price">
             <span class="font-heading text-4xl font-bold text-text">79 000</span>
             <span class="text-lg text-text-muted font-normal ml-1">₽</span>
           </div>
-          <div class="discount-price">
+          <div class="discount-price" style="display:none; opacity:0; transform:translateY(12px);">
             <span class="text-lg text-text-muted line-through font-normal">79 000 ₽</span>
             <div class="flex items-baseline gap-2">
               <span class="font-heading text-4xl font-bold text-accent">71 100</span>
@@ -124,7 +132,7 @@
       </div>
 
       <!-- VIP — Рекомендуемый -->
-      <div class="relative border-2 border-accent rounded-2xl bg-white p-8 flex flex-col min-w-0 shadow-xl reveal-item">
+      <div class="relative border-2 border-accent rounded-2xl bg-white p-8 flex flex-col min-w-0 shadow-xl reveal-item" data-price-card="1">
         <div class="absolute -top-4 left-1/2 -translate-x-1/2">
           <span class="bg-accent text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-md">Рекомендуемый</span>
         </div>
@@ -134,11 +142,11 @@
         <h3 class="font-heading text-2xl font-bold text-text">VIP</h3>
         <p class="text-sm text-text-muted mt-1 mb-6">Результат «под ключ»</p>
         <div class="mb-6 price-block">
-          <div class="original-price hidden">
+          <div class="original-price">
             <span class="font-heading text-4xl font-bold text-text">129 000</span>
             <span class="text-lg text-text-muted font-normal ml-1">₽</span>
           </div>
-          <div class="discount-price">
+          <div class="discount-price" style="display:none; opacity:0; transform:translateY(12px);">
             <span class="text-lg text-text-muted line-through font-normal">129 000 ₽</span>
             <div class="flex items-baseline gap-2">
               <span class="font-heading text-4xl font-bold text-accent">116 100</span>
@@ -183,18 +191,18 @@
       </div>
 
       <!-- КОРПОРАТИВНЫЙ -->
-      <div class="relative border border-border rounded-2xl bg-white p-8 flex flex-col min-w-0 reveal-item">
+      <div class="relative border border-border rounded-2xl bg-white p-8 flex flex-col min-w-0 reveal-item" data-price-card="2">
         <div class="mb-4">
           <span class="inline-block bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">3 места</span>
         </div>
         <h3 class="font-heading text-2xl font-bold text-text">Корпоративный</h3>
         <p class="text-sm text-text-muted mt-1 mb-6">Глубокое внедрение</p>
         <div class="mb-6 price-block">
-          <div class="original-price hidden">
+          <div class="original-price">
             <span class="font-heading text-4xl font-bold text-text">199 000</span>
             <span class="text-lg text-text-muted font-normal ml-1">₽</span>
           </div>
-          <div class="discount-price">
+          <div class="discount-price" style="display:none; opacity:0; transform:translateY(12px);">
             <span class="text-lg text-text-muted line-through font-normal">199 000 ₽</span>
             <div class="flex items-baseline gap-2">
               <span class="font-heading text-4xl font-bold text-accent">179 100</span>
@@ -240,6 +248,14 @@
 
     </div>
 
+    <!-- Компактная плашка — появляется после закрытия баннера -->
+    <div id="compact-discount-badge" class="max-w-md mx-auto mt-6" style="display:none; opacity:0; transform:translateY(-20px);">
+      <div class="flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-dark rounded-full px-5 py-2.5 shadow-md">
+        <span class="text-white font-bold text-sm">−10%</span>
+        <span class="text-white/80 text-sm">до 5 марта</span>
+      </div>
+    </div>
+
     <p class="mt-8 text-center text-text-muted text-sm">Рассрочка на 2-3 месяца. Обсудим индивидуально на диагностике.</p>
     <p class="text-center text-xs text-text-muted mt-2">
       Цены указаны в&nbsp;российских рублях. Не&nbsp;является публичной офертой. Подробности — в&nbsp;<a href="/terms" class="text-primary hover:underline">договоре-оферте</a>.
@@ -250,25 +266,14 @@
 <script>
   const DEADLINE = new Date('2026-03-05T23:59:59+09:00').getTime();
 
+  function isDiscountExpired() {
+    return Date.now() >= DEADLINE;
+  }
+
   function updateCountdown() {
     const now = Date.now();
     const diff = DEADLINE - now;
-    const banner = document.getElementById('discount-banner');
-    const originals = document.querySelectorAll('.original-price');
-    const discounts = document.querySelectorAll('.discount-price');
-
-    if (diff <= 0) {
-      // Скидка истекла — скрыть баннер, показать обычные цены
-      if (banner) banner.style.display = 'none';
-      originals.forEach(el => el.classList.remove('hidden'));
-      discounts.forEach(el => el.classList.add('hidden'));
-      return;
-    }
-
-    // Скидка активна — показать баннер и скидочные цены
-    if (banner) banner.style.display = 'block';
-    originals.forEach(el => el.classList.add('hidden'));
-    discounts.forEach(el => el.classList.remove('hidden'));
+    if (diff <= 0) return;
 
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
     const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -286,6 +291,116 @@
     if (seconds) seconds.textContent = String(s).padStart(2, '0');
   }
 
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  // Если скидка истекла — показать обычные цены, никаких анимаций
+  if (isDiscountExpired()) {
+    // Обычные цены уже видны по умолчанию, ничего не делаем
+  } else {
+    // Скидка активна — запустить таймер и Intersection Observer
+    updateCountdown();
+    const countdownInterval = setInterval(() => {
+      if (isDiscountExpired()) {
+        clearInterval(countdownInterval);
+        return;
+      }
+      updateCountdown();
+    }, 1000);
+
+    let discountAnimated = false;
+
+    const pricingSection = document.getElementById('pricing');
+    if (pricingSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !discountAnimated) {
+            discountAnimated = true;
+            observer.disconnect();
+            // Через 5 секунд — запустить анимацию скидки
+            setTimeout(() => {
+              if (isDiscountExpired()) return;
+              revealDiscountPrices();
+              showDiscountBanner();
+            }, 5000);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      observer.observe(pricingSection);
+    }
+  }
+
+  function revealDiscountPrices() {
+    const cards = document.querySelectorAll('[data-price-card]');
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        const originalPrice = card.querySelector('.original-price');
+        const discountPrice = card.querySelector('.discount-price');
+        if (!originalPrice || !discountPrice) return;
+
+        // Оригинальная цена: уменьшить, сделать серой, зачеркнуть
+        const priceSpan = originalPrice.querySelector('.font-heading');
+        const currencySpan = originalPrice.querySelector('.text-lg');
+        if (priceSpan) {
+          priceSpan.style.transition = 'all 0.5s ease';
+          priceSpan.style.fontSize = '1.125rem';
+          priceSpan.style.color = 'var(--color-text-muted)';
+          priceSpan.style.textDecoration = 'line-through';
+          priceSpan.style.fontWeight = '400';
+        }
+        if (currencySpan) {
+          currencySpan.style.transition = 'all 0.5s ease';
+          currencySpan.style.fontSize = '0.875rem';
+          currencySpan.style.textDecoration = 'line-through';
+        }
+
+        // Показать скидочную цену с анимацией fade-in + slide-up
+        discountPrice.style.display = 'block';
+        // Форсируем reflow для запуска transition
+        discountPrice.offsetHeight;
+        discountPrice.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        discountPrice.style.opacity = '1';
+        discountPrice.style.transform = 'translateY(0)';
+      }, index * 200);
+    });
+  }
+
+  function showDiscountBanner() {
+    const banner = document.getElementById('discount-banner');
+    if (!banner) return;
+
+    banner.style.display = 'block';
+    // Форсируем reflow
+    banner.offsetHeight;
+    banner.style.transition = 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease';
+    banner.style.transform = 'translateY(0)';
+    banner.style.opacity = '1';
+  }
+
+  // Обработчик закрытия баннера
+  const closeBtn = document.getElementById('banner-close-btn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      const banner = document.getElementById('discount-banner');
+      if (!banner) return;
+
+      // Баннер улетает вниз
+      banner.style.transition = 'transform 0.6s cubic-bezier(0.55, 0, 1, 0.45), opacity 0.6s ease';
+      banner.style.transform = 'translateY(100vh)';
+      banner.style.opacity = '0';
+
+      banner.addEventListener('transitionend', function handler() {
+        banner.removeEventListener('transitionend', handler);
+        banner.style.display = 'none';
+
+        // Показать компактную плашку под карточками
+        const badge = document.getElementById('compact-discount-badge');
+        if (badge) {
+          badge.style.display = 'block';
+          badge.offsetHeight;
+          badge.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          badge.style.opacity = '1';
+          badge.style.transform = 'translateY(0)';
+        }
+      }, { once: true });
+    });
+  }
 </script>
