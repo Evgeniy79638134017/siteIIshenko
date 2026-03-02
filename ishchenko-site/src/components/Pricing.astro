@@ -299,50 +299,105 @@
 
   /* ── Анимированное появление скидки ── */
   function revealDiscountAnimated() {
-    var section = document.getElementById('pricing');
-    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var banner = document.getElementById('discount-banner');
+    if (!banner) return;
+    var inner = banner.firstElementChild;
 
-    // 500ms — баннер появляется
-    setTimeout(function() {
-      var banner = document.getElementById('discount-banner');
-      if (banner) {
-        banner.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
-        banner.style.opacity = '1';
-        banner.style.transform = 'translateY(0)';
-      }
-    }, 500);
+    // Блокируем скролл
+    var scrollbarW = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = scrollbarW + 'px';
 
-    // 900ms — цены анимируются последовательно
-    setTimeout(function() {
-      document.querySelectorAll('[data-price-card]').forEach(function(card, i) {
-        setTimeout(function() {
-          var orig = card.querySelector('.original-price');
-          var disc = card.querySelector('.discount-price');
-          if (!orig || !disc) return;
+    // 1. Overlay — затемнение
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9998;opacity:0;transition:opacity 0.3s ease;';
+    document.body.appendChild(overlay);
+    overlay.offsetHeight;
+    overlay.style.opacity = '1';
 
-          var priceSpan = orig.querySelector('.font-heading');
-          var currSpan  = orig.querySelector('.text-lg');
-          if (priceSpan) {
-            priceSpan.style.transition = 'all 0.5s ease';
-            priceSpan.style.fontSize = '1.125rem';
-            priceSpan.style.color = 'var(--color-text-muted)';
-            priceSpan.style.textDecoration = 'line-through';
-            priceSpan.style.fontWeight = '400';
-          }
-          if (currSpan) {
-            currSpan.style.transition = 'all 0.5s ease';
-            currSpan.style.fontSize = '0.875rem';
-            currSpan.style.textDecoration = 'line-through';
-          }
+    // 2. Баннер → fixed по центру, сплошной фон
+    banner.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(1);z-index:9999;opacity:1;width:90vw;max-width:700px;margin:0;';
+    if (inner) {
+      inner.style.background = 'var(--color-primary-dark)';
+      inner.style.backgroundImage = 'none';
+      inner.style.padding = '2rem';
+    }
 
-          disc.style.display = 'block';
-          disc.offsetHeight; // reflow
-          disc.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-          disc.style.opacity = '1';
-          disc.style.transform = 'translateY(0)';
-        }, i * 200);
-      });
-    }, 900);
+    // 3. Крестик
+    var closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.setAttribute('aria-label', 'Закрыть');
+    closeBtn.style.cssText = 'position:absolute;top:0.5rem;right:0.5rem;z-index:10;width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.2);border:none;border-radius:9999px;cursor:pointer;';
+    closeBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
+    banner.appendChild(closeBtn);
+
+    var landed = false;
+
+    function landBanner() {
+      if (landed) return;
+      landed = true;
+
+      // Разблокируем скролл
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+
+      // 4. Overlay исчезает
+      overlay.style.opacity = '0';
+      setTimeout(function() { overlay.remove(); }, 300);
+
+      // 5-6. Возвращаем баннер в поток
+      if (inner) inner.removeAttribute('style');
+      if (closeBtn.parentNode) closeBtn.remove();
+      // Ставим видимое состояние (заменяет исходный opacity:0 / translateY(-20px))
+      banner.setAttribute('style', 'opacity:1; transform:none;');
+
+      // 7. Скролл к ценам
+      var section = document.getElementById('pricing');
+      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // 9. Через 500ms — анимация цен
+      setTimeout(animatePrices, 500);
+    }
+
+    closeBtn.addEventListener('click', function() {
+      clearTimeout(pauseTimeout);
+      landBanner();
+    });
+
+    // Пауза 3 секунды
+    var pauseTimeout = setTimeout(landBanner, 3000);
+  }
+
+  /* ── Анимация цен ── */
+  function animatePrices() {
+    document.querySelectorAll('[data-price-card]').forEach(function(card, i) {
+      setTimeout(function() {
+        var orig = card.querySelector('.original-price');
+        var disc = card.querySelector('.discount-price');
+        if (!orig || !disc) return;
+
+        var priceSpan = orig.querySelector('.font-heading');
+        var currSpan  = orig.querySelector('.text-lg');
+        if (priceSpan) {
+          priceSpan.style.transition = 'all 0.5s ease';
+          priceSpan.style.fontSize = '1.125rem';
+          priceSpan.style.color = 'var(--color-text-muted)';
+          priceSpan.style.textDecoration = 'line-through';
+          priceSpan.style.fontWeight = '400';
+        }
+        if (currSpan) {
+          currSpan.style.transition = 'all 0.5s ease';
+          currSpan.style.fontSize = '0.875rem';
+          currSpan.style.textDecoration = 'line-through';
+        }
+
+        disc.style.display = 'block';
+        disc.offsetHeight;
+        disc.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        disc.style.opacity = '1';
+        disc.style.transform = 'translateY(0)';
+      }, i * 200);
+    });
   }
 
   /* ── Триггеры ── */
