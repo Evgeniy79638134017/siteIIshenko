@@ -316,12 +316,21 @@
     overlay.style.opacity = '1';
 
     // 2. Баннер → fixed по центру, сплошной фон
-    banner.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(1);z-index:9999;opacity:1;width:90vw;max-width:700px;margin:0;';
+    banner.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;opacity:1;width:90vw;max-width:700px;margin:0;';
     if (inner) {
-      inner.style.background = 'var(--color-primary-dark)';
+      inner.style.background = '#0F2B3C';
       inner.style.backgroundImage = 'none';
+      inner.style.opacity = '1';
+      inner.style.backdropFilter = 'none';
+      inner.style.webkitBackdropFilter = 'none';
       inner.style.padding = '2rem';
     }
+    // Таймерные ячейки — убрать прозрачность и blur
+    banner.querySelectorAll('.backdrop-blur-sm').forEach(function(el) {
+      el.style.backdropFilter = 'none';
+      el.style.webkitBackdropFilter = 'none';
+      el.style.background = 'rgba(0,0,0,0.25)';
+    });
 
     // 3. Крестик
     var closeBtn = document.createElement('button');
@@ -337,17 +346,21 @@
       if (landed) return;
       landed = true;
 
-      // Разблокируем скролл
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-
       // 4. Overlay исчезает
       overlay.style.opacity = '0';
       setTimeout(function() { overlay.remove(); }, 300);
 
       // 5-6. Возвращаем баннер в поток
       if (inner) inner.removeAttribute('style');
+      banner.querySelectorAll('.backdrop-blur-sm').forEach(function(el) {
+        el.removeAttribute('style');
+      });
       if (closeBtn.parentNode) closeBtn.remove();
+
+      // Разблокируем скролл
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+
       // Ставим видимое состояние (заменяет исходный opacity:0 / translateY(-20px))
       banner.setAttribute('style', 'opacity:1; transform:none;');
 
