@@ -436,16 +436,25 @@
     banner.style.display = '';
     banner.style.opacity = '1';
     banner.style.transform = 'none';
-    // Показать скидочные цены, скрыть оригинальные (для статического показа)
+    // Показать скидочные цены, зачеркнуть оригинальные
     document.querySelectorAll('.discount-price').forEach(el => {
       el.style.display = '';
       el.style.opacity = '1';
       el.style.transform = 'none';
     });
     document.querySelectorAll('.original-price').forEach(el => {
-      el.style.fontSize = '0.875rem';
-      el.style.color = '#999';
-      el.style.textDecoration = 'line-through';
+      const priceSpan = el.querySelector('.font-heading');
+      const currSpan = el.querySelector('.text-lg');
+      if (priceSpan) {
+        priceSpan.style.fontSize = '1.125rem';
+        priceSpan.style.color = '#999';
+        priceSpan.style.textDecoration = 'line-through';
+        priceSpan.style.fontWeight = '400';
+      }
+      if (currSpan) {
+        currSpan.style.fontSize = '0.875rem';
+        currSpan.style.textDecoration = 'line-through';
+      }
     });
   }
 
@@ -455,10 +464,20 @@
         const orig = card.querySelector('.original-price');
         const disc = card.querySelector('.discount-price');
         if (orig) {
-          orig.style.transition = 'all 0.4s ease';
-          orig.style.fontSize = '0.875rem';
-          orig.style.color = '#999';
-          orig.style.textDecoration = 'line-through';
+          const priceSpan = orig.querySelector('.font-heading');
+          const currSpan = orig.querySelector('.text-lg');
+          if (priceSpan) {
+            priceSpan.style.transition = 'all 0.4s ease';
+            priceSpan.style.fontSize = '1.125rem';
+            priceSpan.style.color = '#999';
+            priceSpan.style.textDecoration = 'line-through';
+            priceSpan.style.fontWeight = '400';
+          }
+          if (currSpan) {
+            currSpan.style.transition = 'all 0.4s ease';
+            currSpan.style.fontSize = '0.875rem';
+            currSpan.style.textDecoration = 'line-through';
+          }
         }
         if (disc) {
           disc.style.display = '';
