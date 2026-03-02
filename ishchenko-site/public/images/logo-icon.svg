@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Дуги -->
+  <path d="M8 40C8 22.3 22.3 8 40 8" stroke="#84CC16" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M14 40C14 25.6 25.6 14 40 14" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M20 40C20 29 29 20 40 20" stroke="#2DD4BF" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M26 40C26 32.3 32.3 26 40 26" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M32 40C32 35.6 35.6 32 40 32" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Точки на концах -->
+  <circle cx="40" cy="8" r="2.5" fill="#84CC16"/>
+  <circle cx="40" cy="14" r="2.5" fill="#34D399"/>
+  <circle cx="40" cy="20" r="2.5" fill="#2DD4BF"/>
+  <circle cx="40" cy="26" r="2.5" fill="#38BDF8"/>
+  <circle cx="40" cy="32" r="2.5" fill="#6366F1"/>
+</svg>
