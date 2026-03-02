@@ -5,20 +5,12 @@
       <p class="text-center text-text-muted mt-3">Старт — после бесплатной диагностики</p>
     </div>
 
-    <!-- Баннер скидки — изначально скрыт -->
-    <div class="discount-banner-wrapper max-w-2xl mx-auto mb-10 mt-10" id="discount-banner" style="display:none; transform:translateY(-100%); opacity:0;">
+    <!-- Баннер скидки — скрыт до анимации -->
+    <div class="max-w-2xl mx-auto mb-10 mt-10" id="discount-banner" style="opacity:0; transform:translateY(-20px);">
       <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-primary-dark p-6 md:p-8">
         <!-- Декоративные круги на фоне -->
         <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
         <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full"></div>
-
-        <!-- Кнопка закрытия -->
-        <button id="banner-close-btn" type="button" aria-label="Закрыть баннер"
-          class="absolute top-3 right-3 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-colors duration-200 cursor-pointer">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M4 4l8 8M12 4l-8 8"/>
-          </svg>
-        </button>
 
         <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
           <!-- Левая часть: текст скидки -->
@@ -35,38 +27,38 @@
           <!-- Правая часть: таймер -->
           <div class="flex items-center gap-1.5" id="countdown-timer">
             <div class="text-center">
-              <div class="bg-black/20 rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
                 <span id="days" class="font-heading font-bold text-2xl md:text-3xl text-white">00</span>
               </div>
-              <span class="text-white/60 text-xs mt-1 block">дн</span>
+              <span class="text-white/40 text-[10px] mt-1 block">дн</span>
             </div>
             <span class="text-white/30 text-xl font-light mb-4">:</span>
             <div class="text-center">
-              <div class="bg-black/20 rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
                 <span id="hours" class="font-heading font-bold text-2xl md:text-3xl text-white">00</span>
               </div>
-              <span class="text-white/60 text-xs mt-1 block">час</span>
+              <span class="text-white/40 text-[10px] mt-1 block">час</span>
             </div>
             <span class="text-white/30 text-xl font-light mb-4">:</span>
             <div class="text-center">
-              <div class="bg-black/20 rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
                 <span id="minutes" class="font-heading font-bold text-2xl md:text-3xl text-white">00</span>
               </div>
-              <span class="text-white/60 text-xs mt-1 block">мин</span>
+              <span class="text-white/40 text-[10px] mt-1 block">мин</span>
             </div>
             <span class="text-white/30 text-xl font-light mb-4">:</span>
             <div class="text-center">
-              <div class="bg-black/20 rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
+              <div class="bg-white/10 backdrop-blur-sm rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
                 <span id="seconds" class="font-heading font-bold text-2xl md:text-3xl text-white">00</span>
               </div>
-              <span class="text-white/60 text-xs mt-1 block">сек</span>
+              <span class="text-white/40 text-[10px] mt-1 block">сек</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="mt-12 pt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start max-w-full reveal-group" id="pricing-cards-grid">
+    <div class="mt-12 pt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start max-w-full reveal-group">
 
       <!-- СТАНДАРТ -->
       <div class="relative border border-border rounded-2xl bg-white p-8 flex flex-col min-w-0 reveal-item" data-price-card="0">
@@ -121,13 +113,11 @@
             Пятничные разборы кейсов
           </li>
         </ul>
-        <div class="mt-auto">
-          <p class="text-xs text-text-muted mb-4">24+ часа живого обучения + 3 мес поддержки</p>
-          <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
-            class="block text-center bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl py-3.5 transition-all duration-300">
-            Записаться
-          </a>
-        </div>
+        <p class="text-xs text-text-muted mb-4">24+ часа живого обучения + 3 мес поддержки</p>
+        <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
+          class="block text-center bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl py-3.5 transition-all duration-300">
+          Получить систему
+        </a>
       </div>
 
       <!-- VIP — Рекомендуемый -->
@@ -183,7 +173,7 @@
           </li>
         </ul>
         <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
-          class="block text-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl py-3.5 transition-all duration-300 shadow-lg shadow-accent/20 mt-auto">
+          class="block text-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl py-3.5 transition-all duration-300 shadow-lg shadow-accent/20">
           Выбрать тариф
         </a>
       </div>
@@ -238,22 +228,14 @@
           </li>
         </ul>
         <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
-          class="block text-center bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl py-3.5 transition-all duration-300 mt-auto">
+          class="block text-center bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl py-3.5 transition-all duration-300">
           Обсудить внедрение
         </a>
       </div>
 
     </div>
 
-    <!-- Компактная плашка — появляется после закрытия баннера -->
-    <div id="compact-discount-badge" class="max-w-md mx-auto mt-6" style="display:none; opacity:0; transform:translateY(-20px);">
-      <div class="flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-dark rounded-full px-5 py-2.5 shadow-md">
-        <span class="text-white font-bold text-sm">−10%</span>
-        <span class="text-white/80 text-sm">до 5 марта</span>
-      </div>
-    </div>
-
-    <p id="pricing-bottom-trigger" class="mt-8 text-center text-text-muted text-sm">Рассрочка на 2-3 месяца. Обсудим индивидуально на диагностике.</p>
+    <p class="mt-8 text-center text-text-muted text-sm">Рассрочка на 2-3 месяца. Обсудим индивидуально на диагностике.</p>
     <p class="text-center text-xs text-text-muted mt-2">
       Цены указаны в&nbsp;российских рублях. Не&nbsp;является публичной офертой. Подробности — в&nbsp;<a href="/terms" class="text-primary hover:underline">договоре-оферте</a>.
     </p>
@@ -268,406 +250,155 @@
   }
 
   function updateCountdown() {
-    const now = Date.now();
-    const diff = DEADLINE - now;
+    const diff = DEADLINE - Date.now();
     if (diff <= 0) return;
 
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((diff % (1000 * 60)) / 1000);
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
 
-    const days = document.getElementById('days');
-    const hours = document.getElementById('hours');
-    const minutes = document.getElementById('minutes');
-    const seconds = document.getElementById('seconds');
-
-    if (days) days.textContent = String(d).padStart(2, '0');
-    if (hours) hours.textContent = String(h).padStart(2, '0');
-    if (minutes) minutes.textContent = String(m).padStart(2, '0');
-    if (seconds) seconds.textContent = String(s).padStart(2, '0');
+    const el = (id) => document.getElementById(id);
+    if (el('days'))    el('days').textContent    = String(d).padStart(2, '0');
+    if (el('hours'))   el('hours').textContent   = String(h).padStart(2, '0');
+    if (el('minutes')) el('minutes').textContent = String(m).padStart(2, '0');
+    if (el('seconds')) el('seconds').textContent = String(s).padStart(2, '0');
   }
 
-  /* ---------- Анимация цен (без изменений) ---------- */
-  function revealDiscountPrices() {
-    const cards = document.querySelectorAll('[data-price-card]');
-    cards.forEach((card, index) => {
-      setTimeout(() => {
-        const originalPrice = card.querySelector('.original-price');
-        const discountPrice = card.querySelector('.discount-price');
-        if (!originalPrice || !discountPrice) return;
-
-        const priceSpan = originalPrice.querySelector('.font-heading');
-        const currencySpan = originalPrice.querySelector('.text-lg');
-        if (priceSpan) {
-          priceSpan.style.transition = 'all 0.5s ease';
-          priceSpan.style.fontSize = '1.125rem';
-          priceSpan.style.color = 'var(--color-text-muted)';
-          priceSpan.style.textDecoration = 'line-through';
-          priceSpan.style.fontWeight = '400';
-        }
-        if (currencySpan) {
-          currencySpan.style.transition = 'all 0.5s ease';
-          currencySpan.style.fontSize = '0.875rem';
-          currencySpan.style.textDecoration = 'line-through';
-        }
-
-        discountPrice.style.display = 'block';
-        discountPrice.offsetHeight;
-        discountPrice.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        discountPrice.style.opacity = '1';
-        discountPrice.style.transform = 'translateY(0)';
-      }, index * 200);
-    });
-  }
-
-  /* ---------- Мгновенное применение скидочного состояния (повторный визит) ---------- */
-  function applyDiscountedStateImmediately() {
-    const banner = document.getElementById('discount-banner');
+  /* ── Мгновенное применение скидки (повторный визит) ── */
+  function applyDiscountNow() {
+    var banner = document.getElementById('discount-banner');
     if (banner) {
-      banner.style.display = 'block';
-      banner.style.transform = 'translateY(0)';
       banner.style.opacity = '1';
+      banner.style.transform = 'translateY(0)';
     }
 
-    document.querySelectorAll('[data-price-card]').forEach((card) => {
-      const originalPrice = card.querySelector('.original-price');
-      const discountPrice = card.querySelector('.discount-price');
-      if (!originalPrice || !discountPrice) return;
+    document.querySelectorAll('[data-price-card]').forEach(function(card) {
+      var orig = card.querySelector('.original-price');
+      var disc = card.querySelector('.discount-price');
+      if (!orig || !disc) return;
 
-      const priceSpan = originalPrice.querySelector('.font-heading');
-      const currencySpan = originalPrice.querySelector('.text-lg');
+      var priceSpan = orig.querySelector('.font-heading');
+      var currSpan  = orig.querySelector('.text-lg');
       if (priceSpan) {
         priceSpan.style.fontSize = '1.125rem';
         priceSpan.style.color = 'var(--color-text-muted)';
         priceSpan.style.textDecoration = 'line-through';
         priceSpan.style.fontWeight = '400';
       }
-      if (currencySpan) {
-        currencySpan.style.fontSize = '0.875rem';
-        currencySpan.style.textDecoration = 'line-through';
+      if (currSpan) {
+        currSpan.style.fontSize = '0.875rem';
+        currSpan.style.textDecoration = 'line-through';
       }
 
-      discountPrice.style.display = 'block';
-      discountPrice.style.opacity = '1';
-      discountPrice.style.transform = 'translateY(0)';
+      disc.style.display = 'block';
+      disc.style.opacity = '1';
+      disc.style.transform = 'translateY(0)';
     });
   }
 
-  /* ---------- Обработчик закрытия баннера (in-flow) ---------- */
-  function setupBannerCloseHandler() {
-    const closeBtn = document.getElementById('banner-close-btn');
-    if (!closeBtn) return;
+  /* ── Анимированное появление скидки ── */
+  function revealDiscountAnimated() {
+    var section = document.getElementById('pricing');
+    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    closeBtn.addEventListener('click', () => {
-      const banner = document.getElementById('discount-banner');
-      if (!banner) return;
-
-      banner.style.transition = 'transform 0.6s cubic-bezier(0.55, 0, 1, 0.45), opacity 0.6s ease';
-      banner.style.transform = 'translateY(100vh)';
-      banner.style.opacity = '0';
-
-      banner.addEventListener('transitionend', () => {
-        banner.style.display = 'none';
-
-        const badge = document.getElementById('compact-discount-badge');
-        if (badge) {
-          badge.style.display = 'block';
-          badge.offsetHeight;
-          badge.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-          badge.style.opacity = '1';
-          badge.style.transform = 'translateY(0)';
-        }
-      }, { once: true });
-    }, { once: true });
-  }
-
-  /* ---------- Стили БОЛЬШОГО баннера (центр экрана) ---------- */
-  function applyBigBannerStyles(banner) {
-    var inner = banner.firstElementChild;
-    var closeBtn = document.getElementById('banner-close-btn');
-    var closeSvg = closeBtn && closeBtn.querySelector('svg');
-    var pill = inner && inner.querySelector('.inline-flex');
-    var discountSpan = pill && pill.children[0];
-    var subtextSpan = pill && pill.children[1];
-    var titleP = pill && pill.parentElement && pill.parentElement.querySelector('p');
-    var isDesktop = window.innerWidth >= 768;
-
-    if (inner) {
-      inner.style.background = 'var(--color-primary-dark)';
-      inner.style.backgroundImage = 'none';
-      inner.style.padding = '2rem';
-    }
-    if (closeBtn) {
-      closeBtn.style.width = '2.5rem';
-      closeBtn.style.height = '2.5rem';
-      closeBtn.style.background = 'rgba(255,255,255,0.2)';
-      closeBtn.style.top = '1rem';
-      closeBtn.style.right = '1rem';
-    }
-    if (closeSvg) {
-      closeSvg.setAttribute('width', '20');
-      closeSvg.setAttribute('height', '20');
-    }
-    if (pill) {
-      pill.style.padding = '0.625rem 1.25rem';
-      pill.style.marginBottom = '1rem';
-    }
-    if (discountSpan) discountSpan.style.fontSize = '1.5rem';
-    if (subtextSpan) subtextSpan.style.fontSize = '1rem';
-    if (titleP) {
-      titleP.style.fontSize = '1.875rem';
-      titleP.style.lineHeight = '2.25rem';
-    }
-
-    var timerCells = document.querySelectorAll('#countdown-timer > div > div:first-child');
-    timerCells.forEach(function(cell) {
-      cell.style.width = isDesktop ? '5rem' : '4rem';
-      cell.style.height = isDesktop ? '5rem' : '4rem';
-    });
-
-    ['days','hours','minutes','seconds'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.style.fontSize = isDesktop ? '2.25rem' : '1.875rem';
-    });
-  }
-
-  /* Плавный возврат внутренних элементов к CSS-классам */
-  function transitionInnerToNormal(banner) {
-    var t = 'all 0.6s ease-in-out';
-    var inner = banner.firstElementChild;
-    var closeBtn = document.getElementById('banner-close-btn');
-    var closeSvg = closeBtn && closeBtn.querySelector('svg');
-    var pill = inner && inner.querySelector('.inline-flex');
-    var discountSpan = pill && pill.children[0];
-    var subtextSpan = pill && pill.children[1];
-    var titleP = pill && pill.parentElement && pill.parentElement.querySelector('p');
-    var timerCells = document.querySelectorAll('#countdown-timer > div > div:first-child');
-    var digitIds = ['days','hours','minutes','seconds'];
-
-    // 1) Добавляем transition
-    [inner, closeBtn, pill, discountSpan, subtextSpan, titleP].forEach(function(el) {
-      if (el) el.style.transition = t;
-    });
-    timerCells.forEach(function(c) { c.style.transition = t; });
-    digitIds.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.style.transition = t;
-    });
-
-    // SVG атрибуты — просто вернуть (не анимируются)
-    if (closeSvg) {
-      closeSvg.setAttribute('width', '16');
-      closeSvg.setAttribute('height', '16');
-    }
-
-    // 2) Reflow чтобы transition применился
-    banner.offsetHeight;
-
-    // 3) Убираем big-overrides → CSS-классы берут верх, transition анимирует
-    if (inner) { inner.style.background = ''; inner.style.backgroundImage = ''; inner.style.padding = ''; }
-    if (closeBtn) { closeBtn.style.width = ''; closeBtn.style.height = ''; closeBtn.style.background = ''; closeBtn.style.top = ''; closeBtn.style.right = ''; }
-    if (pill) { pill.style.padding = ''; pill.style.marginBottom = ''; }
-    if (discountSpan) discountSpan.style.fontSize = '';
-    if (subtextSpan) subtextSpan.style.fontSize = '';
-    if (titleP) { titleP.style.fontSize = ''; titleP.style.lineHeight = ''; }
-    timerCells.forEach(function(c) { c.style.width = ''; c.style.height = ''; });
-    digitIds.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.style.fontSize = '';
-    });
-  }
-
-  /* Полная очистка inline-стилей с внутренних элементов */
-  function cleanupInnerStyles(banner) {
-    var inner = banner.firstElementChild;
-    var closeBtn = document.getElementById('banner-close-btn');
-    var pill = inner && inner.querySelector('.inline-flex');
-    var discountSpan = pill && pill.children[0];
-    var subtextSpan = pill && pill.children[1];
-    var titleP = pill && pill.parentElement && pill.parentElement.querySelector('p');
-
-    [inner, closeBtn, pill, discountSpan, subtextSpan, titleP].forEach(function(el) {
-      if (el) el.removeAttribute('style');
-    });
-    document.querySelectorAll('#countdown-timer > div > div:first-child').forEach(function(c) {
-      c.removeAttribute('style');
-    });
-    ['days','hours','minutes','seconds'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.removeAttribute('style');
-    });
-  }
-
-  /* ---------- Драматичная анимация скидки ---------- */
-  function startDramaticReveal() {
-    sessionStorage.setItem('discount-shown', '1');
-
-    const banner = document.getElementById('discount-banner');
-    if (!banner || isDiscountExpired()) return;
-
-    // Блокируем скролл на время оверлея
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = scrollbarWidth + 'px';
-
-    // 1. Оверлей — затемнение фона (opacity 0 → 0.6 за 300ms)
-    const overlay = document.createElement('div');
-    overlay.style.cssText = 'position:fixed;inset:0;background:#000;z-index:99998;opacity:0;transition:opacity 0.3s ease;';
-    document.body.appendChild(overlay);
-    overlay.offsetHeight;
-    overlay.style.opacity = '0.6';
-
-    // 2. Баннер — БОЛЬШОЙ, фиксированный по центру, z-index выше всего
-    banner.style.cssText = 'display:block;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.8);z-index:99999;opacity:0;width:90vw;max-width:700px;margin:0;';
-    applyBigBannerStyles(banner);
-    banner.offsetHeight;
-
-    // Entrance: scale(0.8→1) + opacity(0→1) за 400ms
-    banner.style.transition = 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease';
-    banner.style.transform = 'translate(-50%,-50%) scale(1)';
-    banner.style.opacity = '1';
-
-    let landed = false;
-
-    function landBanner() {
-      if (landed) return;
-      landed = true;
-
-      // Разблокируем скролл
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-
-      // 5. Оверлей исчезает
-      overlay.style.transition = 'opacity 0.6s ease-in-out';
-      overlay.style.opacity = '0';
-
-      // Скроллим к Pricing мгновенно чтобы измерить целевую позицию
-      const pricingSection = document.getElementById('pricing');
-      if (pricingSection) {
-        pricingSection.scrollIntoView({ behavior: 'auto', block: 'start' });
+    // 500ms — баннер появляется
+    setTimeout(function() {
+      var banner = document.getElementById('discount-banner');
+      if (banner) {
+        banner.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+        banner.style.opacity = '1';
+        banner.style.transform = 'translateY(0)';
       }
+    }, 500);
 
-      // --- Измеряем целевую позицию баннера в потоке ---
-      const savedCss = banner.style.cssText;
-      banner.style.cssText = 'display:block;visibility:hidden;position:static;';
-      const targetRect = banner.getBoundingClientRect();
-      // Восстанавливаем фиксированную позицию
-      banner.style.cssText = savedCss;
-      banner.style.opacity = '1';
-
-      // Конвертируем текущую позицию из % в px (убираем translate)
-      const startRect = banner.getBoundingClientRect();
-      banner.style.transition = 'none';
-      banner.style.top = startRect.top + 'px';
-      banner.style.left = startRect.left + 'px';
-      banner.style.width = startRect.width + 'px';
-      banner.style.maxWidth = startRect.width + 'px';
-      banner.style.transform = 'none';
-      banner.offsetHeight;
-
-      // 4. Анимация: баннер плавно уменьшается и перемещается на своё место (600ms)
-      banner.style.transition = 'top 0.6s ease-in-out, left 0.6s ease-in-out, width 0.6s ease-in-out, max-width 0.6s ease-in-out';
-      banner.style.top = targetRect.top + 'px';
-      banner.style.left = targetRect.left + 'px';
-      banner.style.width = targetRect.width + 'px';
-      banner.style.maxWidth = targetRect.width + 'px';
-
-      // Одновременно — внутренние элементы возвращаются к обычным размерам
-      transitionInnerToNormal(banner);
-
-      // 6. После завершения — removeAttribute('style'), баннер в потоке
-      setTimeout(function() {
-        overlay.remove();
-        banner.removeAttribute('style');
-        banner.style.display = 'block';
-        cleanupInnerStyles(banner);
-
-        // 7. Через 300ms — анимация цен
+    // 900ms — цены анимируются последовательно
+    setTimeout(function() {
+      document.querySelectorAll('[data-price-card]').forEach(function(card, i) {
         setTimeout(function() {
-          revealDiscountPrices();
-          setupBannerCloseHandler();
-        }, 300);
-      }, 650);
-    }
+          var orig = card.querySelector('.original-price');
+          var disc = card.querySelector('.discount-price');
+          if (!orig || !disc) return;
 
-    // Крестик во время центрального показа — пропуск паузы
-    const closeBtn = document.getElementById('banner-close-btn');
-    let pauseTimeout;
+          var priceSpan = orig.querySelector('.font-heading');
+          var currSpan  = orig.querySelector('.text-lg');
+          if (priceSpan) {
+            priceSpan.style.transition = 'all 0.5s ease';
+            priceSpan.style.fontSize = '1.125rem';
+            priceSpan.style.color = 'var(--color-text-muted)';
+            priceSpan.style.textDecoration = 'line-through';
+            priceSpan.style.fontWeight = '400';
+          }
+          if (currSpan) {
+            currSpan.style.transition = 'all 0.5s ease';
+            currSpan.style.fontSize = '0.875rem';
+            currSpan.style.textDecoration = 'line-through';
+          }
 
-    const onCloseCenter = () => {
-      clearTimeout(pauseTimeout);
-      landBanner();
-    };
-
-    if (closeBtn) {
-      closeBtn.addEventListener('click', onCloseCenter, { once: true });
-    }
-
-    // 3. Пауза 2.5 сек (отсчёт после завершения entrance 400ms)
-    pauseTimeout = setTimeout(() => {
-      if (closeBtn) closeBtn.removeEventListener('click', onCloseCenter);
-      landBanner();
-    }, 400 + 2500);
+          disc.style.display = 'block';
+          disc.offsetHeight; // reflow
+          disc.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          disc.style.opacity = '1';
+          disc.style.transform = 'translateY(0)';
+        }, i * 200);
+      });
+    }, 900);
   }
 
-  /* ---------- Триггеры ---------- */
-  function setupDramaticTriggers() {
-    let triggered = false;
-    let bottomObserver = null;
-    let pricingObserver = null;
-    let dwellTimeout = null;
+  /* ── Триггеры ── */
+  function setupTriggers() {
+    var triggered = false;
+    var dwellTimeout = null;
 
     function fire() {
       if (triggered) return;
       triggered = true;
-      if (bottomObserver) bottomObserver.disconnect();
-      if (pricingObserver) pricingObserver.disconnect();
+      observer.disconnect();
       if (dwellTimeout) { clearTimeout(dwellTimeout); dwellTimeout = null; }
-      startDramaticReveal();
+      sessionStorage.setItem('discount-revealed', '1');
+      revealDiscountAnimated();
     }
 
-    const pricingSection = document.getElementById('pricing');
+    var section = document.getElementById('pricing');
+    if (!section) return;
 
-    // Триггер А: пользователь проскроллил НИЖЕ всей секции Pricing
-    // Наблюдаем за первым элементом ПОСЛЕ <section id="pricing">
-    const afterPricingEl = pricingSection && pricingSection.nextElementSibling;
-    if (afterPricingEl) {
-      bottomObserver = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) fire();
-      }, { threshold: 0.1 });
-      bottomObserver.observe(afterPricingEl);
-    }
+    var observer = new IntersectionObserver(function(entries) {
+      var entry = entries[0];
 
-    // Триггер Б: секция Pricing в viewport 12 непрерывных секунд
-    if (pricingSection) {
-      pricingObserver = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          dwellTimeout = setTimeout(() => fire(), 12000);
-        } else {
-          if (dwellTimeout) { clearTimeout(dwellTimeout); dwellTimeout = null; }
+      // Триггер А: секция уходит вверх, ratio < 0.5, top отрицательный
+      if (entry.intersectionRatio < 0.5 && entry.boundingClientRect.top < 0) {
+        fire();
+        return;
+      }
+
+      // Триггер Б: секция видна — запуск 12-секундного таймера
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
+        if (!dwellTimeout) {
+          dwellTimeout = setTimeout(function() { fire(); }, 12000);
         }
-      }, { threshold: 0.15 });
-      pricingObserver.observe(pricingSection);
-    }
+      } else {
+        if (dwellTimeout) { clearTimeout(dwellTimeout); dwellTimeout = null; }
+      }
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1.0] });
+
+    observer.observe(section);
   }
 
-  /* ---------- Инициализация ---------- */
+  /* ── Инициализация ── */
   if (isDiscountExpired()) {
-    // Скидка истекла — обычные цены, баннер не нужен
+    // Скидка истекла — скрыть баннер, обычные цены видны по умолчанию
+    var banner = document.getElementById('discount-banner');
+    if (banner) banner.style.display = 'none';
   } else {
     updateCountdown();
-    const countdownInterval = setInterval(() => {
-      if (isDiscountExpired()) { clearInterval(countdownInterval); return; }
-      updateCountdown();
+    setInterval(function() {
+      if (!isDiscountExpired()) updateCountdown();
     }, 1000);
 
-    if (sessionStorage.getItem('discount-shown')) {
-      // Повторный визит в сессии — сразу скидочное состояние без анимации
-      applyDiscountedStateImmediately();
-      setupBannerCloseHandler();
+    if (sessionStorage.getItem('discount-revealed')) {
+      applyDiscountNow();
     } else {
-      setupDramaticTriggers();
+      setupTriggers();
     }
   }
 </script>
