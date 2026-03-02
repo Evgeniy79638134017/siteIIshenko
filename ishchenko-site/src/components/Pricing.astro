@@ -303,10 +303,7 @@
     if (!banner) return;
     var inner = banner.firstElementChild;
 
-    // Блокируем скролл
-    var scrollbarW = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = scrollbarW + 'px';
+    // Скролл уже заблокирован в fire()
 
     // 1. Overlay — затемнение
     var overlay = document.createElement('div');
@@ -324,11 +321,12 @@
       inner.style.backdropFilter = 'none';
       inner.style.webkitBackdropFilter = 'none';
       inner.style.padding = '2rem';
+      inner.style.boxShadow = '0 25px 50px rgba(0,0,0,0.5)';
     }
-    // Таймерные ячейки — убрать прозрачность и blur
+    // Таймерные ячейки — убрать прозрачность и blur через classList
     banner.querySelectorAll('.backdrop-blur-sm').forEach(function(el) {
-      el.style.backdropFilter = 'none';
-      el.style.webkitBackdropFilter = 'none';
+      el.classList.remove('backdrop-blur-sm');
+      el.classList.remove('bg-white/10');
       el.style.background = 'rgba(0,0,0,0.25)';
     });
 
@@ -352,24 +350,30 @@
 
       // 5-6. Возвращаем баннер в поток
       if (inner) inner.removeAttribute('style');
-      banner.querySelectorAll('.backdrop-blur-sm').forEach(function(el) {
+      // Восстанавливаем классы таймерных ячеек
+      banner.querySelectorAll('#countdown-timer .rounded-xl').forEach(function(el) {
+        el.classList.add('backdrop-blur-sm');
+        el.classList.add('bg-white/10');
         el.removeAttribute('style');
       });
       if (closeBtn.parentNode) closeBtn.remove();
+
+      // Ставим видимое состояние (заменяет исходный opacity:0 / translateY(-20px))
+      banner.setAttribute('style', 'opacity:1; transform:none;');
 
       // Разблокируем скролл
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
 
-      // Ставим видимое состояние (заменяет исходный opacity:0 / translateY(-20px))
-      banner.setAttribute('style', 'opacity:1; transform:none;');
-
-      // 7. Скролл к ценам
-      var section = document.getElementById('pricing');
-      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-      // 9. Через 500ms — анимация цен
-      setTimeout(animatePrices, 500);
+      // 7. Скролл к ценам через window.scrollTo с задержкой 50ms
+      setTimeout(function() {
+        var section = document.getElementById('pricing');
+        if (section) {
+          window.scrollTo({ top: section.offsetTop, behavior: 'smooth' });
+        }
+        // 9. Через 500ms — анимация цен
+        setTimeout(animatePrices, 500);
+      }, 50);
     }
 
     closeBtn.addEventListener('click', function() {
@@ -423,6 +427,10 @@
       triggered = true;
       observer.disconnect();
       if (dwellTimeout) { clearTimeout(dwellTimeout); dwellTimeout = null; }
+      // Блокируем скролл СРАЗУ при срабатывании триггера
+      var scrollbarW = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = scrollbarW + 'px';
       sessionStorage.setItem('discount-revealed', '1');
       revealDiscountAnimated();
     }
