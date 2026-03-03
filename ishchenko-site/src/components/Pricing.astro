@@ -378,12 +378,18 @@
       popup.style.transform = 'translate(-50%, -50%) scale(1)';
     });
 
-    // Закрытие по крестику или через 3 сек
-    const closeTimeout = setTimeout(closePopup, 3000);
-    popup.querySelector('#discount-close').addEventListener('click', () => {
+    // Закрытие по крестику, клику на overlay/popup, или через 4 сек
+    const closeTimeout = setTimeout(closePopup, 4000);
+    let closed = false;
+    function handleClose() {
+      if (closed) return;
+      closed = true;
       clearTimeout(closeTimeout);
       closePopup();
-    });
+    }
+    popup.querySelector('#discount-close').addEventListener('click', handleClose);
+    overlay.addEventListener('click', handleClose);
+    popup.addEventListener('click', handleClose);
 
     function closePopup() {
       clearInterval(timerInterval);
@@ -396,17 +402,32 @@
         overlay.remove();
         // Разблокировать скролл
         document.body.style.overflow = '';
-        // Показать настоящий баннер и скидки
-        showDiscountStatic();
+        // Показать баннер на месте (но НЕ скидочные цены)
+        banner.style.display = '';
+        banner.style.opacity = '1';
+        banner.style.transform = 'none';
         // Скролл к ценам через 50ms
         setTimeout(() => {
           window.scrollTo({
             top: section.offsetTop - 20,
             behavior: 'smooth'
           });
+          // Ждём завершения скролла: 150ms без события scroll
+          let scrollIdleTimer = null;
+          function onScrollEnd() {
+            clearTimeout(scrollIdleTimer);
+            scrollIdleTimer = setTimeout(() => {
+              window.removeEventListener('scroll', onScrollEnd);
+              animatePrices();
+            }, 150);
+          }
+          window.addEventListener('scroll', onScrollEnd);
+          // Fallback: если скролл не произошёл (уже на месте), запустить через 300ms
+          scrollIdleTimer = setTimeout(() => {
+            window.removeEventListener('scroll', onScrollEnd);
+            animatePrices();
+          }, 300);
         }, 50);
-        // Анимация цен через 600ms
-        setTimeout(animatePrices, 600);
       }, 400);
     }
 
@@ -487,7 +508,7 @@
             disc.style.transform = 'translateY(0)';
           });
         }
-      }, i * 200);
+      }, i * 300);
     });
   }
 })();
