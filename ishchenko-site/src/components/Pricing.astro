@@ -277,9 +277,6 @@
     return;
   }
 
-  // Ссылка на overlay — используется в animatePrices для удаления после анимации
-  let activeOverlay = null;
-
   let fired = false;
   let dwellTimer = null;
 
@@ -319,9 +316,6 @@
       transition: 'opacity 0.3s ease'
     });
     document.body.appendChild(overlay);
-    // Блокируем wheel и touch scroll на overlay — удалятся автоматически при overlay.remove()
-    overlay.addEventListener('wheel', (e) => e.preventDefault(), { passive: false });
-    overlay.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
     requestAnimationFrame(() => { overlay.style.opacity = '1'; });
 
     // 2. Создаём КЛОН баннера для показа по центру (не двигаем оригинал)
@@ -375,9 +369,6 @@
     updatePopupTimer();
     const timerInterval = setInterval(updatePopupTimer, 1000);
 
-    // Сохраняем overlay для доступа из animatePrices
-    activeOverlay = overlay;
-
     // Анимировать появление
     requestAnimationFrame(() => {
       popup.style.opacity = '1';
@@ -399,50 +390,25 @@
 
     function closePopup() {
       clearInterval(timerInterval);
-      // Fade out popup
+      // Fade out popup и overlay
       popup.style.opacity = '0';
       popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
-      // Overlay: fade to transparent, но ОСТАЁТСЯ в DOM (блокирует взаимодействие)
       overlay.style.opacity = '0';
-      overlay.style.cursor = 'default';
-      overlay.style.pointerEvents = 'all';
 
-      // После fade out (400ms) — удалить popup, показать баннер, скроллить
+      // После fade out (400ms) — удалить popup и overlay, включить магнит
       setTimeout(() => {
         popup.remove();
-        // overlay НЕ удаляем — он невидимый но блокирует клики/тачи/колёсико
+        overlay.remove();
 
         // Показать баннер на месте (НЕ скидочные цены — они анимируются позже)
         banner.style.display = '';
         banner.style.opacity = '1';
         banner.style.transform = 'none';
 
-        // Плавный скролл к ценам — программный scrollTo работает сквозь overlay
-        window.scrollTo({
-          top: section.offsetTop - 20,
-          behavior: 'smooth'
-        });
-
-        // Ждём завершения скролла: 150ms тишины без scroll-событий
-        let scrollIdleTimer = null;
-        let pricesAnimated = false;
-
-        function onScrollIdle() {
-          if (pricesAnimated) return;
-          pricesAnimated = true;
-          window.removeEventListener('scroll', onScrollEnd);
+        // Магнит тянет к pricing, после settled — анимация цен
+        startScrollMagnet(section, () => {
           animatePrices();
-        }
-
-        function onScrollEnd() {
-          clearTimeout(scrollIdleTimer);
-          scrollIdleTimer = setTimeout(onScrollIdle, 150);
-        }
-
-        window.addEventListener('scroll', onScrollEnd);
-
-        // Fallback: если уже на месте (нет scroll-событий), запустить через 2000ms
-        scrollIdleTimer = setTimeout(onScrollIdle, 2000);
+        });
       }, 400);
     }
 
@@ -465,6 +431,50 @@
         `).join('<div style="font-size:2rem;font-weight:700;line-height:4rem">:</div>');
       }
     }
+  }
+
+  function startScrollMagnet(targetSection, onSettled) {
+    let settled = false;
+    let settledTimer = null;
+
+    function check() {
+      if (settled) return;
+
+      const rect = targetSection.getBoundingClientRect();
+      const targetTop = -20; // небольшой отступ сверху
+
+      // Если секция не у верхнего края экрана — тянем обратно
+      if (Math.abs(rect.top - targetTop) > 50) {
+        window.scrollTo({ top: targetSection.offsetTop - 20, behavior: 'smooth' });
+      }
+
+      // Проверяем: если секция у верхнего края и держится 300ms — считаем settled
+      if (Math.abs(rect.top - targetTop) < 100) {
+        if (!settledTimer) {
+          settledTimer = setTimeout(() => {
+            settled = true;
+            onSettled(); // запускаем анимацию цен
+          }, 300);
+        }
+      } else {
+        clearTimeout(settledTimer);
+        settledTimer = null;
+      }
+
+      if (!settled) {
+        requestAnimationFrame(check);
+      }
+    }
+
+    requestAnimationFrame(check);
+
+    // Безопасный fallback — через 5 секунд всё равно settled
+    setTimeout(() => {
+      if (!settled) {
+        settled = true;
+        onSettled();
+      }
+    }, 5000);
   }
 
   function showDiscountStatic() {
@@ -495,9 +505,7 @@
   }
 
   function animatePrices() {
-    const cards = document.querySelectorAll('[data-price-card]');
-    const lastIndex = cards.length - 1;
-    cards.forEach((card, i) => {
+    document.querySelectorAll('[data-price-card]').forEach((card, i) => {
       setTimeout(() => {
         const orig = card.querySelector('.original-price');
         const disc = card.querySelector('.discount-price');
@@ -524,15 +532,6 @@
             disc.style.opacity = '1';
             disc.style.transform = 'translateY(0)';
           });
-        }
-        // После последней карточки: +400ms (transition) → удалить overlay, полная разблокировка
-        if (i === lastIndex) {
-          setTimeout(() => {
-            if (activeOverlay && activeOverlay.parentNode) {
-              activeOverlay.remove();
-              activeOverlay = null;
-            }
-          }, 400);
         }
       }, i * 300);
     });
