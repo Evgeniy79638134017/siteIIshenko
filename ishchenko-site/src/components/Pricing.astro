@@ -277,22 +277,8 @@
     return;
   }
 
-  // Блокировщики скролла на уровне замыкания
-  const blockWheel = (e) => e.preventDefault();
-  const blockTouch = (e) => e.preventDefault();
-  const blockKeys = (e) => {
-    if ([32, 33, 34, 35, 36, 38, 40].includes(e.keyCode)) e.preventDefault();
-  };
-  function lockScroll() {
-    window.addEventListener('wheel', blockWheel, { passive: false });
-    window.addEventListener('touchmove', blockTouch, { passive: false });
-    window.addEventListener('keydown', blockKeys, { passive: false });
-  }
-  function unlockScroll() {
-    window.removeEventListener('wheel', blockWheel);
-    window.removeEventListener('touchmove', blockTouch);
-    window.removeEventListener('keydown', blockKeys);
-  }
+  // Ссылка на overlay — используется в animatePrices для удаления после анимации
+  let activeOverlay = null;
 
   let fired = false;
   let dwellTimer = null;
@@ -386,10 +372,8 @@
     updatePopupTimer();
     const timerInterval = setInterval(updatePopupTimer, 1000);
 
-    // Блокировка скролла — ТОЛЬКО event blockers, не трогаем body.style
-    // preventDefault на wheel/touchmove/keydown блокирует пользователя,
-    // но НЕ блокирует программный window.scrollTo
-    lockScroll();
+    // Сохраняем overlay для доступа из animatePrices
+    activeOverlay = overlay;
 
     // Анимировать появление
     requestAnimationFrame(() => {
@@ -412,23 +396,25 @@
 
     function closePopup() {
       clearInterval(timerInterval);
-      // Fade out popup и overlay
+      // Fade out popup
       popup.style.opacity = '0';
       popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
+      // Overlay: fade to transparent, но ОСТАЁТСЯ в DOM (блокирует взаимодействие)
       overlay.style.opacity = '0';
+      overlay.style.cursor = 'default';
+      overlay.style.pointerEvents = 'all';
 
-      // После fade out (400ms) — удалить, показать баннер, скроллить
+      // После fade out (400ms) — удалить popup, показать баннер, скроллить
       setTimeout(() => {
         popup.remove();
-        overlay.remove();
+        // overlay НЕ удаляем — он невидимый но блокирует клики/тачи/колёсико
 
         // Показать баннер на месте (НЕ скидочные цены — они анимируются позже)
         banner.style.display = '';
         banner.style.opacity = '1';
         banner.style.transform = 'none';
 
-        // Плавный скролл к ценам — работает потому что мы НЕ трогали body.style
-        // Scroll blockers всё ещё активны — пользователь не может прервать
+        // Плавный скролл к ценам — программный scrollTo работает сквозь overlay
         window.scrollTo({
           top: section.offsetTop - 20,
           behavior: 'smooth'
@@ -452,8 +438,8 @@
 
         window.addEventListener('scroll', onScrollEnd);
 
-        // Fallback: если уже на месте (нет scroll-событий), запустить через 400ms
-        scrollIdleTimer = setTimeout(onScrollIdle, 400);
+        // Fallback: если уже на месте (нет scroll-событий), запустить через 2000ms
+        scrollIdleTimer = setTimeout(onScrollIdle, 2000);
       }, 400);
     }
 
@@ -536,9 +522,14 @@
             disc.style.transform = 'translateY(0)';
           });
         }
-        // После последней карточки: +400ms (transition) → полная разблокировка
+        // После последней карточки: +400ms (transition) → удалить overlay, полная разблокировка
         if (i === lastIndex) {
-          setTimeout(unlockScroll, 400);
+          setTimeout(() => {
+            if (activeOverlay && activeOverlay.parentNode) {
+              activeOverlay.remove();
+              activeOverlay = null;
+            }
+          }, 400);
         }
       }, i * 300);
     });
