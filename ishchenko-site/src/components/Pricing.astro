@@ -369,8 +369,23 @@
     updatePopupTimer();
     const timerInterval = setInterval(updatePopupTimer, 1000);
 
-    // Заблокировать скролл
+    // Жёсткая блокировка скролла
+    const savedScrollY = window.scrollY;
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.width = '100%';
+
+    // Блокировка всех событий скролла
+    function blockWheel(e) { e.preventDefault(); }
+    function blockTouch(e) { e.preventDefault(); }
+    function blockKeys(e) {
+      const keys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
+      if (keys.indexOf(e.keyCode) !== -1) e.preventDefault();
+    }
+    window.addEventListener('wheel', blockWheel, { passive: false });
+    window.addEventListener('touchmove', blockTouch, { passive: false });
+    window.addEventListener('keydown', blockKeys, { passive: false });
 
     // Анимировать появление
     requestAnimationFrame(() => {
@@ -400,13 +415,19 @@
       setTimeout(() => {
         popup.remove();
         overlay.remove();
-        // Разблокировать скролл
-        document.body.style.overflow = '';
         // Показать баннер на месте (но НЕ скидочные цены)
+        // Скролл ВСЁ ЕЩЁ ЗАБЛОКИРОВАН
         banner.style.display = '';
         banner.style.opacity = '1';
         banner.style.transform = 'none';
-        // Скролл к ценам через 50ms
+        // Снять position:fixed, восстановить позицию для программного скролла
+        // Обработчики wheel/touchmove/keydown ОСТАЮТСЯ — пользователь не может мешать
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.overflow = '';
+        document.body.style.width = '';
+        window.scrollTo(0, savedScrollY);
+        // Программный плавный скролл к ценам через 50ms
         setTimeout(() => {
           window.scrollTo({
             top: section.offsetTop - 20,
@@ -419,6 +440,12 @@
             scrollIdleTimer = setTimeout(() => {
               window.removeEventListener('scroll', onScrollEnd);
               animatePrices();
+              // Полная разблокировка после последней анимации цен (+600ms + 400ms)
+              setTimeout(() => {
+                window.removeEventListener('wheel', blockWheel, { passive: false });
+                window.removeEventListener('touchmove', blockTouch, { passive: false });
+                window.removeEventListener('keydown', blockKeys, { passive: false });
+              }, 1000);
             }, 150);
           }
           window.addEventListener('scroll', onScrollEnd);
@@ -426,6 +453,11 @@
           scrollIdleTimer = setTimeout(() => {
             window.removeEventListener('scroll', onScrollEnd);
             animatePrices();
+            setTimeout(() => {
+              window.removeEventListener('wheel', blockWheel, { passive: false });
+              window.removeEventListener('touchmove', blockTouch, { passive: false });
+              window.removeEventListener('keydown', blockKeys, { passive: false });
+            }, 1000);
           }, 300);
         }, 50);
       }, 400);
