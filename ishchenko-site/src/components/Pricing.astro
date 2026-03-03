@@ -386,12 +386,9 @@
     updatePopupTimer();
     const timerInterval = setInterval(updatePopupTimer, 1000);
 
-    // Жёсткая блокировка скролла
-    const savedScrollY = window.scrollY;
-    document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${savedScrollY}px`;
-    document.body.style.width = '100%';
+    // Блокировка скролла — ТОЛЬКО event blockers, не трогаем body.style
+    // preventDefault на wheel/touchmove/keydown блокирует пользователя,
+    // но НЕ блокирует программный window.scrollTo
     lockScroll();
 
     // Анимировать появление
@@ -401,7 +398,6 @@
     });
 
     // Закрытие по крестику, клику на overlay/popup, или через 4 сек
-    const closeTimeout = setTimeout(closePopup, 4000);
     let closed = false;
     function handleClose() {
       if (closed) return;
@@ -409,53 +405,55 @@
       clearTimeout(closeTimeout);
       closePopup();
     }
+    const closeTimeout = setTimeout(handleClose, 4000);
     popup.querySelector('#discount-close').addEventListener('click', handleClose);
     overlay.addEventListener('click', handleClose);
     popup.addEventListener('click', handleClose);
 
     function closePopup() {
       clearInterval(timerInterval);
-      // Убираем popup
+      // Fade out popup и overlay
       popup.style.opacity = '0';
       popup.style.transform = 'translate(-50%, -50%) scale(0.9)';
       overlay.style.opacity = '0';
+
+      // После fade out (400ms) — удалить, показать баннер, скроллить
       setTimeout(() => {
         popup.remove();
         overlay.remove();
-        // Показать баннер на месте (но НЕ скидочные цены)
+
+        // Показать баннер на месте (НЕ скидочные цены — они анимируются позже)
         banner.style.display = '';
         banner.style.opacity = '1';
         banner.style.transform = 'none';
-        // Снять position:fixed, восстановить позицию
-        // Обработчики wheel/touchmove/keydown ОСТАЮТСЯ — пользователь не может мешать
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.overflow = '';
-        document.body.style.width = '';
-        // Мгновенно вернуть позицию (без smooth)
-        window.scrollTo(0, savedScrollY);
-        // Программный плавный скролл к ценам через 50ms
-        setTimeout(() => {
-          window.scrollTo({
-            top: section.offsetTop - 20,
-            behavior: 'smooth'
-          });
-          // Ждём завершения скролла: 150ms без события scroll
-          let scrollIdleTimer = null;
-          function onScrollEnd() {
-            clearTimeout(scrollIdleTimer);
-            scrollIdleTimer = setTimeout(() => {
-              window.removeEventListener('scroll', onScrollEnd);
-              animatePrices();
-            }, 150);
-          }
-          window.addEventListener('scroll', onScrollEnd);
-          // Fallback: если скролл не произошёл (уже на месте), запустить через 300ms
-          scrollIdleTimer = setTimeout(() => {
-            window.removeEventListener('scroll', onScrollEnd);
-            animatePrices();
-          }, 300);
-        }, 50);
+
+        // Плавный скролл к ценам — работает потому что мы НЕ трогали body.style
+        // Scroll blockers всё ещё активны — пользователь не может прервать
+        window.scrollTo({
+          top: section.offsetTop - 20,
+          behavior: 'smooth'
+        });
+
+        // Ждём завершения скролла: 150ms тишины без scroll-событий
+        let scrollIdleTimer = null;
+        let pricesAnimated = false;
+
+        function onScrollIdle() {
+          if (pricesAnimated) return;
+          pricesAnimated = true;
+          window.removeEventListener('scroll', onScrollEnd);
+          animatePrices();
+        }
+
+        function onScrollEnd() {
+          clearTimeout(scrollIdleTimer);
+          scrollIdleTimer = setTimeout(onScrollIdle, 150);
+        }
+
+        window.addEventListener('scroll', onScrollEnd);
+
+        // Fallback: если уже на месте (нет scroll-событий), запустить через 400ms
+        scrollIdleTimer = setTimeout(onScrollIdle, 400);
       }, 400);
     }
 
