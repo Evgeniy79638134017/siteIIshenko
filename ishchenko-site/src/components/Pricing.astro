@@ -277,6 +277,23 @@
     return;
   }
 
+  // Блокировщики скролла на уровне замыкания
+  const blockWheel = (e) => e.preventDefault();
+  const blockTouch = (e) => e.preventDefault();
+  const blockKeys = (e) => {
+    if ([32, 33, 34, 35, 36, 38, 40].includes(e.keyCode)) e.preventDefault();
+  };
+  function lockScroll() {
+    window.addEventListener('wheel', blockWheel, { passive: false });
+    window.addEventListener('touchmove', blockTouch, { passive: false });
+    window.addEventListener('keydown', blockKeys, { passive: false });
+  }
+  function unlockScroll() {
+    window.removeEventListener('wheel', blockWheel);
+    window.removeEventListener('touchmove', blockTouch);
+    window.removeEventListener('keydown', blockKeys);
+  }
+
   let fired = false;
   let dwellTimer = null;
 
@@ -375,17 +392,7 @@
     document.body.style.position = 'fixed';
     document.body.style.top = `-${savedScrollY}px`;
     document.body.style.width = '100%';
-
-    // Блокировка всех событий скролла
-    function blockWheel(e) { e.preventDefault(); }
-    function blockTouch(e) { e.preventDefault(); }
-    function blockKeys(e) {
-      const keys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
-      if (keys.indexOf(e.keyCode) !== -1) e.preventDefault();
-    }
-    window.addEventListener('wheel', blockWheel, { passive: false });
-    window.addEventListener('touchmove', blockTouch, { passive: false });
-    window.addEventListener('keydown', blockKeys, { passive: false });
+    lockScroll();
 
     // Анимировать появление
     requestAnimationFrame(() => {
@@ -416,16 +423,16 @@
         popup.remove();
         overlay.remove();
         // Показать баннер на месте (но НЕ скидочные цены)
-        // Скролл ВСЁ ЕЩЁ ЗАБЛОКИРОВАН
         banner.style.display = '';
         banner.style.opacity = '1';
         banner.style.transform = 'none';
-        // Снять position:fixed, восстановить позицию для программного скролла
+        // Снять position:fixed, восстановить позицию
         // Обработчики wheel/touchmove/keydown ОСТАЮТСЯ — пользователь не может мешать
         document.body.style.position = '';
         document.body.style.top = '';
         document.body.style.overflow = '';
         document.body.style.width = '';
+        // Мгновенно вернуть позицию (без smooth)
         window.scrollTo(0, savedScrollY);
         // Программный плавный скролл к ценам через 50ms
         setTimeout(() => {
@@ -440,12 +447,6 @@
             scrollIdleTimer = setTimeout(() => {
               window.removeEventListener('scroll', onScrollEnd);
               animatePrices();
-              // Полная разблокировка после последней анимации цен (+600ms + 400ms)
-              setTimeout(() => {
-                window.removeEventListener('wheel', blockWheel, { passive: false });
-                window.removeEventListener('touchmove', blockTouch, { passive: false });
-                window.removeEventListener('keydown', blockKeys, { passive: false });
-              }, 1000);
             }, 150);
           }
           window.addEventListener('scroll', onScrollEnd);
@@ -453,11 +454,6 @@
           scrollIdleTimer = setTimeout(() => {
             window.removeEventListener('scroll', onScrollEnd);
             animatePrices();
-            setTimeout(() => {
-              window.removeEventListener('wheel', blockWheel, { passive: false });
-              window.removeEventListener('touchmove', blockTouch, { passive: false });
-              window.removeEventListener('keydown', blockKeys, { passive: false });
-            }, 1000);
           }, 300);
         }, 50);
       }, 400);
@@ -512,7 +508,9 @@
   }
 
   function animatePrices() {
-    document.querySelectorAll('[data-price-card]').forEach((card, i) => {
+    const cards = document.querySelectorAll('[data-price-card]');
+    const lastIndex = cards.length - 1;
+    cards.forEach((card, i) => {
       setTimeout(() => {
         const orig = card.querySelector('.original-price');
         const disc = card.querySelector('.discount-price');
@@ -539,6 +537,10 @@
             disc.style.opacity = '1';
             disc.style.transform = 'translateY(0)';
           });
+        }
+        // После последней карточки: +400ms (transition) → полная разблокировка
+        if (i === lastIndex) {
+          setTimeout(unlockScroll, 400);
         }
       }, i * 300);
     });
