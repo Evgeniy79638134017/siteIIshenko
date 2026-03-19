@@ -545,18 +545,18 @@
 })();
 </script>
 
-<script>
+<script is:inline>
   // Оплата через Продамус
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-pay-product]');
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-pay-product]');
     if (!btn) return;
 
-    const product = btn.dataset.payProduct;
-    const price = btn.dataset.payPrice;
+    var product = btn.dataset.payProduct;
+    var price = btn.dataset.payPrice;
 
     if (typeof payformInit === 'function') {
       payformInit({
-        url: 'https://ishchenko.payform.ru',
+        url: 'ishchenko.payform.ru',
         product: product,
         sum: price,
         currency: 'rub',
@@ -568,7 +568,7 @@
   });
 
   // Слушаем postMessage от виджета Продамуса
-  window.addEventListener('message', (e) => {
+  window.addEventListener('message', function(e) {
     if (e.data && e.data.status === 'success') {
       window.location.href = '/thanks';
     }
