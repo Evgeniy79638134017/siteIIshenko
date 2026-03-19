@@ -114,10 +114,13 @@
           </li>
         </ul>
         <p class="text-xs text-text-muted mb-4">24+ часа живого обучения + 3 мес поддержки</p>
-        <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
-          class="block text-center bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl py-3.5 transition-all duration-300">
+        <button
+          type="button"
+          data-pay-product="Стандарт"
+          data-pay-price="79000"
+          class="w-full text-center bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl py-3.5 transition-all duration-300 cursor-pointer border-none">
           Получить систему
-        </a>
+        </button>
       </div>
 
       <!-- VIP — Рекомендуемый -->
@@ -172,10 +175,13 @@
             Сопровождение до передачи системы
           </li>
         </ul>
-        <a href="https://t.me/Evgen_isch" target="_blank" rel="noopener noreferrer"
-          class="block text-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl py-3.5 transition-all duration-300 shadow-lg shadow-accent/20">
+        <button
+          type="button"
+          data-pay-product="VIP"
+          data-pay-price="129000"
+          class="w-full text-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl py-3.5 transition-all duration-300 shadow-lg shadow-accent/20 cursor-pointer border-none">
           Выбрать тариф
-        </a>
+        </button>
       </div>
 
       <!-- КОРПОРАТИВНЫЙ -->
@@ -537,4 +543,34 @@
     });
   }
 })();
+</script>
+
+<script>
+  // Оплата через Продамус
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-pay-product]');
+    if (!btn) return;
+
+    const product = btn.dataset.payProduct;
+    const price = btn.dataset.payPrice;
+
+    if (typeof payformInit === 'function') {
+      payformInit({
+        url: 'https://ishchenko.payform.ru',
+        product: product,
+        sum: price,
+        currency: 'rub',
+      });
+    } else {
+      // Фоллбэк: открыть страницу оплаты напрямую
+      window.open('https://ishchenko.payform.ru', '_blank');
+    }
+  });
+
+  // Слушаем postMessage от виджета Продамуса
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.status === 'success') {
+      window.location.href = '/thanks';
+    }
+  });
 </script>
