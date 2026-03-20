@@ -116,10 +116,9 @@
         <p class="text-xs text-text-muted mb-4">24+ часа живого обучения + 3 мес поддержки</p>
         <button
           type="button"
-          data-pay-product="Стандарт"
-          data-pay-price="79000"
+          data-prodamusprice="79000"
           class="w-full text-center bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl py-3.5 transition-all duration-300 cursor-pointer border-none">
-          Получить систему
+          Оплатить — 79 000₽
         </button>
       </div>
 
@@ -177,10 +176,9 @@
         </ul>
         <button
           type="button"
-          data-pay-product="VIP"
-          data-pay-price="129000"
+          data-prodamusprice="129000"
           class="w-full text-center bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl py-3.5 transition-all duration-300 shadow-lg shadow-accent/20 cursor-pointer border-none">
-          Выбрать тариф
+          Оплатить — 129 000₽
         </button>
       </div>
 
@@ -543,34 +541,4 @@
     });
   }
 })();
-</script>
-
-<script is:inline>
-  // Оплата через Продамус
-  document.addEventListener('click', function(e) {
-    var btn = e.target.closest('[data-pay-product]');
-    if (!btn) return;
-
-    var product = btn.dataset.payProduct;
-    var price = btn.dataset.payPrice;
-
-    if (typeof payformInit === 'function') {
-      payformInit({
-        url: 'ishchenko.payform.ru',
-        product: product,
-        sum: price,
-        currency: 'rub',
-      });
-    } else {
-      // Фоллбэк: открыть страницу оплаты напрямую
-      window.open('https://ishchenko.payform.ru', '_blank');
-    }
-  });
-
-  // Слушаем postMessage от виджета Продамуса
-  window.addEventListener('message', function(e) {
-    if (e.data && e.data.status === 'success') {
-      window.location.href = '/thanks';
-    }
-  });
 </script>
