@@ -370,13 +370,12 @@
   const priceBlocks = pricingGrid ? pricingGrid.querySelectorAll('.price-block') : [];
 
   // Состояние
-  let modalShown = false;       // модалка уже показывалась
-  let pricesChanged = false;    // цены уже сменились на скидочные
-  let watchTimer = null;        // таймер 20 сек
-  let pricingVisible = false;   // секция на экране
+  let modalShown = false;
+  let pricesChanged = false;
+  let watchTimer = null;
+  let pricingVisible = false;
 
   if (!discountActive) {
-    // Скидка истекла — ничего не делаем, обычные цены
     if (banner) banner.style.display = 'none';
     if (overlay) overlay.style.display = 'none';
   } else {
@@ -389,7 +388,6 @@
       const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-      // Баннер
       const de = document.getElementById('days');
       const he = document.getElementById('hours');
       const me = document.getElementById('minutes');
@@ -399,7 +397,6 @@
       if (me) me.textContent = String(m).padStart(2, '0');
       if (se) se.textContent = String(s).padStart(2, '0');
 
-      // Модалка
       document.querySelectorAll('.modal-days').forEach(el => el.textContent = String(d).padStart(2, '0'));
       document.querySelectorAll('.modal-hours').forEach(el => el.textContent = String(h).padStart(2, '0'));
       document.querySelectorAll('.modal-mins').forEach(el => el.textContent = String(m).padStart(2, '0'));
@@ -412,27 +409,75 @@
     function showModal() {
       if (modalShown || !overlay) return;
       modalShown = true;
-      document.body.style.overflow = 'hidden';
+      stopWatchTimer();
       overlay.classList.remove('hidden');
       void overlay.offsetWidth;
       overlay.classList.add('visible');
     }
 
-    // === Закрытие модалки + магнит к ценам + сразу скидки ===
+    // === Магнит к секции pricing ===
+    function startScrollMagnet(targetSection, onSettled) {
+      let settled = false;
+      let settledTimer = null;
+
+      function check() {
+        if (settled) return;
+
+        const rect = targetSection.getBoundingClientRect();
+        const targetTop = -20;
+
+        // Если секция не у верхнего края — тянем обратно
+        if (Math.abs(rect.top - targetTop) > 50) {
+          window.scrollTo({ top: targetSection.offsetTop - 20, behavior: 'smooth' });
+        }
+
+        // Если секция у верхнего края и держится 300ms — settled
+        if (Math.abs(rect.top - targetTop) < 100) {
+          if (!settledTimer) {
+            settledTimer = setTimeout(() => {
+              settled = true;
+              onSettled();
+            }, 300);
+          }
+        } else {
+          clearTimeout(settledTimer);
+          settledTimer = null;
+        }
+
+        if (!settled) {
+          requestAnimationFrame(check);
+        }
+      }
+
+      requestAnimationFrame(check);
+
+      // Fallback — через 5 секунд всё равно settled
+      setTimeout(() => {
+        if (!settled) {
+          settled = true;
+          onSettled();
+        }
+      }, 5000);
+    }
+
+    // === Закрытие модалки → убираем popup+overlay → баннер → магнит → анимация цен ===
     function closeModal() {
       if (!overlay) return;
       overlay.classList.remove('visible');
-      document.body.style.overflow = '';
       setTimeout(() => {
         overlay.classList.add('hidden');
-        // Магнит — плавный скролл к ценам
+
+        // Показать баннер на месте
+        showBannerOnly();
+
+        // Запустить магнит — когда встанет на место, анимировать цены
         if (pricingSection) {
-          pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        // После модалки — цены меняются сразу (с небольшой паузой на скролл)
-        setTimeout(() => {
+          startScrollMagnet(pricingSection, () => {
+            revealDiscountPrices();
+          });
+        } else {
           revealDiscountPrices();
-        }, 800);
+        }
       }, 400);
     }
 
@@ -452,7 +497,6 @@
     window.addEventListener('scroll', onScrollForModal, { passive: true });
 
     // === Таймер 20 сек: только при первом визите, пока не ушёл вниз ===
-    // Запускается когда цены впервые появляются на экране
     function startWatchTimer() {
       if (pricesChanged || watchTimer || modalShown) return;
       watchTimer = setTimeout(() => {
@@ -469,7 +513,6 @@
       }
     }
 
-    // Отслеживаем видимость секции — таймер только на первом визите
     const pricingObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         pricingVisible = entry.isIntersecting;
@@ -483,7 +526,16 @@
 
     if (pricingGrid) pricingObserver.observe(pricingGrid);
 
-    // === Последовательная смена цен + появление баннера ===
+    // === Показать только баннер (без анимации цен) ===
+    function showBannerOnly() {
+      if (banner) {
+        banner.classList.remove('hidden');
+        void banner.offsetWidth;
+        banner.classList.add('show');
+      }
+    }
+
+    // === Последовательная смена цен (каскад 0, 300, 600ms) ===
     function revealDiscountPrices() {
       if (pricesChanged) return;
       pricesChanged = true;
@@ -498,17 +550,13 @@
             void disc.offsetWidth;
             disc.classList.add('show');
           }
-        }, i * 500); // 0ms, 500ms, 1000ms — по очереди
+        }, i * 300);
       });
 
-      // Баннер появляется после последней цены
+      // Баннер — если ещё не показан (путь через 20 сек таймер)
       setTimeout(() => {
-        if (banner) {
-          banner.classList.remove('hidden');
-          void banner.offsetWidth;
-          banner.classList.add('show');
-        }
-      }, priceBlocks.length * 500 + 300);
+        showBannerOnly();
+      }, priceBlocks.length * 300 + 300);
     }
   }
 </script>
