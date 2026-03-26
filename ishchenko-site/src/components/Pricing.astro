@@ -5,15 +5,12 @@
       <p class="text-center text-text-muted mt-3">Старт — после бесплатной диагностики</p>
     </div>
 
-    <!-- Баннер скидки — начинает скрытым, влетает при скролле -->
-    <div class="max-w-2xl mx-auto mb-10 mt-10" id="discount-banner" style="opacity:0; transform:translateY(-40px); position:sticky; top:0; z-index:30;">
+    <!-- Sticky-баннер скидки (скрыт, появляется после 20 сек просмотра) -->
+    <div class="max-w-2xl mx-auto mb-10 mt-10 hidden" id="discount-banner" style="position:sticky; top:0; z-index:30;">
       <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-primary-dark p-6 md:p-8 shadow-2xl">
-        <!-- Декоративные круги на фоне -->
         <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
         <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full"></div>
-
         <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
-          <!-- Левая часть: текст скидки -->
           <div class="flex-1 text-center md:text-left">
             <div class="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-1.5 mb-3">
               <span class="text-white font-bold text-sm">−10%</span>
@@ -23,8 +20,6 @@
               Скидка до&nbsp;10&nbsp;апреля
             </p>
           </div>
-
-          <!-- Правая часть: таймер -->
           <div class="flex items-center gap-1.5" id="countdown-timer">
             <div class="text-center">
               <div class="bg-black/20 rounded-xl w-14 h-14 md:w-16 md:h-16 flex items-center justify-center">
@@ -58,7 +53,7 @@
       </div>
     </div>
 
-    <div class="mt-12 pt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start max-w-full reveal-group">
+    <div class="mt-12 pt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start max-w-full reveal-group" id="pricing-grid">
 
       <!-- СТАНДАРТ -->
       <div class="relative border border-border rounded-2xl bg-white p-8 flex flex-col min-w-0 reveal-item">
@@ -247,7 +242,73 @@
   </div>
 </section>
 
+<!-- Полноэкранная модалка со скидкой (overlay + popup) -->
+<div id="discount-overlay" class="fixed inset-0 z-[100] hidden">
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" id="discount-overlay-bg"></div>
+  <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+    <div class="relative max-w-lg w-full rounded-2xl bg-gradient-to-br from-primary to-primary-dark p-8 md:p-10 shadow-2xl" id="discount-modal">
+      <!-- Крестик -->
+      <button id="discount-close" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <!-- Декор -->
+      <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
+      <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full"></div>
+      <!-- Контент -->
+      <div class="relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 bg-white/20 rounded-full px-5 py-2 mb-5">
+          <span class="text-white font-bold text-lg">−10%</span>
+          <span class="text-white/80 text-sm">на&nbsp;любой тариф</span>
+        </div>
+        <p class="text-white font-heading font-bold text-2xl md:text-3xl mb-3">
+          Специальная скидка!
+        </p>
+        <p class="text-white/80 text-base mb-6">
+          Только до&nbsp;10&nbsp;апреля — все тарифы со скидкой&nbsp;10%
+        </p>
+        <!-- Таймер в модалке -->
+        <div class="flex items-center justify-center gap-2 mb-8">
+          <div class="text-center">
+            <div class="bg-black/20 rounded-xl w-16 h-16 flex items-center justify-center">
+              <span class="modal-days font-heading font-bold text-3xl text-white">00</span>
+            </div>
+            <span class="text-white/50 text-xs mt-1 block">дн</span>
+          </div>
+          <span class="text-white/30 text-xl font-light mb-4">:</span>
+          <div class="text-center">
+            <div class="bg-black/20 rounded-xl w-16 h-16 flex items-center justify-center">
+              <span class="modal-hours font-heading font-bold text-3xl text-white">00</span>
+            </div>
+            <span class="text-white/50 text-xs mt-1 block">час</span>
+          </div>
+          <span class="text-white/30 text-xl font-light mb-4">:</span>
+          <div class="text-center">
+            <div class="bg-black/20 rounded-xl w-16 h-16 flex items-center justify-center">
+              <span class="modal-mins font-heading font-bold text-3xl text-white">00</span>
+            </div>
+            <span class="text-white/50 text-xs mt-1 block">мин</span>
+          </div>
+          <span class="text-white/30 text-xl font-light mb-4">:</span>
+          <div class="text-center">
+            <div class="bg-black/20 rounded-xl w-16 h-16 flex items-center justify-center">
+              <span class="modal-secs font-heading font-bold text-3xl text-white">00</span>
+            </div>
+            <span class="text-white/50 text-xs mt-1 block">сек</span>
+          </div>
+        </div>
+        <button id="discount-cta" class="bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl py-4 px-8 transition-all duration-300 shadow-lg shadow-accent/30 text-lg cursor-pointer">
+          Смотреть тарифы со скидкой
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <style>
+  .price-block {
+    position: relative;
+    min-height: 70px;
+  }
   .original-price {
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
@@ -255,103 +316,195 @@
     opacity: 0;
     transform: translateY(-10px);
     position: absolute;
+    pointer-events: none;
   }
   .discount-price {
-    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
-  .discount-price.fade-in {
+  .discount-price.show {
     opacity: 1;
     transform: translateY(0);
   }
-  .discount-price.hidden:not(.fade-in) {
-    opacity: 0;
-    transform: translateY(15px);
+  .discount-price.hidden {
+    display: none;
   }
-  .price-block {
-    position: relative;
-    min-height: 70px;
+  #discount-banner {
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #discount-banner.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #discount-overlay {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  #discount-overlay.visible {
+    opacity: 1;
+  }
+  #discount-modal {
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #discount-overlay.visible #discount-modal {
+    transform: scale(1) translateY(0);
   }
 </style>
 
 <script>
   const DEADLINE = new Date('2026-04-10T23:59:59+09:00').getTime();
-  const banner = document.getElementById('discount-banner');
-  const originals = document.querySelectorAll('.original-price');
-  const discounts = document.querySelectorAll('.discount-price');
-  const pricingGrid = document.querySelector('#pricing .reveal-group');
-  let discountRevealed = false;
+  const discountActive = DEADLINE - Date.now() > 0;
 
-  // Проверяем, активна ли скидка
-  const now = Date.now();
-  const discountActive = DEADLINE - now > 0;
+  // Элементы
+  const banner = document.getElementById('discount-banner');
+  const overlay = document.getElementById('discount-overlay');
+  const overlayBg = document.getElementById('discount-overlay-bg');
+  const closeBtn = document.getElementById('discount-close');
+  const ctaBtn = document.getElementById('discount-cta');
+  const pricingSection = document.getElementById('pricing');
+  const pricingGrid = document.getElementById('pricing-grid');
+  const priceBlocks = pricingGrid ? pricingGrid.querySelectorAll('.price-block') : [];
+
+  // Состояние
+  let modalShown = false;       // модалка уже показывалась
+  let pricesChanged = false;    // цены уже сменились на скидочные
+  let watchTimer = null;        // таймер 20 сек
+  let pricingVisible = false;   // секция на экране
 
   if (!discountActive) {
-    // Скидка истекла — скрыть баннер, показать обычные цены
+    // Скидка истекла — ничего не делаем, обычные цены
     if (banner) banner.style.display = 'none';
-    originals.forEach(el => el.classList.remove('hidden'));
-    discounts.forEach(el => el.classList.add('hidden'));
+    if (overlay) overlay.style.display = 'none';
   } else {
-    // Скидка активна — запускаем таймер и scroll-анимацию
-    // Изначально: обычные цены видны, скидочные скрыты, баннер невидим
-    originals.forEach(el => el.classList.remove('hidden'));
-    discounts.forEach(el => el.classList.add('hidden'));
-
-    // Таймер обратного отсчёта
+    // === Таймер обратного отсчёта ===
     function updateCountdown() {
       const diff = DEADLINE - Date.now();
       if (diff <= 0) return;
-
       const d = Math.floor(diff / (1000 * 60 * 60 * 24));
       const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-      const days = document.getElementById('days');
-      const hours = document.getElementById('hours');
-      const minutes = document.getElementById('minutes');
-      const seconds = document.getElementById('seconds');
+      // Баннер
+      const de = document.getElementById('days');
+      const he = document.getElementById('hours');
+      const me = document.getElementById('minutes');
+      const se = document.getElementById('seconds');
+      if (de) de.textContent = String(d).padStart(2, '0');
+      if (he) he.textContent = String(h).padStart(2, '0');
+      if (me) me.textContent = String(m).padStart(2, '0');
+      if (se) se.textContent = String(s).padStart(2, '0');
 
-      if (days) days.textContent = String(d).padStart(2, '0');
-      if (hours) hours.textContent = String(h).padStart(2, '0');
-      if (minutes) minutes.textContent = String(m).padStart(2, '0');
-      if (seconds) seconds.textContent = String(s).padStart(2, '0');
+      // Модалка
+      document.querySelectorAll('.modal-days').forEach(el => el.textContent = String(d).padStart(2, '0'));
+      document.querySelectorAll('.modal-hours').forEach(el => el.textContent = String(h).padStart(2, '0'));
+      document.querySelectorAll('.modal-mins').forEach(el => el.textContent = String(m).padStart(2, '0'));
+      document.querySelectorAll('.modal-secs').forEach(el => el.textContent = String(s).padStart(2, '0'));
     }
-
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Scroll-анимация: когда карточки прокручены на 40%, баннер влетает и цены переключаются
+    // === Показ модалки ===
+    function showModal() {
+      if (modalShown || !overlay) return;
+      modalShown = true;
+      document.body.style.overflow = 'hidden';
+      overlay.classList.remove('hidden');
+      void overlay.offsetWidth;
+      overlay.classList.add('visible');
+    }
+
+    // === Закрытие модалки + магнит к ценам ===
+    function closeModal() {
+      if (!overlay) return;
+      overlay.classList.remove('visible');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        // Магнит — плавный скролл к ценам
+        if (pricingSection) {
+          pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        // Запускаем таймер 20 сек на просмотр цен
+        startWatchTimer();
+      }, 400);
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (ctaBtn) ctaBtn.addEventListener('click', closeModal);
+    if (overlayBg) overlayBg.addEventListener('click', closeModal);
+
+    // === Отслеживание: цены ушли с экрана → показываем модалку ===
     function onScroll() {
-      if (discountRevealed || !pricingGrid) return;
-
+      if (!pricingGrid || modalShown) return;
       const rect = pricingGrid.getBoundingClientRect();
-      const triggerPoint = window.innerHeight * 0.6;
-
-      if (rect.top < triggerPoint) {
-        discountRevealed = true;
-
-        // Баннер влетает сверху и прилипает
-        banner.style.transition = 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
-        banner.style.opacity = '1';
-        banner.style.transform = 'translateY(0)';
-
-        // Цены переключаются с задержкой 400ms
-        setTimeout(() => {
-          originals.forEach(el => el.classList.add('fade-out'));
-          discounts.forEach(el => {
-            el.classList.remove('hidden');
-            // Запускаем reflow для анимации
-            void el.offsetWidth;
-            el.classList.add('fade-in');
-          });
-        }, 400);
-
-        window.removeEventListener('scroll', onScroll);
+      // Цены полностью ушли вверх за экран
+      if (rect.bottom < 0) {
+        showModal();
+        window.removeEventListener('scroll', onScrollForModal);
       }
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    // Проверяем сразу на случай если секция уже видна
-    onScroll();
+    function onScrollForModal() {
+      onScroll();
+    }
+    window.addEventListener('scroll', onScrollForModal, { passive: true });
+
+    // === Отслеживание видимости секции для таймера 20 сек ===
+    function startWatchTimer() {
+      if (pricesChanged || watchTimer) return;
+      watchTimer = setTimeout(() => {
+        if (!pricesChanged) {
+          revealDiscountPrices();
+        }
+      }, 20000);
+    }
+
+    // Если человек уходит с секции — сбрасываем таймер
+    const pricingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        pricingVisible = entry.isIntersecting;
+        if (pricingVisible && modalShown && !pricesChanged) {
+          startWatchTimer();
+        } else if (!pricingVisible && watchTimer && !pricesChanged) {
+          clearTimeout(watchTimer);
+          watchTimer = null;
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (pricingGrid) pricingObserver.observe(pricingGrid);
+
+    // === Последовательная смена цен + появление баннера ===
+    function revealDiscountPrices() {
+      if (pricesChanged) return;
+      pricesChanged = true;
+
+      priceBlocks.forEach((block, i) => {
+        setTimeout(() => {
+          const orig = block.querySelector('.original-price');
+          const disc = block.querySelector('.discount-price');
+          if (orig) orig.classList.add('fade-out');
+          if (disc) {
+            disc.classList.remove('hidden');
+            void disc.offsetWidth;
+            disc.classList.add('show');
+          }
+        }, i * 500); // 0ms, 500ms, 1000ms — по очереди
+      });
+
+      // Баннер появляется после последней цены
+      setTimeout(() => {
+        if (banner) {
+          banner.classList.remove('hidden');
+          void banner.offsetWidth;
+          banner.classList.add('show');
+        }
+      }, priceBlocks.length * 500 + 300);
+    }
   }
 </script>
