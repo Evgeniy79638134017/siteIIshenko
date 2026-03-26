@@ -248,12 +248,12 @@
   <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
     <div class="relative max-w-lg w-full rounded-2xl bg-gradient-to-br from-primary to-primary-dark p-8 md:p-10 shadow-2xl" id="discount-modal">
       <!-- Крестик -->
-      <button id="discount-close" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer">
+      <button id="discount-close" class="absolute top-4 right-4 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors cursor-pointer">
         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
       <!-- Декор -->
-      <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
-      <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full"></div>
+      <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full pointer-events-none"></div>
+      <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full pointer-events-none"></div>
       <!-- Контент -->
       <div class="relative z-10 text-center">
         <div class="inline-flex items-center gap-2 bg-white/20 rounded-full px-5 py-2 mb-5">
@@ -418,7 +418,7 @@
       overlay.classList.add('visible');
     }
 
-    // === Закрытие модалки + магнит к ценам ===
+    // === Закрытие модалки + магнит к ценам + сразу скидки ===
     function closeModal() {
       if (!overlay) return;
       overlay.classList.remove('visible');
@@ -429,8 +429,10 @@
         if (pricingSection) {
           pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-        // Запускаем таймер 20 сек на просмотр цен
-        startWatchTimer();
+        // После модалки — цены меняются сразу (с небольшой паузой на скролл)
+        setTimeout(() => {
+          revealDiscountPrices();
+        }, 800);
       }, 400);
     }
 
@@ -439,40 +441,42 @@
     if (overlayBg) overlayBg.addEventListener('click', closeModal);
 
     // === Отслеживание: цены ушли с экрана → показываем модалку ===
-    function onScroll() {
+    function onScrollForModal() {
       if (!pricingGrid || modalShown) return;
       const rect = pricingGrid.getBoundingClientRect();
-      // Цены полностью ушли вверх за экран
       if (rect.bottom < 0) {
         showModal();
         window.removeEventListener('scroll', onScrollForModal);
       }
     }
-
-    function onScrollForModal() {
-      onScroll();
-    }
     window.addEventListener('scroll', onScrollForModal, { passive: true });
 
-    // === Отслеживание видимости секции для таймера 20 сек ===
+    // === Таймер 20 сек: только при первом визите, пока не ушёл вниз ===
+    // Запускается когда цены впервые появляются на экране
     function startWatchTimer() {
-      if (pricesChanged || watchTimer) return;
+      if (pricesChanged || watchTimer || modalShown) return;
       watchTimer = setTimeout(() => {
-        if (!pricesChanged) {
+        if (!pricesChanged && !modalShown) {
           revealDiscountPrices();
         }
       }, 20000);
     }
 
-    // Если человек уходит с секции — сбрасываем таймер
+    function stopWatchTimer() {
+      if (watchTimer) {
+        clearTimeout(watchTimer);
+        watchTimer = null;
+      }
+    }
+
+    // Отслеживаем видимость секции — таймер только на первом визите
     const pricingObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         pricingVisible = entry.isIntersecting;
-        if (pricingVisible && modalShown && !pricesChanged) {
+        if (pricingVisible && !modalShown && !pricesChanged) {
           startWatchTimer();
-        } else if (!pricingVisible && watchTimer && !pricesChanged) {
-          clearTimeout(watchTimer);
-          watchTimer = null;
+        } else if (!pricingVisible && !pricesChanged) {
+          stopWatchTimer();
         }
       });
     }, { threshold: 0.3 });
