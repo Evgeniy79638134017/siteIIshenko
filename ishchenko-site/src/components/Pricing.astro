@@ -5,9 +5,9 @@
       <p class="text-center text-text-muted mt-3">Старт — после бесплатной диагностики</p>
     </div>
 
-    <!-- Баннер скидки -->
-    <div class="max-w-2xl mx-auto mb-10 mt-10 reveal" id="discount-banner">
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-primary-dark p-6 md:p-8">
+    <!-- Баннер скидки — начинает скрытым, влетает при скролле -->
+    <div class="max-w-2xl mx-auto mb-10 mt-10" id="discount-banner" style="opacity:0; transform:translateY(-40px); position:sticky; top:0; z-index:30;">
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-primary-dark p-6 md:p-8 shadow-2xl">
         <!-- Декоративные круги на фоне -->
         <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
         <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full"></div>
@@ -68,11 +68,11 @@
         <h3 class="font-heading text-2xl font-bold text-text">Стандарт</h3>
         <p class="text-sm text-text-muted mt-1 mb-6">Полное сопровождение</p>
         <div class="mb-6 price-block">
-          <div class="original-price hidden">
+          <div class="original-price">
             <span class="font-heading text-4xl font-bold text-text">99 000</span>
             <span class="text-lg text-text-muted font-normal ml-1">₽</span>
           </div>
-          <div class="discount-price">
+          <div class="discount-price hidden">
             <span class="text-lg text-text-muted line-through font-normal">99 000 ₽</span>
             <div class="flex items-baseline gap-2">
               <span class="font-heading text-4xl font-bold text-accent">89 100</span>
@@ -134,11 +134,11 @@
         <h3 class="font-heading text-2xl font-bold text-text">VIP</h3>
         <p class="text-sm text-text-muted mt-1 mb-6">Результат «под ключ»</p>
         <div class="mb-6 price-block">
-          <div class="original-price hidden">
+          <div class="original-price">
             <span class="font-heading text-4xl font-bold text-text">149 000</span>
             <span class="text-lg text-text-muted font-normal ml-1">₽</span>
           </div>
-          <div class="discount-price">
+          <div class="discount-price hidden">
             <span class="text-lg text-text-muted line-through font-normal">149 000 ₽</span>
             <div class="flex items-baseline gap-2">
               <span class="font-heading text-4xl font-bold text-accent">134 100</span>
@@ -190,11 +190,11 @@
         <h3 class="font-heading text-2xl font-bold text-text">Корпоративный</h3>
         <p class="text-sm text-text-muted mt-1 mb-6">Глубокое внедрение</p>
         <div class="mb-6 price-block">
-          <div class="original-price hidden">
+          <div class="original-price">
             <span class="font-heading text-4xl font-bold text-text">219 000</span>
             <span class="text-lg text-text-muted font-normal ml-1">₽</span>
           </div>
-          <div class="discount-price">
+          <div class="discount-price hidden">
             <span class="text-lg text-text-muted line-through font-normal">219 000 ₽</span>
             <div class="flex items-baseline gap-2">
               <span class="font-heading text-4xl font-bold text-accent">197 100</span>
@@ -247,45 +247,111 @@
   </div>
 </section>
 
+<style>
+  .original-price {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .original-price.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+    position: absolute;
+  }
+  .discount-price {
+    transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+  }
+  .discount-price.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .discount-price.hidden:not(.fade-in) {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  .price-block {
+    position: relative;
+    min-height: 70px;
+  }
+</style>
+
 <script>
   const DEADLINE = new Date('2026-04-10T23:59:59+09:00').getTime();
+  const banner = document.getElementById('discount-banner');
+  const originals = document.querySelectorAll('.original-price');
+  const discounts = document.querySelectorAll('.discount-price');
+  const pricingGrid = document.querySelector('#pricing .reveal-group');
+  let discountRevealed = false;
 
-  function updateCountdown() {
-    const now = Date.now();
-    const diff = DEADLINE - now;
-    const banner = document.getElementById('discount-banner');
-    const originals = document.querySelectorAll('.original-price');
-    const discounts = document.querySelectorAll('.discount-price');
+  // Проверяем, активна ли скидка
+  const now = Date.now();
+  const discountActive = DEADLINE - now > 0;
 
-    if (diff <= 0) {
-      // Скидка истекла — скрыть баннер, показать обычные цены
-      if (banner) banner.style.display = 'none';
-      originals.forEach(el => el.classList.remove('hidden'));
-      discounts.forEach(el => el.classList.add('hidden'));
-      return;
+  if (!discountActive) {
+    // Скидка истекла — скрыть баннер, показать обычные цены
+    if (banner) banner.style.display = 'none';
+    originals.forEach(el => el.classList.remove('hidden'));
+    discounts.forEach(el => el.classList.add('hidden'));
+  } else {
+    // Скидка активна — запускаем таймер и scroll-анимацию
+    // Изначально: обычные цены видны, скидочные скрыты, баннер невидим
+    originals.forEach(el => el.classList.remove('hidden'));
+    discounts.forEach(el => el.classList.add('hidden'));
+
+    // Таймер обратного отсчёта
+    function updateCountdown() {
+      const diff = DEADLINE - Date.now();
+      if (diff <= 0) return;
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      const days = document.getElementById('days');
+      const hours = document.getElementById('hours');
+      const minutes = document.getElementById('minutes');
+      const seconds = document.getElementById('seconds');
+
+      if (days) days.textContent = String(d).padStart(2, '0');
+      if (hours) hours.textContent = String(h).padStart(2, '0');
+      if (minutes) minutes.textContent = String(m).padStart(2, '0');
+      if (seconds) seconds.textContent = String(s).padStart(2, '0');
     }
 
-    // Скидка активна — показать баннер и скидочные цены
-    if (banner) banner.style.display = 'block';
-    originals.forEach(el => el.classList.add('hidden'));
-    discounts.forEach(el => el.classList.remove('hidden'));
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((diff % (1000 * 60)) / 1000);
+    // Scroll-анимация: когда карточки прокручены на 40%, баннер влетает и цены переключаются
+    function onScroll() {
+      if (discountRevealed || !pricingGrid) return;
 
-    const days = document.getElementById('days');
-    const hours = document.getElementById('hours');
-    const minutes = document.getElementById('minutes');
-    const seconds = document.getElementById('seconds');
+      const rect = pricingGrid.getBoundingClientRect();
+      const triggerPoint = window.innerHeight * 0.6;
 
-    if (days) days.textContent = String(d).padStart(2, '0');
-    if (hours) hours.textContent = String(h).padStart(2, '0');
-    if (minutes) minutes.textContent = String(m).padStart(2, '0');
-    if (seconds) seconds.textContent = String(s).padStart(2, '0');
+      if (rect.top < triggerPoint) {
+        discountRevealed = true;
+
+        // Баннер влетает сверху и прилипает
+        banner.style.transition = 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+        banner.style.opacity = '1';
+        banner.style.transform = 'translateY(0)';
+
+        // Цены переключаются с задержкой 400ms
+        setTimeout(() => {
+          originals.forEach(el => el.classList.add('fade-out'));
+          discounts.forEach(el => {
+            el.classList.remove('hidden');
+            // Запускаем reflow для анимации
+            void el.offsetWidth;
+            el.classList.add('fade-in');
+          });
+        }, 400);
+
+        window.removeEventListener('scroll', onScroll);
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Проверяем сразу на случай если секция уже видна
+    onScroll();
   }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
 </script>
