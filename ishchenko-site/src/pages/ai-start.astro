@@ -263,6 +263,94 @@ const stages = [
         </li>
       </ol>
 
+      <!-- Настройка пользовательского DNS для AdGuard -->
+      <div class="mt-8 rounded-2xl bg-primary/5 border border-primary/20 px-5 py-5 md:px-6 md:py-6 reveal">
+        <h4 class="font-heading font-bold text-base md:text-lg text-text">
+          Если AdGuard VPN не&nbsp;подключается&nbsp;— добавьте пользовательский DNS
+        </h4>
+        <p class="text-text-muted text-sm md:text-base mt-2 leading-relaxed">
+          В&nbsp;некоторых сетях AdGuard без&nbsp;кастомного DNS работает нестабильно. Настройка делается за&nbsp;минуту:
+        </p>
+        <ol class="mt-4 space-y-2 text-text text-sm md:text-base">
+          <li><span class="font-semibold">1.</span> Откройте <span class="font-semibold">Настройки → Настройки приложения → DNS-серверы</span></li>
+          <li><span class="font-semibold">2.</span> Нажмите <span class="font-semibold">«Добавить DNS-сервер»</span></li>
+          <li><span class="font-semibold">3.</span> Вставьте значения ниже, сохраните и&nbsp;выберите добавленный сервер</li>
+        </ol>
+
+        <div class="mt-5 space-y-3">
+          <!-- Имя -->
+          <div class="rounded-xl bg-bg border border-border px-4 py-3 md:px-5 md:py-4 flex items-center gap-3">
+            <div class="min-w-0 flex-1">
+              <p class="text-text-muted text-[11px] md:text-xs font-semibold uppercase tracking-wider">Имя</p>
+              <code class="block font-mono text-text text-sm md:text-base mt-1 select-all break-all" id="adguard-dns-name">AdguardvpnQuiq</code>
+            </div>
+            <button
+              type="button"
+              data-copy-target="adguard-dns-name"
+              class="copy-dns-btn shrink-0 inline-flex items-center gap-1.5 bg-primary text-white hover:bg-primary-light rounded-lg px-3 py-2 text-xs md:text-sm font-semibold transition-colors cursor-pointer"
+              aria-label="Скопировать имя"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9.75a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"/></svg>
+              <span class="copy-label">Скопировать</span>
+            </button>
+          </div>
+
+          <!-- URL -->
+          <div class="rounded-xl bg-bg border border-border px-4 py-3 md:px-5 md:py-4 flex items-center gap-3">
+            <div class="min-w-0 flex-1">
+              <p class="text-text-muted text-[11px] md:text-xs font-semibold uppercase tracking-wider">URL</p>
+              <code class="block font-mono text-text text-sm md:text-base mt-1 select-all break-all" id="adguard-dns-url">https://dns.adguard-dns.com/dns-query</code>
+            </div>
+            <button
+              type="button"
+              data-copy-target="adguard-dns-url"
+              class="copy-dns-btn shrink-0 inline-flex items-center gap-1.5 bg-primary text-white hover:bg-primary-light rounded-lg px-3 py-2 text-xs md:text-sm font-semibold transition-colors cursor-pointer"
+              aria-label="Скопировать URL"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9.75a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"/></svg>
+              <span class="copy-label">Скопировать</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <script is:inline>
+        document.querySelectorAll('.copy-dns-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var targetId = btn.getAttribute('data-copy-target');
+            var target = document.getElementById(targetId);
+            if (!target) return;
+            var text = target.textContent.trim();
+            var label = btn.querySelector('.copy-label');
+            var done = function() {
+              if (!label) return;
+              var original = label.textContent;
+              label.textContent = 'Скопировано!';
+              setTimeout(function() { label.textContent = original; }, 1500);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(text).then(done).catch(function() {
+                var range = document.createRange();
+                range.selectNodeContents(target);
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+                try { document.execCommand('copy'); done(); } catch (e) {}
+                sel.removeAllRanges();
+              });
+            } else {
+              var range = document.createRange();
+              range.selectNodeContents(target);
+              var sel = window.getSelection();
+              sel.removeAllRanges();
+              sel.addRange(range);
+              try { document.execCommand('copy'); done(); } catch (e) {}
+              sel.removeAllRanges();
+            }
+          });
+        });
+      </script>
+
       <!-- Типичные проблемы -->
       <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
         Типичные проблемы и&nbsp;решения
