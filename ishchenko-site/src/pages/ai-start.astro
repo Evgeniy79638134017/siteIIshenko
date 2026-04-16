@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const stages = [
+  { n: 1, name: 'VPN', why: 'Обход геоблокировок OpenAI, Anthropic, Midjourney и других зарубежных сервисов' },
+  { n: 2, name: 'SMS-верификация', why: 'Регистрация аккаунтов, требующих иностранный номер телефона' },
+  { n: 3, name: 'Оплата', why: 'Покупка подписок на ChatGPT Plus, Claude Pro, Midjourney с зарубежных карт' },
+  { n: 4, name: 'Claude Desktop', why: 'Основной рабочий инструмент: проекты, артефакты, длинный контекст' },
+];
+---
+<BaseLayout
+  title="Как войти в нейросети в 2026 году"
+  description="Пошаговое руководство: VPN, SMS-верификация, оплата зарубежных сервисов, Claude Desktop"
+>
+  <!-- Hero -->
+  <section class="bg-bg-alt py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 mb-5 reveal">
+        <span class="text-accent font-semibold text-xs md:text-sm">Апрель 2026 • Версия 2.0</span>
+      </div>
+      <h1 class="font-heading font-bold text-text reveal" style="font-size: clamp(2rem, 4vw, 3rem);">
+        Как&nbsp;войти в&nbsp;нейросети сегодня
+      </h1>
+      <p class="text-text-muted text-lg mt-4 reveal">
+        Пошаговое руководство для&nbsp;новичков: VPN, верификация, оплата, Claude&nbsp;Desktop
+      </p>
+    </div>
+  </section>
+
+  <!-- Введение -->
+  <section class="bg-bg py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading font-bold text-2xl md:text-3xl text-text reveal">Введение</h2>
+      <div class="mt-6 space-y-5 reveal">
+        <p class="text-text text-base md:text-lg leading-relaxed">
+          Нейросети — это&nbsp;уже не&nbsp;будущее, а&nbsp;настоящее. ChatGPT, Claude, Midjourney меняют то, как&nbsp;мы&nbsp;работаем. Но&nbsp;для&nbsp;пользователей из&nbsp;России доступ сопряжён со&nbsp;сложностями.
+        </p>
+        <p class="text-text text-base md:text-lg leading-relaxed">
+          Это руководство основано на&nbsp;реальном опыте команды ИИщенко&nbsp;LAB.
+        </p>
+      </div>
+
+      <!-- Таблица 4 этапов -->
+      <div class="mt-10 overflow-hidden rounded-2xl border border-border reveal">
+        <table class="w-full text-left">
+          <thead class="bg-bg-alt">
+            <tr>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base w-12 md:w-16">№</th>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">Этап</th>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">Зачем нужен</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stages.map((s, i) => (
+              <tr class={i < stages.length - 1 ? 'border-b border-border' : ''}>
+                <td class="px-4 md:px-6 py-3 md:py-4 font-heading font-bold text-primary text-base md:text-lg align-top">{s.n}</td>
+                <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top whitespace-nowrap">{s.name}</td>
+                <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base leading-relaxed">{s.why}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Раздел 1. VPN -->
+  <section class="bg-bg-alt py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading font-bold text-2xl md:text-3xl text-text reveal">
+        Раздел&nbsp;1. VPN&nbsp;— обход геоблокировок
+      </h2>
+      <!-- Контент из Промпта 2 -->
+    </div>
+  </section>
+
+  <!-- Раздел 2. SMS-верификация -->
+  <section class="bg-bg py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading font-bold text-2xl md:text-3xl text-text reveal">
+        Раздел&nbsp;2. SMS-верификация
+      </h2>
+      <!-- Контент из Промпта 2 -->
+    </div>
+  </section>
+
+  <!-- Раздел 3. Оплата -->
+  <section class="bg-bg-alt py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading font-bold text-2xl md:text-3xl text-text reveal">
+        Раздел&nbsp;3. Оплата зарубежных сервисов
+      </h2>
+      <!-- Контент из Промпта 2 -->
+    </div>
+  </section>
+
+  <!-- Раздел 4. Claude Desktop -->
+  <section class="bg-bg py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading font-bold text-2xl md:text-3xl text-text reveal">
+        Раздел&nbsp;4. Claude&nbsp;Desktop&nbsp;— основной инструмент
+      </h2>
+      <!-- Контент из Промпта 2 -->
+    </div>
+  </section>
+
+  <!-- Финальный CTA -->
+  <section class="bg-bg-alt py-16 md:py-20">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-heading font-bold text-2xl md:text-3xl text-text reveal">
+        Нужна помощь с&nbsp;настройкой?
+      </h2>
+      <p class="text-text-muted text-base md:text-lg mt-4 leading-relaxed reveal">
+        На&nbsp;тарифах «Стандарт» и&nbsp;«VIP» Евгений лично помогает с&nbsp;регистрацией Claude&nbsp;AI, VPN и&nbsp;оплатой.
+      </p>
+      <a
+        href="/contacts"
+        class="inline-block mt-8 bg-accent text-white px-8 py-3 rounded-xl font-bold hover:bg-accent-hover transition-all reveal"
+      >
+        Записаться на&nbsp;диагностику
+      </a>
+    </div>
+  </section>
+</BaseLayout>
