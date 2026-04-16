@@ -830,6 +830,113 @@ const stages = [
           </tbody>
         </table>
       </div>
+
+      <!-- Cowork / Hyper-V -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Проблема Cowork на&nbsp;Windows&nbsp;Home (Hyper-V)
+      </h3>
+      <p class="text-text text-base md:text-lg leading-relaxed mt-4 reveal">
+        Cowork&nbsp;— это продвинутый режим Claude&nbsp;Desktop, который позволяет автоматизировать работу с&nbsp;файлами, создавать документы, презентации и&nbsp;даже запускать код. Он&nbsp;работает внутри виртуальной машины Linux через технологию Hyper-V.
+      </p>
+
+      <!-- Оранжевый callout: распространённая проблема -->
+      <div class="mt-6 flex gap-3 rounded-xl bg-orange-50 border border-orange-400 px-4 py-4 md:px-5 md:py-5 reveal">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-orange-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+        </svg>
+        <div>
+          <p class="font-heading font-bold text-orange-900 text-sm md:text-base">
+            Распространённая проблема: зависает на&nbsp;«Setting&nbsp;up&nbsp;workspace»
+          </p>
+          <p class="text-orange-900 text-sm md:text-base leading-relaxed mt-1.5">
+            При первом запуске Cowork может зависнуть на&nbsp;экране «Setting&nbsp;up&nbsp;Claude's&nbsp;workspace» и&nbsp;не&nbsp;двигаться часами. Главная причина&nbsp;— Windows&nbsp;Home не&nbsp;поддерживает Hyper-V, а&nbsp;без&nbsp;него Cowork не&nbsp;может запустить виртуальную машину. На&nbsp;GitHub&nbsp;Anthropic по&nbsp;этой теме 60+ баг-репортов.
+          </p>
+        </div>
+      </div>
+
+      <!-- Как проверить -->
+      <h4 class="font-heading font-bold text-lg md:text-xl text-text mt-10 reveal">
+        Как проверить
+      </h4>
+      <p class="text-text text-sm md:text-base leading-relaxed mt-3 reveal">
+        Откройте PowerShell (Win&nbsp;+&nbsp;X&nbsp;→ Windows&nbsp;PowerShell) и&nbsp;выполните команду:
+      </p>
+      <pre class="mt-3 overflow-x-auto rounded-lg bg-gray-900 text-gray-100 p-4 reveal"><code class="font-mono text-sm md:text-base">Get-Service vmms</code></pre>
+      <p class="text-text text-sm md:text-base leading-relaxed mt-3 reveal">
+        Если служба не&nbsp;найдена&nbsp;— значит, у&nbsp;вас Windows&nbsp;Home без&nbsp;Hyper-V.
+      </p>
+
+      <!-- Решение -->
+      <h4 class="font-heading font-bold text-lg md:text-xl text-text mt-10 reveal">
+        Решение: установка Hyper-V на&nbsp;Windows&nbsp;Home
+      </h4>
+      <p class="text-text text-sm md:text-base leading-relaxed mt-3 reveal">
+        Есть неофициальный способ включить Hyper-V на&nbsp;Windows&nbsp;Home. Запустите специальный bat-файл от&nbsp;имени администратора.
+      </p>
+
+      <a
+        href="https://github.com/Evgeniy79638134017/vpnexefile/releases/download/1.0.0/hyper-v-fix.bat"
+        target="_blank"
+        rel="noopener"
+        download
+        class="mt-6 inline-flex items-center gap-2.5 bg-accent text-white px-6 md:px-7 py-3 md:py-3.5 rounded-xl font-bold text-sm md:text-base hover:bg-accent-hover transition-all reveal"
+      >
+        <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+        </svg>
+        Скачать hyper-v-fix.bat
+      </a>
+
+      <ol class="mt-8 space-y-3 reveal">
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">1</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Скачайте файл hyper-v-fix.bat по&nbsp;кнопке выше</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">2</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Правый клик на&nbsp;файл → «Запуск от&nbsp;имени администратора»</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">3</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Дождитесь завершения установки (несколько минут)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">4</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Перезагрузите компьютер</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">5</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Проверьте в&nbsp;PowerShell: <code class="font-mono bg-gray-100 text-text px-1.5 py-0.5 rounded">Get-Service vmms</code>. Если служба найдена&nbsp;— запустите Cowork заново</span>
+        </li>
+      </ol>
+
+      <!-- Раскрывашка: содержимое bat -->
+      <details class="group mt-8 rounded-2xl border border-border bg-bg reveal">
+        <summary class="cursor-pointer select-none list-none px-5 py-4 md:px-6 md:py-5 flex items-center gap-2 font-heading font-semibold text-text text-sm md:text-base">
+          <svg class="w-4 h-4 shrink-0 text-text-muted transition-transform duration-200 group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+          </svg>
+          Содержимое файла hyper-v-fix.bat
+        </summary>
+        <div class="px-5 pb-5 md:px-6 md:pb-6">
+          <pre class="overflow-x-auto rounded-lg bg-gray-900 text-gray-100 p-4"><code class="font-mono text-xs md:text-sm whitespace-pre">{`pushd "%~dp0"
+dir /b %SystemRoot%\\servicing\\Packages\\*Hyper-V*.mum >hyper-v.txt
+for /f %%i in ('findstr /i . hyper-v.txt 2^>nul') do dism /online /add-package:"%SystemRoot%\\servicing\\Packages\\%%i"
+del hyper-v.txt
+Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL
+pause`}</code></pre>
+        </div>
+      </details>
+
+      <!-- Серый callout: если не помогло -->
+      <div class="mt-8 flex gap-3 rounded-xl bg-gray-50 border border-gray-300 px-4 py-4 md:px-5 md:py-5 reveal">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-gray-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
+        </svg>
+        <p class="text-gray-800 text-sm md:text-base leading-relaxed">
+          <span class="font-bold">Если не&nbsp;помогло:</span> на&nbsp;некоторых версиях Windows&nbsp;Home Hyper-V включить не&nbsp;удастся. В&nbsp;этом случае используйте Cowork через&nbsp;браузер на&nbsp;claude.ai&nbsp;— он&nbsp;работает без&nbsp;виртуальной машины. Либо обновите Windows до&nbsp;редакции Pro.
+        </p>
+      </div>
     </div>
   </section>
 
