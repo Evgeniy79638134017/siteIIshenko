@@ -551,7 +551,193 @@ const stages = [
       <h2 class="font-heading font-bold text-2xl md:text-3xl text-text reveal">
         Раздел&nbsp;4. Claude&nbsp;Desktop&nbsp;— основной инструмент
       </h2>
-      <!-- Контент из Промпта 2 -->
+
+      <p class="text-text text-base md:text-lg leading-relaxed mt-6 reveal">
+        Настольное приложение от&nbsp;Anthropic с&nbsp;доступом к&nbsp;моделям Claude. Поддерживает работу с&nbsp;локальными файлами, MCP-серверы, встроенный редактор кода и&nbsp;терминал. Работает на&nbsp;macOS и&nbsp;Windows.
+      </p>
+
+      <!-- КРАСНЫЙ callout — критически важно -->
+      <div class="mt-8 rounded-2xl bg-red-50 border-2 border-red-500 px-5 py-5 md:px-6 md:py-6 shadow-lg shadow-red-500/10 reveal">
+        <div class="flex gap-3 md:gap-4">
+          <div class="shrink-0 w-10 h-10 md:w-11 md:h-11 rounded-full bg-red-500 flex items-center justify-center">
+            <svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-heading font-bold text-red-700 text-base md:text-lg tracking-wide uppercase">
+              Критически важно: не&nbsp;оплачивайте сразу после регистрации!
+            </p>
+            <p class="text-red-900 text-sm md:text-base leading-relaxed mt-2">
+              После создания аккаунта попользуйтесь бесплатной версией 1–2&nbsp;дня, и&nbsp;только потом оплачивайте&nbsp;Pro. Иначе аккаунт может улететь в&nbsp;бан. У&nbsp;нас уже два аккаунта заблокировали именно из-за этого.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ОРАНЖЕВЫЙ callout — ограничение устройств -->
+      <div class="mt-6 flex gap-3 rounded-xl bg-orange-50 border border-orange-400 px-4 py-4 md:px-5 md:py-5 reveal">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-orange-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+        </svg>
+        <p class="text-orange-900 text-sm md:text-base leading-relaxed">
+          <span class="font-bold">Ограничение по&nbsp;устройствам:</span> не&nbsp;используйте один аккаунт на&nbsp;более чем 5&nbsp;устройствах&nbsp;— заблокируют. Лучше завести несколько аккаунтов.
+        </p>
+      </div>
+
+      <!-- Требования -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Требования к&nbsp;компьютеру
+      </h3>
+      <p class="text-text text-base md:text-lg leading-relaxed mt-4 reveal">
+        Нужен достаточно новый компьютер. На&nbsp;старых ноутбуках приложение будет тормозить, вылетать и&nbsp;работать некорректно.
+      </p>
+
+      <!-- Установка и настройка -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Установка и&nbsp;настройка
+      </h3>
+      <ol class="mt-6 space-y-3 reveal">
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">1</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Скачайте приложение с&nbsp;claude.com/download (через VPN!)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">2</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Установите и&nbsp;войдите в&nbsp;аккаунт (Google или&nbsp;e-mail)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">3</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Установите Node.js&nbsp;— нужен для&nbsp;MCP-серверов и&nbsp;коннекторов</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">4</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Установите расширение «Claude&nbsp;in&nbsp;Chrome»&nbsp;— Claude сможет сам заходить в&nbsp;интернет</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">5</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Задайте первую задачу и&nbsp;дождитесь скачивания workflow (не&nbsp;давайте ПК уходить в&nbsp;сон!)</span>
+        </li>
+      </ol>
+
+      <!-- Серый callout — Windows -->
+      <div class="mt-8 flex gap-3 rounded-xl bg-gray-50 border border-gray-300 px-4 py-4 md:px-5 md:py-5 reveal">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-gray-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        <p class="text-gray-800 text-sm md:text-base leading-relaxed">
+          <span class="font-bold">Нюансы для&nbsp;Windows:</span> Claude&nbsp;Desktop изначально создавался под&nbsp;Linux. Могут быть косяки&nbsp;— некорректное отображение, ошибки. Включите режим разработчика (Settings&nbsp;→ For&nbsp;developers).
+        </p>
+      </div>
+
+      <!-- Типичные проблемы -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Типичные проблемы и&nbsp;решения
+      </h3>
+
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border reveal">
+        <table class="w-full min-w-[560px] text-left">
+          <thead class="bg-bg-alt">
+            <tr>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base w-2/5">Проблема</th>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">Решение</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Аккаунт забанили после оплаты</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Попользуйтесь бесплатно 1–2&nbsp;дня перед&nbsp;Pro</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Аккаунт заблокирован (5+ устройств)</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Заведите отдельные аккаунты</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Тормозит и&nbsp;вылетает</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Нужен более мощный компьютер</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Ошибки на&nbsp;Windows</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Включите режим разработчика, обновите приложение</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Workflow не&nbsp;скачивается</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Лучше VPN, не&nbsp;давайте ПК уходить в&nbsp;сон</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">MCP-серверы не&nbsp;работают</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Установите Node.js, используйте /doctor</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Что даёт Claude Pro -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Что даёт Claude&nbsp;Pro ($20/мес.)
+      </h3>
+      <ul class="mt-6 space-y-3 reveal">
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+          <span class="text-text text-sm md:text-base leading-relaxed">В&nbsp;5&nbsp;раз больше запросов в&nbsp;пиковые часы</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+          <span class="text-text text-sm md:text-base leading-relaxed">Неограниченные проекты (бесплатно&nbsp;— только&nbsp;5)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+          <span class="text-text text-sm md:text-base leading-relaxed">Доступ к&nbsp;Claude&nbsp;Code в&nbsp;терминале</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+          <span class="text-text text-sm md:text-base leading-relaxed">Интеграция с&nbsp;Google&nbsp;Workspace и&nbsp;MCP-коннекторы</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+          <span class="text-text text-sm md:text-base leading-relaxed">Расширенные модели рассуждений</span>
+        </li>
+      </ul>
+
+      <!-- Что установить дополнительно -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Что установить дополнительно
+      </h3>
+
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border reveal">
+        <table class="w-full min-w-[600px] text-left">
+          <thead class="bg-bg-alt">
+            <tr>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">Программа</th>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">Зачем</th>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">Обязательно?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top whitespace-nowrap">Node.js</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Для&nbsp;MCP-серверов и&nbsp;коннекторов</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 align-top">
+                <span class="inline-flex items-center rounded-full bg-red-100 text-red-700 font-semibold text-xs px-2.5 py-1">Да</span>
+              </td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top whitespace-nowrap">Claude&nbsp;in&nbsp;Chrome</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Claude сможет сам заходить в&nbsp;интернет</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 align-top">
+                <span class="inline-flex items-center rounded-full bg-amber-100 text-amber-800 font-semibold text-xs px-2.5 py-1 whitespace-nowrap">Рекомендуется</span>
+              </td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top whitespace-nowrap">Git for&nbsp;Windows</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Для&nbsp;некоторых функций</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 align-top">
+                <span class="inline-flex items-center rounded-full bg-gray-100 text-gray-700 font-semibold text-xs px-2.5 py-1 whitespace-nowrap">Только на&nbsp;Windows</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
