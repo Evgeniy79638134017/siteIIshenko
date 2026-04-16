@@ -309,7 +309,126 @@ const stages = [
       <h2 class="font-heading font-bold text-2xl md:text-3xl text-text reveal">
         Раздел&nbsp;2. SMS-верификация
       </h2>
-      <!-- Контент из Промпта 2 -->
+
+      <p class="text-text text-base md:text-lg leading-relaxed mt-6 reveal">
+        Многие AI-сервисы при&nbsp;регистрации требуют подтвердить номер через&nbsp;SMS. Российские номера (+7) часто не&nbsp;принимаются. Сервисы SMS-верификации предоставляют временные номера других стран.
+      </p>
+
+      <!-- Сравнительная таблица OnlineSIM vs Give-SMS -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        OnlineSIM vs&nbsp;Give-SMS&nbsp;— сравнение
+      </h3>
+
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border reveal">
+        <table class="w-full min-w-[560px] text-left">
+          <thead class="bg-bg-alt">
+            <tr>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base w-1/3">Критерий</th>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">OnlineSIM</th>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">Give-SMS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Стабильность</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Работает намного стабильнее</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Работает хуже, бывают сбои</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Доставка SMS</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Обычно с&nbsp;первой попытки</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Может потребовать много попыток</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Оплата</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Криптовалюта</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Карта&nbsp;/ другие способы</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Стоимость SMS</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">от&nbsp;$0,5 до&nbsp;$3</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">от&nbsp;$0,5 до&nbsp;$3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Callout: лучшие номера для Claude -->
+      <div class="mt-8 flex gap-3 rounded-xl bg-blue-50 border border-blue-400 px-4 py-4 md:px-5 md:py-5 reveal">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
+        </svg>
+        <p class="text-blue-900 text-sm md:text-base leading-relaxed">
+          <span class="font-bold">Совет:</span> при&nbsp;верификации Claude лучше всего работают номера из&nbsp;Эстонии и&nbsp;Таиланда. Эстония&nbsp;— максимально стабильно, Таиланд иногда подвисает.
+        </p>
+      </div>
+
+      <!-- Порядок действий -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Порядок действий
+      </h3>
+      <ol class="mt-6 space-y-3 reveal">
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">1</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Зарегистрируйтесь на&nbsp;сайте сервиса и&nbsp;пополните баланс</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">2</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Выберите сервис (OpenAI, Claude) и&nbsp;страну номера (рекомендуем: Эстония)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">3</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Получите временный номер и&nbsp;введите его на&nbsp;сайте AI-сервиса</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">4</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Дождитесь SMS с&nbsp;кодом (1–5&nbsp;минут) и&nbsp;введите код</span>
+        </li>
+      </ol>
+
+      <!-- Типичные проблемы -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Типичные проблемы и&nbsp;решения
+      </h3>
+
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border reveal">
+        <table class="w-full min-w-[560px] text-left">
+          <thead class="bg-bg-alt">
+            <tr>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base w-2/5">Проблема</th>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">Решение</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">SMS не&nbsp;приходит</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Возьмите другой номер или&nbsp;смените страну</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Номер уже зарегистрирован</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Возьмите новый номер из&nbsp;другой страны</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Много неудачных попыток (Give-SMS)</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Перейдите на&nbsp;OnlineSIM</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Деньги списались, SMS нет</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Обратитесь в&nbsp;поддержку&nbsp;— обычно возвращают</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Callout про Google-сервисы -->
+      <div class="mt-8 flex gap-3 rounded-xl bg-gray-50 border border-gray-300 px-4 py-4 md:px-5 md:py-5 reveal">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-gray-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/>
+        </svg>
+        <p class="text-gray-800 text-sm md:text-base leading-relaxed">
+          <span class="font-bold">Про Google-сервисы</span> (Gemini, NotebookLM): требуют полностью не-российский аккаунт. Рекомендуем работать на&nbsp;Claude&nbsp;— он&nbsp;проще в&nbsp;настройке и&nbsp;максимально русифицирован.
+        </p>
+      </div>
     </div>
   </section>
 
