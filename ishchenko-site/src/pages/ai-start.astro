@@ -70,7 +70,236 @@ const stages = [
       <h2 class="font-heading font-bold text-2xl md:text-3xl text-text reveal">
         Раздел&nbsp;1. VPN&nbsp;— обход геоблокировок
       </h2>
-      <!-- Контент из Промпта 2 -->
+
+      <p class="text-text text-base md:text-lg leading-relaxed mt-6 reveal">
+        ChatGPT, Claude, Midjourney заблокировали доступ из&nbsp;России. VPN меняет IP на&nbsp;адрес другой страны, позволяя пользоваться сервисами без&nbsp;ограничений.
+      </p>
+
+      <!-- Callout: проблема курицы и яйца -->
+      <div class="mt-6 flex gap-3 rounded-xl bg-yellow-50 border border-yellow-400 px-4 py-4 md:px-5 md:py-5 reveal">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+        </svg>
+        <p class="text-yellow-900 text-sm md:text-base leading-relaxed">
+          <span class="font-bold">Проблема курицы и&nbsp;яйца:</span> сайты VPN-сервисов тоже заблокированы в&nbsp;РФ. Установочные файлы мы&nbsp;выкладываем на&nbsp;GitHub.
+        </p>
+      </div>
+
+      <!-- Блок: прямые ссылки для скачивания -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Прямые ссылки для&nbsp;скачивания
+      </h3>
+
+      <div class="mt-6 grid gap-4 md:grid-cols-2 reveal">
+        <!-- AdGuard VPN -->
+        <div class="rounded-2xl bg-bg border border-border p-5 md:p-6">
+          <h4 class="font-heading font-bold text-lg text-text">AdGuard VPN</h4>
+          <p class="text-text-muted text-sm mt-1">Удобный интерфейс, оплата картой</p>
+          <div class="mt-4 space-y-2">
+            <a
+              href="https://github.com/Evgeniy79638134017/vpnexefile/releases/download/1.0.0/adguardVPNInstaller.exe"
+              target="_blank"
+              rel="noopener"
+              download
+              class="flex items-center justify-between gap-3 rounded-lg bg-primary/5 hover:bg-primary/10 text-primary font-semibold text-sm px-4 py-2.5 transition-colors"
+            >
+              <span>Windows (.exe)</span>
+              <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+            </a>
+            <a
+              href="https://github.com/Evgeniy79638134017/vpnexefile/releases/download/1.0.0/AdGuardVPNInstaller.dmg"
+              target="_blank"
+              rel="noopener"
+              download
+              class="flex items-center justify-between gap-3 rounded-lg bg-primary/5 hover:bg-primary/10 text-primary font-semibold text-sm px-4 py-2.5 transition-colors"
+            >
+              <span>macOS (.dmg)</span>
+              <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mullvad VPN -->
+        <div class="rounded-2xl bg-bg border border-border p-5 md:p-6">
+          <h4 class="font-heading font-bold text-lg text-text">Mullvad VPN</h4>
+          <p class="text-text-muted text-sm mt-1">Анонимный, без&nbsp;e-mail, оплата криптой</p>
+          <div class="mt-4 space-y-2">
+            <a
+              href="https://github.com/Evgeniy79638134017/vpnexefile/releases/download/1.0.0/Install.Mullvad.VPN.exe"
+              target="_blank"
+              rel="noopener"
+              download
+              class="flex items-center justify-between gap-3 rounded-lg bg-primary/5 hover:bg-primary/10 text-primary font-semibold text-sm px-4 py-2.5 transition-colors"
+            >
+              <span>Windows (.exe)</span>
+              <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Amnezia VPN -->
+        <div class="rounded-2xl bg-bg border border-border p-5 md:p-6 md:col-span-2">
+          <div class="flex items-center gap-2">
+            <h4 class="font-heading font-bold text-lg text-text">Amnezia VPN</h4>
+            <span class="inline-flex items-center rounded-full bg-accent/15 text-accent font-semibold text-[11px] px-2 py-0.5">бонус</span>
+          </div>
+          <p class="text-text-muted text-sm mt-1">Open-source, на&nbsp;свой сервер — полный контроль</p>
+          <div class="mt-4 space-y-2 md:max-w-sm">
+            <a
+              href="https://github.com/Evgeniy79638134017/vpnexefile/releases/download/1.0.0/AmneziaVPN_4.8.14.5_x64.exe"
+              target="_blank"
+              rel="noopener"
+              download
+              class="flex items-center justify-between gap-3 rounded-lg bg-primary/5 hover:bg-primary/10 text-primary font-semibold text-sm px-4 py-2.5 transition-colors"
+            >
+              <span>Windows (.exe)</span>
+              <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Сравнительная таблица Mullvad vs AdGuard -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Mullvad vs&nbsp;AdGuard&nbsp;— сравнение
+      </h3>
+
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border reveal">
+        <table class="w-full min-w-[560px] text-left">
+          <thead class="bg-bg">
+            <tr>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base w-1/3">Критерий</th>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">Mullvad</th>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">AdGuard</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Цена</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">~5&nbsp;€/мес</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">от&nbsp;2,57&nbsp;€/мес (2&nbsp;года)</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Стабильность</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Подключается почти всегда</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Стабильно, РКН может мешать</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Оплата</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Только криптовалюта</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Карта или&nbsp;крипто</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Интерфейс</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Простой</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Самый удобный</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Исключения</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Нет</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Да (сайты и&nbsp;приложения)</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Регистрация</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Без&nbsp;e-mail, без&nbsp;логов</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">E-mail или&nbsp;соцсети</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Телефон</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Чуть хуже, но&nbsp;работает</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Стабильно</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Настройка Mullvad -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Настройка Mullvad
+      </h3>
+      <ol class="mt-6 space-y-3 reveal">
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">1</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Перейдите на&nbsp;mullvad.net или&nbsp;скачайте с&nbsp;GitHub (ссылка выше)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">2</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Нажмите «Generate account number»&nbsp;— получите 16-значный логин</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">3</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Сохраните номер аккаунта в&nbsp;надёжном месте</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">4</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Оплатите подписку через криптокошелёк</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">5</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Установите приложение, введите номер, подключитесь к&nbsp;серверу в&nbsp;Европе</span>
+        </li>
+      </ol>
+
+      <!-- Настройка AdGuard -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Настройка AdGuard
+      </h3>
+      <ol class="mt-6 space-y-3 reveal">
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">1</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Перейдите на&nbsp;adguard-vpn.com и&nbsp;зарегистрируйтесь</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">2</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Скачайте приложение или&nbsp;расширение для&nbsp;браузера</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">3</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Выберите сервер и&nbsp;подключитесь</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary font-heading font-bold text-sm flex items-center justify-center">4</span>
+          <span class="text-text text-sm md:text-base leading-relaxed mt-0.5">Настройте исключения (сайты или&nbsp;приложения)</span>
+        </li>
+      </ol>
+
+      <!-- Типичные проблемы -->
+      <h3 class="font-heading font-bold text-xl md:text-2xl text-text mt-12 reveal">
+        Типичные проблемы и&nbsp;решения
+      </h3>
+
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-border reveal">
+        <table class="w-full min-w-[520px] text-left">
+          <thead class="bg-bg">
+            <tr>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base w-2/5">Проблема</th>
+              <th class="px-4 md:px-6 py-3 md:py-4 font-heading font-semibold text-text text-sm md:text-base">Решение</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Не&nbsp;открывается сайт VPN</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Скачайте файлы с&nbsp;GitHub</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">VPN не&nbsp;подключается</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Включите протокол QUIC</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Медленная скорость</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Выберите сервер ближе (Финляндия, Эстония)</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">AI-сервис блокирует VPN&nbsp;IP</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Смените сервер или&nbsp;страну</td>
+            </tr>
+            <tr class="border-t border-border">
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text font-semibold text-sm md:text-base align-top">Нет приложения в&nbsp;App&nbsp;Store</td>
+              <td class="px-4 md:px-6 py-3 md:py-4 text-text-muted text-sm md:text-base align-top">Смените регион Apple&nbsp;ID</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
