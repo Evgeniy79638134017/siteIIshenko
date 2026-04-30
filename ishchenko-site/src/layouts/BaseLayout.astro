@@ -43,6 +43,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Prodamus payment widget -->
+  <script is:inline>
+    window.prodamusDomain = 'ishchenko.payform.ru';
+    window.prodamusCurrency = 'rub';
+  </script>
+  <script src="https://widget.prodamus.ru/src/init.js" async></script>
+  <link rel="stylesheet" href="https://widget.prodamus.ru/src/init.css">
+
   <slot name="head" />
 </head>
 <body class="bg-bg text-text min-h-screen flex flex-col">
